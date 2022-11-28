@@ -1,0 +1,30 @@
+// In Board:
+
+BlockObserver* getCurrentBlock(int row, int col){
+    // Should return a pointer to a BlockObserver such that row and col are within its range.
+}
+
+void render(){
+    // This function will only call GraphicDisplay and TextDisplay's notify function
+}
+
+// In Subject/Board:
+void renderObservers(){
+    // This will call the notify functions on ONLY the displayObservers.
+}
+
+// In GraphicDisplay and TextDisplay:
+Logic: We will call subject's getCurrentBlock on every indices, take the pointer and print 
+void notify()
+
+// Overall:
+Whenever a new block is created, the block will be manipulated first in the player. 
+    When the block drops or reaches the bottom/another block (tested by seeing if there are any blocks below)
+    we can check clearRow on each row from the bottom row.
+When a block moves left or right, player's "makeMoveLeft" or "makeMoveRight" will call moveLeft or moveRight
+    on the block that was just created. moveLeft/moveRight will first check for the boundaries to the left
+    and right of the block to see if a move is possible at all (Same with turning). If a move is not possible,
+    the function call will have no action. 
+We also need a char field in Block that is initiliazed to the specific block type letter; this is used for
+    printing in GraphicDisplay and TextDisplay.
+BlockObserver's notify function should DO NOTHING since it is outputting in GraphicDisplay and TextDisplay.
