@@ -25,6 +25,8 @@ When a block moves left or right, player's "makeMoveLeft" or "makeMoveRight" wil
     on the block that was just created. moveLeft/moveRight will first check for the boundaries to the left
     and right of the block to see if a move is possible at all (Same with turning). If a move is not possible,
     the function call will have no action. 
+
+
 We also need a char field in Block that is initiliazed to the specific block type letter; this is used for
     printing in GraphicDisplay and TextDisplay.
 BlockObserver's notify function should DO NOTHING since it is outputting in GraphicDisplay and TextDisplay.
@@ -36,3 +38,8 @@ Must have player pointer in graphicdisplay and textdisplay in order to display t
 Note that row goes from 0-17 (0 is the top row) and col goes from 0-10 (0 is left col)
 We need the character of each block as a field (pattern) itself or else it is impossible to find out what it should print.
 getCurrentBlock should have row and col.
+What does nextBlock do? If it creates a new block, shouldn't we store the pointer to the pointer somewhere
+    in our board especially for manipulation purposes as well. 
+Can we also have a function that returns the vector of posns in block? Used for printing.
+Every file is just the class with all lowercase, NOTHING ELSE!
+Whenever currentblock and nextblock are the same, call the blockcreator function.
