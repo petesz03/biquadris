@@ -43,3 +43,7 @@ What does nextBlock do? If it creates a new block, shouldn't we store the pointe
 Can we also have a function that returns the vector of posns in block? Used for printing.
 Every file is just the class with all lowercase, NOTHING ELSE!
 Whenever currentblock and nextblock are the same, call the blockcreator function.
+
+
+
+Hello
