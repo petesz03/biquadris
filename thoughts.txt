@@ -29,4 +29,10 @@ We also need a char field in Block that is initiliazed to the specific block typ
     printing in GraphicDisplay and TextDisplay.
 BlockObserver's notify function should DO NOTHING since it is outputting in GraphicDisplay and TextDisplay.
 Write BlockObserver first.
-Understand
+What does the numRowFull do in Board??
+Board should only call render() on DisplayObservers
+Board should only call checkColFull, numRowFull and clearRow on the BlockObservers.
+Must have player pointer in graphicdisplay and textdisplay in order to display the level and the secore.
+Note that row goes from 0-17 (0 is the top row) and col goes from 0-10 (0 is left col)
+We need the character of each block as a field (pattern) itself or else it is impossible to find out what it should print.
+getCurrentBlock should have row and col.
