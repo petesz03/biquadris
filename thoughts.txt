@@ -28,3 +28,5 @@ When a block moves left or right, player's "makeMoveLeft" or "makeMoveRight" wil
 We also need a char field in Block that is initiliazed to the specific block type letter; this is used for
     printing in GraphicDisplay and TextDisplay.
 BlockObserver's notify function should DO NOTHING since it is outputting in GraphicDisplay and TextDisplay.
+Write BlockObserver first.
+Understand

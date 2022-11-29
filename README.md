@@ -1,2 +1,2 @@
 # cs246project
-Hello! CS246 Biquadris project - Winter 2022 (1229)
+Hello! CS246 Biquadris project - Winter 2022
