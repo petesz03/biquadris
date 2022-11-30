@@ -186,6 +186,18 @@ void Player::setCurrBlock(char blockType) {
     }
 }
 
+void Player::unsetBlind() {
+    isBlind = false;
+}
+
+void Player::unsetHeavy() {
+    isHeavy = false;
+}
+
+void Player::unsetForce() {
+    isForce = false;
+}
+
 // method to update the current score and the max score
 int Player::updateScore(int n) {
     score += n;

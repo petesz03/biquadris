@@ -88,7 +88,13 @@ public:
 
     // method to perform speical action
     void doSpecialAction(int type, char blockType);
+    void setBlind();
+    void setHeavy();
+    void setForce();
     void setCurrBlock(Block* block);
+    void unsetBlind();
+    void unsetHeavy();
+    void unsetForce();
 
     // method to update the current score and the max score
     int updateScore(int n);
