@@ -1,6 +1,6 @@
 #include "level4.h"
 
-Level3::Level4(): Level(), blockIndex1{0}, blockIndex2{0}, isRandom{true} {
+Level4::Level4(): Level(), blockIndex1{0}, blockIndex2{0}, isRandom{true} {
     ifstream seq1{"sequence1.txt"};
 	ifstream seq2{"sequence2.txt"};
 

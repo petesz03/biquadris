@@ -38,7 +38,9 @@ class Player {
     Player* opponent;
 
     // whether special action is triggered
-    bool isSpecialAction;
+    bool isBlind = false,
+    bool isHeavy = false,
+    bool isForce = false
 
     // pointer to the special action, specialAction class
     SpecialAction* specialAction;
@@ -50,13 +52,17 @@ public:
         int count = 0,
         int score = 0,
         int maxScore = 0,
+        bool isOver = false,
+        bool isMyTurn = false;
         int currLevel = 0,
         Level* myLevel,
         Board* myBoard,
         Block* currBlock,
         Block* nextBlock,
         Player* opponent,
-        bool isSpecialAction = false);
+        bool isBlind = false,
+        bool isHeavy = false,
+        bool isForce = false);
     ~Player();
 
     // pointer to the special action, specialAction class
@@ -67,7 +73,8 @@ public:
     int getScore();
     int getMaxScore();
     int getLevel();
-    int getMyTurn();
+    bool getMyTurn();
+    bool getIsOver();
 
     // generate punish block if in level 4
     Block* level4punish();
@@ -80,16 +87,17 @@ public:
     void restart();
 
     // method to perform speical action
-    void doSpecialAction();
+    void doSpecialAction(int type, char blockType);
+    void setCurrBlock(Block* block);
 
-    // method to return the current score and update the max score
-    int countScore();
+    // method to update the current score and the max score
+    int updateScore(int n);
     int updateMaxScore();
     
     // methods to perform moves to the current blocks
     void makeMoveLeft(Block& currBlock);
     void makeMoveRight(Block& currBlock);
-    void makeMoveDown(Block& currBlock, int heaviness);
+    void makeMoveDown(Block& currBlock);
     void makeClockwiseTurn(Block& currBlock);
     void makeCounterTurn(Block& currBlock);
     void makeDrop(Block& currBlock);
