@@ -254,6 +254,10 @@ void Player::makeDrop(Block& currBlock) {
     if (myBoard->numRowFull > 0) {
         myBoard->clearRow();
     }
+    
+    unsetBlind();
+    unsetHeavy();
+    unsetForce();
 }
 
 
