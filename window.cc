@@ -72,7 +72,7 @@ void Xwindow::fillRectangle(int x, int y, int width, int height, int colour) {
   XFillRectangle(d, w, gc, x, y, width, height);
   XSetForeground(d, gc, colours[Black]);
 }
-
+// Note that x and y is the left bottom of the string:
 void Xwindow::drawString(int x, int y, string msg) {
   XDrawString(d, w, DefaultGC(d, s), x, y, msg.c_str(), msg.length());
 }

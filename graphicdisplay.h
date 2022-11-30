@@ -13,4 +13,8 @@ class GraphicDisplay: public DisplayObserver{
     GraphicDisplay(Board* subject, Player* control);
     void notify() override;
     ~GraphicDisplay();
+    
+    // placeTile: 
+    // Given a row, col, and pattern, input it onto the board:
+    void placeTile(char pattern, int row, int col);
 }
