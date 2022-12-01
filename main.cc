@@ -59,6 +59,7 @@ int main(){
         if (player1.getMyTurn()){
             playerInPlay = player1;
             boardInPlay = player1Board;
+        }
         else{
             playerInPlay = player2;
             boardInPlay = player2Board;
@@ -115,9 +116,11 @@ int main(){
         }
         else if (command == "I"){
             Block* currentBlock = boardInPlay->getCurrentBlock();
-            
+
         }
 
     }
+
+    /***** Section to free memory: *****/
     
 }

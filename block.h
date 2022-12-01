@@ -28,6 +28,7 @@ public:
     void setbox2(int x, int y);
     void setbox3(int x, int y);
     void setbox4(int x, int y);
+    char getItem();
 };
 
 

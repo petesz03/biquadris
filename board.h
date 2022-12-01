@@ -12,19 +12,22 @@
 #include "tblock.h"
 #include <vector>
 #include "level.h"
+#include "subject.h"
 
-class Board {
+class Board: public Subject{
 public:
     Player* owner;
     Level* owners_level;
-    Block* current;
-    Block* next;
+    Block* currentBlock;
+    Block* nextBlock;
     //special action
     bool isblind;
-    bool isheavy;
     bool isforce;
+    /*
+
     //all blocks
     std::vector<Block*> v_all;
+    
     //vector of each row
     std::vector<Block*> row0;
     std::vector<Block*> row1;
@@ -44,20 +47,24 @@ public:
     std::vector<Block*> row15;
     std::vector<Block*> row16;
     std::vector<Block*> row17;
+    */
     
+    /*
     //max height
     int max_height;
     std::vector<int> to_free;
     int num_of_full;
     bool start_action;
+    */
 
 public:
     Board(Player* owner, Level* owners_level);
     ~Board();
     void checkfullrow();
-    void clearrow();
+    void clearRow(int row);
     Block* createBlock();
     Block* get_current();
+    Char charAt(int row, int col);
 };
 
 

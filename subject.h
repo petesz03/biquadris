@@ -10,6 +10,8 @@ class Subject{
     std::vector<DisplayObserver*> displayobservers;
     std::vector<BlockObserver*> blockobservers;
     public:
+    subject(std::vector<DisplayObserver*> displayobservers,
+            std::vector<BlockObserver*> blockobservers);
     void notifyObservers();
     void attach(DisplayObserver* ob);
     void attach(BlockObserver* ob);

@@ -2,6 +2,11 @@
 #include "displayobserver.h"
 #include "blockobserver.h"
 
+subject(std::vector<DisplayObserver*> displayobservers,
+            std::vector<BlockObserver*> blockobservers):
+            displayobservers{displayobservers}, blockobservers{blockobservers}{}
+
+
 void attach(DisplayObserver* ob){
     displayobservers.emplace_back(ob);
 }

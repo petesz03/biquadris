@@ -86,3 +86,5 @@ void Block::setbox4(int x, int y) {
     Posn temp = Posn{x,y};
     box4 = temp;
 }
+
+char Block::getItem(){ return item; }
