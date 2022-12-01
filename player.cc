@@ -157,7 +157,7 @@ void Player::setHeavy() {
     currBlock.heaviness = 2;
 }
 
-void Player::setCurrBlockchar blockType) {
+void Player::setCurrBlockchar(char blockType) {
     isForce = true;
     delete currBlcok;
     
