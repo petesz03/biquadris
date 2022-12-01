@@ -38,9 +38,9 @@ class Player {
     Player* opponent;
 
     // whether special action is triggered
-    bool isBlind = false,
-    bool isHeavy = false,
-    bool isForce = false
+    bool isBlind = false;
+    bool isHeavy = false;
+    bool isForce = false;
 
     // pointer to the special action, specialAction class
     SpecialAction* specialAction;
@@ -90,8 +90,7 @@ public:
     void doSpecialAction(int type, char blockType);
     void setBlind();
     void setHeavy();
-    void setForce();
-    void setCurrBlock(Block* block);
+    void setForce(char blockType);
     void unsetBlind();
     void unsetHeavy();
     void unsetForce();

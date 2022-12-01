@@ -139,24 +139,22 @@ void Player::doSpecialAction(int type, char blockType) {
         opponent->setHeavy();
         break;
     case 3:
-        opponent->setForce();
-        opponent->setCurrBlock(blockType);
+        opponent->setForce(blockType);
     }
 }
 
 void Player::setBlind() {
     isBlind = true;
+    myBoard.isBlind = true;
 }
 
 void Player::setHeavy() {
     isHeavy = true;
+    currBlock.heaviness = 2;
 }
 
-void Player::setForce() {
+void Player::setCurrBlockchar blockType) {
     isForce = true;
-}
-
-void Player::setCurrBlock(char blockType) {
     delete currBlcok;
     
     switch (blockType) {
@@ -217,6 +215,7 @@ void Player::makeMoveLeft(Block& currBlock) {
     currBlock->moveLeft(*this);
     myBoard->render();
 }
+
 void Player::makeMoveRight(Block& currBlock) {
     if (isHeavy) {
         currBlock.heaviness = 2;
@@ -224,6 +223,7 @@ void Player::makeMoveRight(Block& currBlock) {
     currBlock->moveRight(*this);
     myBoard->render();
 }
+
 void Player::makeMoveDown(Block& currBlock) {
     if (isHeavy) {
         currBlock.heaviness = 2;
@@ -237,22 +237,28 @@ void Player::makeMoveDown(Block& currBlock) {
 
     }
 }
+
 void Player::makeClockwiseTurn(Block& currBlock) {
     currBlock->clockwiseTurn(*this);
     myBoard->render();
 }
+
 void Player::makeCounterTurn(Block& currBlock) {
     currBlock->counterTurn(*this);
     myBoard->render();
 }
+
 void Player::makeDrop(Block& currBlock) {
     currBlock->drop();
     if (myBoard->checkColFull()) {
         isOver = true;
     }
     myBoard->render();
-    if (myBoard->numRowFull > 0) {
+    int fullRow = myBoard->numRowFull;
+    if ( fullRow > 0) {
+        count = 0;
         myBoard->clearRow();
+        updateScore(currLevel + fullRow);
     }
     
     unsetBlind();
