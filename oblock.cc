@@ -1,4 +1,4 @@
-#include <vector.h>
+#include <vector>
 #include "oblock.h"
 
 Oblock::Oblock(int heaviness = 0, bool candown = true, int dir = 1):

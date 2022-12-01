@@ -1,7 +1,7 @@
 #ifndef __BLOCK_H__
 #define __BLOCK_H__
 #include "posn.h"
-#include <vector.h>
+#include <vector>
 
 class Block {
 public:

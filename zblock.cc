@@ -1,4 +1,4 @@
-#include <vector.h>
+#include <vector>
 #include "zblock.h"
 
 Zblock::Zblock(int heaviness = 0, bool candown = true, int dir):

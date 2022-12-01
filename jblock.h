@@ -1,7 +1,7 @@
 #ifndef __JBLOCK_H__
 #define __JBLOCK_H__
 
-#include <vector.h>
+#include <vector>
 #include "block.h"
 
 class Jblock : public Block {

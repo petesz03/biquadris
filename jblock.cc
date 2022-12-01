@@ -1,4 +1,4 @@
-#include <vector.h>
+#include <vector>
 #include "jblock.h"
 
 Jblock::Jblock(int heaviness, bool candown, int dir):

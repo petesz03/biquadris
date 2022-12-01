@@ -1,7 +1,7 @@
 #ifndef __ZBLOCK_H__
 #define __ZBLOCK_H__
 
-#include <vector.h>
+#include <vector>
 #include "block.h"
 
 class Zblock : public Block {

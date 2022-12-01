@@ -1,7 +1,7 @@
 #ifndef __TBLOCK_H__
 #define __TBLOCK_H__
 
-#include <vector.h>
+#include <vector>
 #include "block.h"
 
 class Tblock : public Block {

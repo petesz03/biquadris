@@ -1,6 +1,6 @@
 #ifndef __IBLOCK_H__
 #define __IBLOCK_H__
-#include <vector.h>
+#include <vector>
 #include "block.h"
 
 class Iblock: public Block {
