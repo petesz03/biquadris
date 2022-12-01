@@ -63,8 +63,9 @@ public:
     void checkfullrow();
     void clearRow(int row);
     Block* createBlock();
-    Block* get_current();
+    Block* getCurrentBlock();
     Char charAt(int row, int col);
+    Block* getNextBlock()
 };
 
 

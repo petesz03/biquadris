@@ -11,12 +11,14 @@ Board::Board(Player* owner): owner{owner}{
     isblind = (owners_level)->isblind;
     isforce = (owners_level)->isforce;
 
-    // Upon initialization, currentBlock should be initialized:
+    // Upon initialization of Board, currentBlock should be initialized:
     currentBlock = createBlock();
     attach(currentBlock); // We need to attach it to block observer list in subject.
     // If it is my turn, I need to prepare next block (for printing purposes):
     if (owners_level->getMyTurn()){
-        nextBlock = createBlock()
+        // The coordinates of this block does not matter since it is not
+        //   attached to the list of Block observers yet! (It will not print)
+        nextBlock = createBlock(); 
     }
     // Note that nextblock is not put in the list yet since it has not come onto the board.
 }
@@ -116,20 +118,21 @@ Block* Board::createBlock() {
     }
 }
 
+// CLEARING THE BOARD CLEARS ALLLLLL THE BLOCKS (NOT THE PLAYER AND LEVEL):
 Block::~Block(){
     for (auto it = blockobservers.begin(); it != blockobservers.end(); it++){
         delete it;
     }
     delete currentBlock;
     delete nextBlock;
-    // Note that owner and owners_level will be deleted in player when it returns.
-    //   We cannot delete it twice.
+    // Note that owner and owners_level should be deleted in player when it returns.
+    // We cannot delete it twice.
 }
 
 void Block::checkfullrow(){
     // We need to check every row!
     for (int i = 3; i <= 17; i++){
-        // board starts at row 3, ends at 17
+        // board starts at row 3, ends at 17 (rows 0 - 3 is for showing currentblock)
         bool rowfull = true;
         for (int j = 0; j <= 10; j++){
             // board starts at col 0, ends at 10
@@ -160,14 +163,15 @@ void clearRow(int row){
             else if ((vecIt)->y < row){
                 // This means that the position is above row.
                 // Since row is clearing, each block above will fall by one block:
-                vecIt->y = (vecIt->y)- 1;
+                (vecIt->y)--;
             }
         }
         // Check this part!! Remove if needed:
         
-        if (box1.x < 0 && box1.y < 0 && box2.x < 0 && box2.y <0 && box3.x < 0 &&
+        if (box1.x < 0 && box1.y < 0 && box2.x < 0 && box2.y < 0 && box3.x < 0 &&
         box3.y < 0 && box4.x < 0 && box4.y < 0){
-            // If it is fully empty, we will remove it while we can:
+            // This means that "it" is fully empty, we will remove it while we can
+            //   to improve efficiency as the game progresses.
             auto temp = it;
             it--; // SINCE WE ARE DELETING THIS CURRENT OBSERVER
             detach(temp); // We have to detach temp first from the list of blockobs.
@@ -191,8 +195,11 @@ Char charAt(int row, int col){
     return ' ';
 }
 
-Block* Board::get_current() {
-    return current;
+Block* Board::getCurrentBlock() {
+    return currentBlock;
+}
+Block* Board::getNextBlock(){
+    return nextBlock;
 }
 
 /* Old:
