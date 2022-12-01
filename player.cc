@@ -26,8 +26,8 @@ Player::Player(
         currLevel{0},
         myLevel{myLevel},
         myBoard{myBoard},
-        currBlock{currBlock},
-        nextBlock{nextBlock},
+        currBlock{nullptr},
+        nextBlock{nullptr},
         opponent{opponent},
         isBlind{false},
         isHeavy{false},
@@ -44,6 +44,10 @@ Player::~Player() {
 SpecialAction* Player::specialAction() {
 
 }
+
+void Player::setOpponent(Player* opponent){ this->opponent = opponent; }
+
+void Player::setTurn(bool turn){ isMyTurn = turn; }
 
 // retrieve player information
 int Player::getPid() { return pid; }

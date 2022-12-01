@@ -65,6 +65,10 @@ public:
         bool isForce = false);
     ~Player();
 
+    // function to change the status:
+    void setOpponent(Player* opponent);
+    void setTurn(bool turn);
+
     // pointer to the special action, specialAction class
     SpecialAction* specialAction();
 
@@ -86,7 +90,7 @@ public:
     // method to restart the current game
     void restart();
 
-    // method to perform speical action
+    // method to perform special action
     void doSpecialAction(int type, char blockType);
     void setBlind();
     void setHeavy();
@@ -106,7 +110,6 @@ public:
     void makeClockwiseTurn(Block& currBlock);
     void makeCounterTurn(Block& currBlock);
     void makeDrop(Block& currBlock);
-
 
 };
 

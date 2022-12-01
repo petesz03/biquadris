@@ -69,6 +69,12 @@ void GraphicDisplay::notify(){
             placeTile(pattern, i, j);
         }
     }
+    // If it is not our term currently, we do not see extra blocks below "Next:"
+    if (!control->turn){
+        std::cout << std::endl << std::endl;
+        return;
+    }
+    
     char nextChar = (subject->getNextBlock())->getItem();
     int nextBlockStart = 21; // Row that nextblock starts at.
     
