@@ -1,7 +1,7 @@
 #include "level1.cc"
 #include <cstdlib>
 
-Level1::Level1(): Level() {}
+Level1::Level1():: Level{1} {}
 
 Level1::~Level1() {}
 

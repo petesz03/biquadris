@@ -479,8 +479,8 @@ void Board::clearrow() {
 
 
 
-Block* Board::nextblock() {
-    if (owners_level->get_level() == 1) {
+Block* Board::createBlock() {
+    if (owners_level->level() == 1) {
         int value = rand() % 12;
         if (value == 0) {
             current = new Sblock{0, true, 1};
@@ -508,7 +508,7 @@ Block* Board::nextblock() {
             current = new Tblock{0, true, 1};
         }
     }
-    if (owners_level->get_level() == 2) {
+    if (owners_level->level() == 2) {
         int value = rand() % 7;
         if (value == 0) {
             current = new Iblock{0, true, 1};
@@ -527,7 +527,7 @@ Block* Board::nextblock() {
         }
     }
 
-    if (owners_level->get_level() == 3) {
+    if (owners_level->level() == 3) {
         int value = rand() % 9;
         if (value == 0) {
             current = new Sblock{0, true, 1};
@@ -550,7 +550,7 @@ Block* Board::nextblock() {
         }
     }
 
-    if (owners_level->get_level() == 4) {
+    if (owners_level->level() == 4) {
         int value = rand() % 9;
         if (value == 0) {
             current = new Sblock{0, true, 1};

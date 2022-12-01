@@ -1,6 +1,6 @@
 #include "level2.h"
 
-Level2::Level2(): Level() {}
+Level2::Level2(): Level{2} {}
 
 Level2::~Level2() {}
 

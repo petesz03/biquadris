@@ -86,6 +86,7 @@ public:
     // methods to increase and decrease level
     void levelUp();
     void levelDown();
+    void random();
 
     // method to restart the current game
     void restart();

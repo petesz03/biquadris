@@ -18,6 +18,7 @@ public:
     Player* owner;
     Level* owners_level;
     Block* current;
+    Block* next;
     //special action
     bool isblind;
     bool isheavy;
@@ -55,7 +56,7 @@ public:
     ~Board();
     void checkfullrow();
     void clearrow();
-    Block* nextblock();
+    Block* createBlock();
     Block* get_current();
 };
 

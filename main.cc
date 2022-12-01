@@ -41,8 +41,18 @@ int main(){
 
     /***** Input *****/
     std::string command;
-    std::istream& is = std::cin;
-    while (is >> command){
+    std::string file;
+    bool readFromFile = false;
+    std::fstream commandfile;
+    while (true){
+        if (!readFromFile){
+            if (std::cin >> command){}
+            else{ break; }
+        }
+        else{
+            if (commandfile >> command){}
+            else{ break; }
+        }
         // Set who is moving for future commands:
         Player* playerInPlay;
         Board* boardInPlay;
@@ -86,8 +96,26 @@ int main(){
         else if (command == "leveldown"){
             playerInPlay->levelDown();
         }
-        else if (command == ""){
-            // gotta know how to declare 
+        else if (command == "norandom"){
+            // What does this mean?? 
+        }
+        else if (command == "random"){
+            // What does this mean??
+        }
+        else if (command == "sequence"){
+            std::string file;
+            if (!readFromFile){ std::cin >> file; }
+            else{
+                // If we are currently already reading from a file,
+                //   need to close it before before opening a new one:
+                commandfile >> file;
+                commandfile.close()}
+            readFromFile = true;
+            commandfile.open(file, std::fstream::in);
+        }
+        else if (command == "I"){
+            Block* currentBlock = boardInPlay->getCurrentBlock();
+            
         }
 
     }

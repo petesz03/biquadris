@@ -1,3 +1,3 @@
 #include "level.h"
 
-Level::Level() {}
+Level::Level(int level): level{level} {}

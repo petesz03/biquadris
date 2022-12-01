@@ -3,10 +3,9 @@
 #include <fstream>
 #include <vector>
 
-Level0::Level0() {
+Level0::Level0(): Level{0} {
     ifstream seq1{"sequence1.txt"};
 	ifstream seq2{"sequence2.txt"};
-
     string curr;
 
     while (seq1 >> curr) {
