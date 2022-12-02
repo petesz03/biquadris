@@ -2,23 +2,23 @@
 #define SUBJECT_H
 #include <vector>
 
-class BlockObserver;
+class Block;
 
 class DisplayObserver;
 
 class Subject{
     std::vector<DisplayObserver*> displayobservers;
-    std::vector<BlockObserver*> blockobservers;
+    std::vector<Block*> blocks;
     public:
-    subject(std::vector<DisplayObserver*> displayobservers,
-            std::vector<BlockObserver*> blockobservers);
+    Subject(std::vector<DisplayObserver*> displayobservers,
+            std::vector<Block*> blocks);
     void notifyObservers();
     void attach(DisplayObserver* ob);
-    void attach(BlockObserver* ob);
-    void detach(DiplayObserver* ob);
+    void attach(Block* ob);
     void detach(DisplayObserver* ob);
+    void detach(Block* ob);
     virtual ~Subject() = default;
 
-}
+};
 
 #endif

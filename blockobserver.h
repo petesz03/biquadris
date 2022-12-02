@@ -7,7 +7,7 @@ class BlockObserver{
     void rowRemove(int row); // Block's clearRow should call this
     int rowIntFull();
     bool colFull(int col);
-    virtual ~Observer() = default;
+    virtual ~BlockObserver() = default;
 };
 
 #endif

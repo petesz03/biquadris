@@ -1,19 +1,19 @@
 #include "subject.h"
 #include "displayobserver.h"
-#include "blockobserver.h"
+#include "block.h"
 
-subject(std::vector<DisplayObserver*> displayobservers,
-            std::vector<BlockObserver*> blockobservers):
-            displayobservers{displayobservers}, blockobservers{blockobservers}{}
+Subject::Subject(std::vector<DisplayObserver*> displayobservers,
+            std::vector<Block*> blocks):
+            displayobservers{displayobservers}, blocks{blocks}{}
 
 
-void attach(DisplayObserver* ob){
+void Subject::attach(DisplayObserver* ob){
     displayobservers.emplace_back(ob);
 }
-void attach(BlockObserver* ob){
-    blockobservers.emplace_back(ob);
+void Subject::attach(Block* ob){
+    blocks.emplace_back(ob);
 }
-void detach(DisplayObserver* ob){
+void Subject::detach(DisplayObserver* ob){
     for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
         if (*it == ob){
             displayobservers.erase(it);
@@ -21,10 +21,10 @@ void detach(DisplayObserver* ob){
         }
     }
 }
-void detach(BlockObserver* ob){
-    for (auto it = blockobservers.begin(); it != blockobservers.end(); it++){
+void Subject::detach(Block* ob){
+    for (auto it = blocks.begin(); it != blocks.end(); it++){
         if (*it == ob){
-            displayobservers.erase(it);
+            blocks.erase(it);
             break;
         }
     }

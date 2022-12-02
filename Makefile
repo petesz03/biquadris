@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -MMD
 EXEC = a5
-OBJECTS = subject.o displayobserver.o
+OBJECTS = main.o subject.o
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
@@ -13,4 +13,3 @@ ${EXEC}: ${OBJECTS}
 
 clean:
 		rm ${OBJECTS} ${EXEC} ${DEPENDS}
-		
