@@ -1,4 +1,12 @@
 #include "level2.h"
+#include "sblock.h"
+#include "zblock.h"
+#include "iblock.h"
+#include "jblock.h"
+#include "lblock.h"
+#include "oblock.h"
+#include "tblock.h"
+#include <cstdlib>
 
 Level2::Level2(): Level{2} {}
 
@@ -14,28 +22,28 @@ Block* Level2::nextBlock(Player* p) {
     switch (random % 7 + 1)
     {
     case 1:
-        return new SBlock();
+        return new Sblock();
         break;
     case 2:
-        return new ZBlock();
+        return new Zblock();
         break;
     case 3:
-        return new IBlock;
+        return new Iblock();
         break;
     case 4:
-        return new JBlock();
+        return new Jblock();
         break;
     case 5:
-        return new LBlock();
+        return new Lblock();
         break;
     case 6:
-        return new OBlock();
+        return new Oblock();
         break;
     case 7:
-        return new TBlock();
+        return new Tblock();
         break;
     default:
-        return new IBlock();
+        return new Iblock();
     }
 }
 

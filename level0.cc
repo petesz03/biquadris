@@ -9,7 +9,7 @@ using namespace std;
 Level0::Level0(std::string fileToRead): Level{0} {
     ifstream seq1{fileToRead};
 	/* ifstream seq2{"sequence2.txt"}; */
-    string curr;
+    char curr;
 
     while (seq1 >> curr) {
         file1.push_back(curr);
@@ -79,7 +79,7 @@ void Level0::useFile1(string file) {
     file1.clear();
 
     ifstream seq1{file};
-    string curr;
+    char curr;
 
     while (seq1 >> curr) {
         file1.push_back(curr);

@@ -8,7 +8,7 @@
 
 class Player;
 
-class Level0 : public Level {
+class Level2 : public Level {
 public:
 	Level2();
     ~Level2();
