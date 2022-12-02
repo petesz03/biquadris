@@ -82,22 +82,25 @@ int main(int argc, char** args){
     Player* player2 = new Player{2, player2Level, player2Board, player1, filePlayer2};
 
     // Creating player1's text displays:
-    TextDisplay* player1Graph = new TextDisplay{player1Board, player1};
+    TextDisplay* player1Text = new TextDisplay{player1Board, player1};
     player1Board->attach(player1Text);
     
     // Creating player2's text displays:
-    TextDisplay* player2Graph = new TextDisplay{player2Board, player2};
+    TextDisplay* player2Text = new TextDisplay{player2Board, player2};
     player2Board->attach(player2Text);
     
     // If the filePlayer fields are not empty, we have to replace level0's file:
 
 
     // Creating player1 and player2's text displays:
+
+    GraphicDisplay* player1Graphics = nullptr;
+    GraphicDisplay* player2Graphics = nullptr;
     if (graphics){
-        GraphicDisplay* player1Text = new GraphicDisplay{player1Board, player1};
-        player1Board->attach(player1Graph);
-        GraphicDisplay* player2Text = new GraphicDisplay{player2Board, player2};
-        player2Board->attach(player2Graph);
+        player1Graphics = new GraphicDisplay{player1Board, player1};
+        player1Board->attach(player1Graphics);
+        player2Graphcs = new GraphicDisplay{player2Board, player2};
+        player2Board->attach(player2Graphics);
     }
 
     // Since player1's opponent's pointer is nullptr, change the pointer:
@@ -130,8 +133,30 @@ int main(int argc, char** args){
             playerInPlay = player2;
             boardInPlay = player2Board;
         }
+
+        // Read for input and call functions in playerInPlay,
+        //   WHILE checking for similar commands:
+
+        // We check for similar commands that "command" matches to:
+        int commandsMatched = 0;
+        std::string commandToExecute = "";
+        std::vector<std::string> listOfCommands = {"left", "right", "down", "clockwise",
+            "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random",
+            "sequence", "I", "J", "L", "restart"};
         
-        // Read for input and call functions in playerInPlay:
+        // Check how many different types of command that "command" matches to:
+        for (auto it = listOfCommands.begin(); it != listOfCommands.end(); it++){
+            std::string matched = (*it).find(command);
+            if (matched != std::string::npos){
+                commandsMatched++;
+                commandToExecute = (*it);
+            }
+        }
+        // If "command" only matches to one command, execute that command:
+        if (commandToExecute == 1){
+            command == commandToExecute;
+        }
+
         if (command == "left"){
             Block* currentBlock = boardInPlay->getCurrentBlock();
             playerInPlay->makeMoveLeft(*currentBlock);
@@ -175,46 +200,48 @@ int main(int argc, char** args){
                 // If we are currently already reading from a file,
                 //   need to close it before before opening a new one:
                 commandfile >> file;
-                commandfile.close()}
+                commandfile.close();
+                }
             readFromFile = true;
             commandfile.open(file, std::fstream::in);
         }
         else if (command == "I"){
-		Block* curBlock = boardInPlay->getCurrentBlock();
-		// Detach it first from the vector of Blocks:
-		boardInPlay->detach(curBlock);
-		// Delete the old "currentBlock" in Board:
-		delete curBlock;
-		// Create new Block
-		Block* newblock = new Iblock{};
-		// Attach:
-		boardInPlay->attach(curBlock);
-		// Set currentBlock in Board
-		boardInPlay->setCurrent(newBlock); 
+            Block* curBlock = boardInPlay->getCurrentBlock();
+            // Detach it first from the vector of Blocks:
+            boardInPlay->detach(curBlock);
+            // Delete the old "currentBlock" in Board:
+		    delete curBlock;
+		    // Create new Block
+		    Block* newblock = new Iblock{};
+		    // Attach:
+		    boardInPlay->attach(curBlock);
+		    // Set currentBlock in Board
+		    boardInPlay->setCurrent(curBlock); 
         }
-	else if (command == "J"){                
-		Block* curBlock = boardInPlay->getCurrentBlock();                   // Detach it first from the vector of Blocks:       
-                boardInPlay->detach(curBlock);
-                // Delete the old "currentBlock" in Board:
-		delete curBlock;
-		// Create new Block
-		Block* newblock = new Jblock{};     
+	    else if (command == "J"){                
+		    Block* curBlock = boardInPlay->getCurrentBlock();
+            // Detach it first from the vector of Blocks:       
+            boardInPlay->detach(curBlock);
+            // Delete the old "currentBlock" in Board:
+		    delete curBlock;
+		    // Create new Block
+		    Block* newblock = new Jblock{};     
      		// Attach:                
-		boardInPlay->attach(curBlock);
-                // Set currentBlock in Board                
-		boardInPlay->setCurrent(newBlock);
-	}
-	else if (command == "L"){
-                Block* curBlock = boardInPlay->getCurrentBlock();                   // Detach it first from the vector of Blocks:
-		boardInPlay->detach(curBlock);                
-		// Delete the old "currentBlock" in Board:
-                delete curBlock;
-                // Create new Block
-                Block* newblock = new Lblock{};
-                // Attach:
-                boardInPlay->attach(curBlock);
-                // Set currentBlock in Board
-                boardInPlay->setCurrent(newBlock);
+		    boardInPlay->attach(curBlock);
+            // Set currentBlock in Board                
+		    boardInPlay->setCurrent(curBlock);
+	    }
+	    else if (command == "L"){
+            Block* curBlock = boardInPlay->getCurrentBlock();                   // Detach it first from the vector of Blocks:
+		    boardInPlay->detach(curBlock);                
+		    // Delete the old "currentBlock" in Board:
+            delete curBlock;
+            // Create new Block
+            Block* newblock = new Lblock{};
+            // Attach:
+            boardInPlay->attach(curBlock);
+            // Set currentBlock in Board
+            boardInPlay->setCurrent(curBlock);
         }
         else if (command == "restart"){
             player1->restart();
@@ -222,6 +249,17 @@ int main(int argc, char** args){
         }
     }
 
-    /***** Section to free memory: *****/
-    
+    /***** Free Memory: *****/
+    // Deleting players will delete its corresponding level and board, which
+    //   will delete all the attached blocks:
+    delete player1;
+    delete player2;
+
+    // Must delete graphic observers since they are not deleted:
+    delete player1Text;
+    delete player2Text;
+    if (graphics){
+        delete player1Graphics;
+        delete player2Graphics;
+    }
 }
