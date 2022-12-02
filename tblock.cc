@@ -1,7 +1,7 @@
 #include <vector>
 #include "tblock.h"
 
-Tblock::Tblock(int heaviness = 0, bool candown = true, int dir):
+Tblock::Tblock(int heaviness = 0, bool candown = true, int dir = 1):
     Block{'T', Posn{5,1}, Posn{4,1}, Posn{6,1}, Posn{5,2}, heaviness, candown}, dir{dir} {}
 
 

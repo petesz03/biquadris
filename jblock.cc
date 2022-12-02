@@ -1,7 +1,7 @@
 #include <vector>
 #include "jblock.h"
 
-Jblock::Jblock(int heaviness, bool candown, int dir):
+Jblock::Jblock(int heaviness, bool candown, int dir = 1):
     Block{'j', Posn{4,2}, Posn{5,2}, Posn{6,2}, Posn{4, 1}, heaviness, candown}, dir{dir} {}
 
 Jblock::~Jblock() {

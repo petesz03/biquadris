@@ -1,6 +1,6 @@
 #include "sblock.h"
 
-Sblock::Sblock(int heaviness = 0, bool candown = true, int dir):
+Sblock::Sblock(int heaviness = 0, bool candown = true, int dir = 1):
     Block{'S', Posn{4,2}, Posn{5,2}, Posn{5,1}, Posn{6,1}, heaviness, candown}, dir{dir} {}
 
 

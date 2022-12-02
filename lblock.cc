@@ -1,7 +1,7 @@
 #include <vector>
 #include "lblock.h"
 
-Lblock::Lblock(int heaviness = 0, bool candown = true, int dir):
+Lblock::Lblock(int heaviness = 0, bool candown = true, int dir = 1):
     Block{'L', Posn{4,2}, Posn{5,2}, Posn{6,2}, Posn{6,1}, heaviness, candown}, dir{dir} {}
 
 

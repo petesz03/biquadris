@@ -1,7 +1,7 @@
 #include <vector>
 #include "zblock.h"
 
-Zblock::Zblock(int heaviness = 0, bool candown = true, int dir):
+Zblock::Zblock(int heaviness = 0, bool candown = true, int dir = 1):
     Block{'Z', Posn{4,1}, Posn{5,1}, Posn{5,2}, Posn{6,2}, heaviness, candown}, dir{dir} {}
 
 
