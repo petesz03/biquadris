@@ -11,14 +11,7 @@
 #include <cstdlib>
 using namespace std;
 
-Level3::Level3(string fileToRead): Level{3}, blockIndex{0} {
-    ifstream seq{fileToRead};
-    char curr;
-
-    while (seq >> curr) {
-        file.push_back(curr);
-    }
-}
+Level3::Level3(): Level{3}, blockIndex{0} {}
 
 Level3::~Level3() {}
 

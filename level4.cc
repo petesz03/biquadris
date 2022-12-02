@@ -11,14 +11,7 @@
 #include <cstdlib>
 using namespace std;
 
-Level4::Level4(string fileToRead): Level{4}, blockIndex{0} {
-    ifstream seq{fileToRead};
-    char curr;
-
-    while (seq >> curr) {
-        file.push_back(curr);
-    }
-}
+Level4::Level4(): Level{4}, blockIndex{0} {}
 
 Level4::~Level4() {}
 

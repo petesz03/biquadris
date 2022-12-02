@@ -17,7 +17,7 @@ class Level4 : public Level {
     int blockIndex;
 
 public:
-	Level4(std::string fileToRead);
+	Level4();
     ~Level4();
 
     Block* randomNextBlock();

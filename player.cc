@@ -139,7 +139,7 @@ void Player::setBlind() {
 }
 
 void Player::setHeavy() {
-    myBoard->currentBlock->special_action = true;
+    myBoard->currentBlock->isheavy = true;
 }
 
 /*
@@ -201,31 +201,31 @@ void Player::updateMaxScore() {
 
 // methods to perform moves to the current blocks
 void Player::makeMoveLeft() {
-	myBoard->MoveLeft();
+	myBoard->moveLeft();
 	myBoard->render();
 }
 
-void Player::makeMoveRight(Block& currBlock) {
+void Player::makeMoveRight() {
     myBoard->moveRight();
     myBoard->render();
 }
 
-void Player::makeMoveDown(Block& currBlock) {
+void Player::makeMoveDown() {
     myBoard->moveDown();
     myBoard->render();
 }
 
-void Player::makeClockwiseTurn(Block& currBlock) {
-    myBoard->clockWiseTurn();
+void Player::makeClockwiseTurn() {
+    myBoard->clockwiseTurn();
     myBoard->render();
 }
 
-void Player::makeCounterTurn(Block& currBlock) {
+void Player::makeCounterTurn() {
     myBoard->counterTurn();
     myBoard->render();
 }
 
-void Player::makeDrop(Block& currBlock) {
+void Player::makeDrop() {
     myBoard->drop();
     myBoard->render();
     
