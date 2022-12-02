@@ -40,7 +40,8 @@ int main(int argc, char** args){
         else if (argument == "-scriptfile2"){
             i++;
             filePlayer2 = args[i];
-        }else if (argument == "-startlevel"){
+        }
+	else if (argument == "-startlevel"){
             i++;
             argument = args[i];
             levelInitiated = stoi(argument);
@@ -179,8 +180,41 @@ int main(int argc, char** args){
             commandfile.open(file, std::fstream::in);
         }
         else if (command == "I"){
-            Block* currentBlock = boardInPlay->getCurrentBlock();
-            
+		Block* curBlock = boardInPlay->getCurrentBlock();
+		// Detach it first from the vector of Blocks:
+		boardInPlay->detach(curBlock);
+		// Delete the old "currentBlock" in Board:
+		delete curBlock;
+		// Create new Block
+		Block* newblock = new Iblock{};
+		// Attach:
+		boardInPlay->attach(curBlock);
+		// Set currentBlock in Board
+		boardInPlay->setCurrent(newBlock); 
+        }
+	else if (command == "J"){                
+		Block* curBlock = boardInPlay->getCurrentBlock();                   // Detach it first from the vector of Blocks:       
+                boardInPlay->detach(curBlock);
+                // Delete the old "currentBlock" in Board:
+		delete curBlock;
+		// Create new Block
+		Block* newblock = new Jblock{};     
+     		// Attach:                
+		boardInPlay->attach(curBlock);
+                // Set currentBlock in Board                
+		boardInPlay->setCurrent(newBlock);
+	}
+	else if (command == "L"){
+                Block* curBlock = boardInPlay->getCurrentBlock();                   // Detach it first from the vector of Blocks:
+		boardInPlay->detach(curBlock);                
+		// Delete the old "currentBlock" in Board:
+                delete curBlock;
+                // Create new Block
+                Block* newblock = new Lblock{};
+                // Attach:
+                boardInPlay->attach(curBlock);
+                // Set currentBlock in Board
+                boardInPlay->setCurrent(newBlock);
         }
         else if (command == "restart"){
             player1->restart();
