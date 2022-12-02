@@ -23,6 +23,7 @@ public:
     //special action
     bool isblind;
     bool isforce;
+    bool isheavy;
     /*
 
     //all blocks
@@ -64,7 +65,7 @@ public:
     void clearRow(int row);
     Block* createBlock();
     Block* getCurrentBlock();
-    Char charAt(int row, int col);
+    char charAt(int row, int col);
     Block* getNextBlock();
     void setCurrent(Block* newBlock);
 };

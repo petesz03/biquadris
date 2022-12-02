@@ -8,7 +8,7 @@ class Sblock : public Block {
 public:
     int dir;
 public:
-    Sblock(int, bool, int);
+    Sblock(int heaviness = 0, bool candown = true, int dir = 1);
     ~Sblock();
     void clockwiseturn();
     void counterturn();

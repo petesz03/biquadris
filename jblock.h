@@ -8,7 +8,7 @@ class Jblock : public Block {
 public:
     int dir;
 public:
-    Jblock(int, bool, int);
+    Jblock(int heaviness = 0, bool candown = true, int dir = 1);
     ~Jblock();
     void clockwiseturn();
     void counterturn();

@@ -1,127 +1,119 @@
 #include "board.h"
 #include <vector>
+#include "subject.h"
 
 
-Board::Board(Player* owner): owner{owner}{
-    owners_level = owner.myLevel;
+Board::Board(Player* owner, Level* owners_level):
+    owner{owner}, owners_level{owners_level} {
     currentBlock = nullptr;
     nextBlock = nullptr;
 
     // This will initiate w.r.t to the constants initialized in level:
-    isblind = (owners_level)->isblind;
-    isforce = (owners_level)->isforce;
+    isblind = false;
+    isforce = false;
+    isheavy = false;
 
-    // Upon initialization of Board, currentBlock should be initialized:
-    currentBlock = createBlock();
-    attach(currentBlock); // We need to attach it to block observer list in subject.
-    // If it is my turn, I need to prepare next block (for printing purposes):
-    if (owners_level->getMyTurn()){
-        // The coordinates of this block does not matter since it is not
-        //   attached to the list of Block observers yet! (It will not print)
-        nextBlock = createBlock(); 
-    }
-    // Note that nextblock is not put in the list yet since it has not come onto the board.
 }
 
 Block* Board::createBlock() {
-    if (owners_level->level() == 1) {
+    if (owners_level->level == 1) {
         int value = rand() % 12;
         if (value == 0) {
-            current = new Sblock{0, true, 1};
+            currentBlock = new Sblock{0, true, 1};
         } else if (value == 1) {
-            current = new Zblock{0, true, 1};
+            currentBlock = new Zblock{0, true, 1};
         } else if (value == 2) {
-            current = new Iblock{0, true, 1};
+            currentBlock = new Iblock{0, true, 1};
         } else if (value == 3) {
-            current = new Iblock{0, true, 1};
+            currentBlock = new Iblock{0, true, 1};
         } else if (value == 4) {
-            current = new Jblock{0, true, 1};
+            currentBlock = new Jblock{0, true, 1};
         } else if (value == 5) {
-            current = new Jblock{0, true, 1};
+            currentBlock = new Jblock{0, true, 1};
         } else if (value == 6) {
-            current = new Lblock{0, true, 1};
+            currentBlock = new Lblock{0, true, 1};
         } else if (value == 7) {
-            current = new Lblock{0, true, 1};
+            currentBlock = new Lblock{0, true, 1};
         } else if (value == 8) {
-            current = new Oblock{0, true, 1};
+            currentBlock = new Oblock{0, true, 1};
         } else if (value == 9) {
-            current = new Oblock{0, true, 1};
+            currentBlock = new Oblock{0, true, 1};
         } else if (value == 10) {
-            current = new Tblock{0, true, 1};
+            currentBlock = new Tblock{0, true, 1};
         } else if (value == 11) {
-            current = new Tblock{0, true, 1};
+            currentBlock = new Tblock{0, true, 1};
         }
     }
-    if (owners_level->level() == 2) {
+    if (owners_level->level == 2) {
         int value = rand() % 7;
         if (value == 0) {
-            current = new Iblock{0, true, 1};
+            currentBlock = new Iblock{0, true, 1};
         } else if (value == 1) {
-            current = new Jblock{0, true, 1};
+            currentBlock = new Jblock{0, true, 1};
         } else if (value == 2) {
-            current = new Lblock{0, true, 1};
+            currentBlock = new Lblock{0, true, 1};
         } else if (value == 3) {
-            current = new Oblock{0, true, 1};
+            currentBlock = new Oblock{0, true, 1};
         } else if (value == 4) {
-            current = new Sblock{0, true, 1};
+            currentBlock = new Sblock{0, true, 1};
         } else if (value == 5) {
-            current = new Zblock{0, true, 1};
+            currentBlock = new Zblock{0, true, 1};
         } else if (value == 6) {
-            current = new Tblock{0, true, 1};
+            currentBlock = new Tblock{0, true, 1};
         }
     }
 
-    if (owners_level->level() == 3) {
+    if (owners_level->level == 3) {
         int value = rand() % 9;
         if (value == 0) {
-            current = new Sblock{0, true, 1};
+            currentBlock = new Sblock{0, true, 1};
         } else if (value == 1) {
-            current = new Sblock{0, true, 1};
+            currentBlock = new Sblock{0, true, 1};
         } else if (value == 2) {
-            current = new Zblock{0, true, 1};
+            currentBlock = new Zblock{0, true, 1};
         } else if (value == 3) {
-            current = new Zblock{0, true, 1};
+            currentBlock = new Zblock{0, true, 1};
         } else if (value == 4) {
-            current = new Iblock{0, true, 1};
+            currentBlock = new Iblock{0, true, 1};
         } else if (value == 5) {
-            current = new Jblock{0, true, 1};
+            currentBlock = new Jblock{0, true, 1};
         } else if (value == 6) {
-            current = new Lblock{0, true, 1};
+            currentBlock = new Lblock{0, true, 1};
         } else if (value == 7) {
-            current = new Oblock{0, true, 1};
+            currentBlock = new Oblock{0, true, 1};
         } else if (value == 8) {
-            current = new Tblock{0, true, 1};
+            currentBlock = new Tblock{0, true, 1};
         }
     }
 
-    if (owners_level->level() == 4) {
+    if (owners_level->level == 4) {
         int value = rand() % 9;
         if (value == 0) {
-            current = new Sblock{0, true, 1};
+            currentBlock = new Sblock{0, true, 1};
         } else if (value == 1) {
-            current = new Sblock{0, true, 1};
+            currentBlock = new Sblock{0, true, 1};
         } else if (value == 2) {
-            current = new Zblock{0, true, 1};
+            currentBlock = new Zblock{0, true, 1};
         } else if (value == 3) {
-            current = new Zblock{0, true, 1};
+            currentBlock = new Zblock{0, true, 1};
         } else if (value == 4) {
-            current = new Iblock{0, true, 1};
+            currentBlock = new Iblock{0, true, 1};
         } else if (value == 5) {
-            current = new Jblock{0, true, 1};
+            currentBlock = new Jblock{0, true, 1};
         } else if (value == 6) {
-            current = new Lblock{0, true, 1};
+            currentBlock = new Lblock{0, true, 1};
         } else if (value == 7) {
-            current = new Oblock{0, true, 1};
+            currentBlock = new Oblock{0, true, 1};
         } else if (value == 8) {
-            current = new Tblock{0, true, 1};
+            currentBlock = new Tblock{0, true, 1};
         }
     }
 }
 
 // CLEARING THE BOARD CLEARS ALLLLLL THE BLOCKS (NOT THE PLAYER AND LEVEL):
-Block::~Block(){
-    for (auto it = blockobservers.begin(); it != blockobservers.end(); it++){
-        delete it;
+Board::~Board(){
+    for (auto it = blocks.begin(); it != blocks.end(); it++){
+        delete *it;
     }
     delete currentBlock;
     delete nextBlock;
@@ -129,7 +121,7 @@ Block::~Block(){
     // We cannot delete it twice.
 }
 
-void Block::checkfullrow(){
+void Board::checkfullrow(){
     // We need to check every row!
     for (int i = 3; i <= 17; i++){
         // board starts at row 3, ends at 17 (rows 0 - 3 is for showing currentblock)
@@ -145,12 +137,12 @@ void Block::checkfullrow(){
     }
 }
 
-void clearRow(int row){
-    for (auto it = blockobservers.begin(); it != blockobservers.end(); it++){
-        Posn box1 = it->box1;
-        Posn box2 = it->box2;
-        Posn box3 = it->box3;
-        Posn box4 = it->box4;
+void Board::clearRow(int row){
+    for (auto it = blocks.begin(); it != blocks.end(); it++){
+        Posn box1 = (*it)->box1;
+        Posn box2 = (*it)->box2;
+        Posn box3 = (*it)->box3;
+        Posn box4 = (*it)->box4;
         std::vector<Posn> vec{box1, box2, box3, box4};
         // iterate through all 4 Posns:
         for (auto vecIt = vec.begin(); vecIt != vec.end(); vecIt++){
@@ -173,23 +165,19 @@ void clearRow(int row){
             // This means that "it" is fully empty, we will remove it while we can
             //   to improve efficiency as the game progresses.
             auto temp = it;
-            it--; // SINCE WE ARE DELETING THIS CURRENT OBSERVER
-            detach(temp); // We have to detach temp first from the list of blockobs.
-            delete temp;
+            (*it)--; // SINCE WE ARE DELETING THIS CURRENT OBSERVER
+            detach(*temp); // We have to detach temp first from the list of blockobs.
+            delete *temp;
         }
     }
 }
 
-Char charAt(int row, int col){
-    for (auto it = blockobservers.begin(); it != blockobservers.end(); it++){
-        Posn box1 = it->box1;
-        Posn box2 = it->box2;
-        Posn box3 = it->box3;
-        Posn box4 = it->box4;
-        std::vector<Posn> vec{box1, box2, box3, box4};
+char Board::charAt(int row, int col){
+    for (auto it = blocks.begin(); it != blocks.end(); it++){
+        std::vector<Posn> vec{(*it)->box1, (*it)->box2, (*it)->box3, (*it)->box4};
         // iterate through all 4 Posns:
         for (auto vecIt = vec.begin(); vecIt != vec.end(); vecIt++){
-            if ((vecIt)->x == col && (vecIt)->y == row){ return it->getItem(); }
+            if ((vecIt)->x == col && (vecIt)->y == row){ return (*it)->getItem(); }
         }
     }
     return ' ';

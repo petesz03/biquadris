@@ -43,8 +43,6 @@ class Player {
     bool isHeavy = false;
     bool isForce = false;
 
-    // pointer to the special action, specialAction class
-    SpecialAction* specialAction;
 
     // Add file for input in level0:
     std::string fileForLevel0;
@@ -53,20 +51,12 @@ public:
     // ctor and dtor
     Player(
         int pid,
-        int count = 0,
-        int score = 0,
-        int maxScore = 0,
-        bool isOver = false,
-        bool isMyTurn = false;
-        int currLevel = 0,
         Level* myLevel,
         Board* myBoard,
         Block* currBlock,
         Block* nextBlock,
         Player* opponent,
-        bool isBlind = false,
-        bool isHeavy = false,
-        bool isForce = false);
+	std::string fileForLevel0);
     ~Player();
 
     // function to change the status:
@@ -74,8 +64,6 @@ public:
     void setTurn(bool turn);
     void setFileForLevel0(std::string file);
 
-    // pointer to the special action, specialAction class
-    SpecialAction* specialAction();
 
     // retrieve player information
     int getPid();

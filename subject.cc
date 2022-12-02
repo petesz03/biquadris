@@ -2,8 +2,7 @@
 #include "displayobserver.h"
 #include "block.h"
 
-Subject::Subject(std::vector<DisplayObserver*> displayobservers,
-            std::vector<Block*> blocks):
+Subject::Subject():
             displayobservers{displayobservers}, blocks{blocks}{}
 
 

@@ -8,7 +8,7 @@ class Zblock : public Block {
 public:
     int dir;
 public:
-    Zblock(int, bool, int);
+    Zblock(int heaviness = 0, bool candown = true, int dir = 1);
     ~Zblock();
     void clockwiseturn();
     void counterturn();
