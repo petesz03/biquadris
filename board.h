@@ -68,6 +68,13 @@ public:
     char charAt(int row, int col);
     Block* getNextBlock();
     void setCurrent(Block* newBlock);
+    void render();
+
+
+    // Move block functions:
+    void moveLeft();
+    void moveRight();
+    void moveDown();
 };
 
 

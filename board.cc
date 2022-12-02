@@ -194,6 +194,38 @@ void Board::setCurrent(Block* newBlock){
     currentBlock = newBlock;
     return;
 }
+void Board::render(){
+	for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
+		(*it)->notify;
+	}
+}
+
+// Left, right, down, turn should bring in heaviness
+void Board::moveLeft(){
+	std::vector<Posn> vec = {currentBlock.box1, currentBlock.box2, currentBlock.box3, currentBlock.box4};
+	// Set row1Index and row2Index to out of bounds boundaries:
+	int row1Index = 20;
+	int row2Index = 20;
+	// Get row1Index and row2Index:
+	for (auto it = vec.begin(); it != vec.end(); it++){
+		if (row1Index == 20){ row1Index = (*it).y; }
+		else if (row1Index != 20 && (*it).y != row1Index){
+			row2Index == (*it).y;
+			break;
+		}
+	}
+	int row1Left = 20;
+	int row2Left = 20;
+	for (auto it = vec.begin(); it != vec.end(); it++){
+		if ((*it).y == row1Index && (*it).x <= row1Left){ row1Left == (*it).x; }
+		else if ((*it).y == row2Index && (*it).x <= row2Left){ row2Left == (*it).y; }
+	}
+	if (charAt(row1Index, row1Left - 1) == ' ' && charAt(row2Index, row2Left - 1) == ' '){
+		currentBlock.moveLeft();
+	}
+}
+
+
 
 /* Old:
 Board::Board(Player* owner, Level* owners_level):
