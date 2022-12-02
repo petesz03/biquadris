@@ -11,7 +11,7 @@ class Player;
 class Level0 : public Level {
 	// store its blocks in sequence from the files 
     // sequence1.txt (for player 1) and sequence2.txt (for player 2) 
-    vector<std::string> file1;
+    std::vector<std::string> file1;
 	/* vector<std::string> file2; */
 
     // tracks the current index of block in the file sequence input

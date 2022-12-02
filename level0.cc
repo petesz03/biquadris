@@ -1,4 +1,5 @@
 #include "level0.h"
+#include "player.h"
 #include <string>
 #include <fstream>
 #include <vector>
@@ -20,14 +21,6 @@ Level0::Level0(std::string fileToRead): Level{0} {
     }
     */
 }
-Level0::Level0(std::string file){
-    ifstream seq1{file};
-    string curr;
-    while (seq1 >> curr) {
-        file1.push_back(curr);
-    }
-}
-
 
 Level0::~Level0() {}
 

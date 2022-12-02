@@ -7,7 +7,7 @@ class Iblock: public Block {
 public:
     int dir;
 public:
-    Iblock(int, bool, int);
+    Iblock(int heaviness = 0, bool candown = true, int dir = 1);
     ~Iblock() override;
     void clockwiseturn();
     void counterturn();

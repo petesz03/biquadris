@@ -7,7 +7,7 @@ class Lblock: public Block {
 public:
     int dir;
 public:
-    Lblock(int, bool, int);
+    Lblock(int heaviness = 0, bool candown = true, int dir = 1);
     ~Lblock();
     void clockwiseturn();
     void counterturn();
