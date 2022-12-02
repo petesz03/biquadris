@@ -3,98 +3,114 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include "sblock.h"
+#include "zblock.h"
+#include "iblock.h"
+#include "jblock.h"
+#include "lblock.h"
+#include "oblock.h"
+#include "tblock.h"
+#include <cstdlib>
 
 using namespace std;
 
-Level0::Level0(std::string fileToRead): Level{0} {
-    ifstream seq1{fileToRead};
-	/* ifstream seq2{"sequence2.txt"}; */
+Level0::Level0(std::string fileToRead): Level{0}, blockIndex{0} {
+    ifstream seq{fileToRead};
     char curr;
 
-    while (seq1 >> curr) {
-        file1.push_back(curr);
+    while (seq >> curr) {
+        file.push_back(curr);
     }
 
-    /*
-    while (seq2 >> curr) {
-        file2.push_back(curr);
-    }
-    */
 }
 
 Level0::~Level0() {}
 
-void changefile2(std::string file);
+Block* Level0::randomNextBlock() {
+    char next;
+    int size = file.size();
 
-Block* Level0::nextBlock(Player* p) {
-    int pid = p->getPid();
-    string next;
-
-    if (pid == 1) {
-        if (blockIndex1 == file1.size()) {
-            blockIndex1 = 0;
-        }
-        next = file1[blockIndex1];
-        blockIndex1++;
-    } else if (pid == 2) {
-        if (blockIndex2 == file2.size()) {
-            blockIndex2 = 0;
-        }
-        next = file2[blockIndex2];
-        blockIndex2++;
+    if (blockIndex == size) {
+        blockIndex = 0;
     }
+    next = file[blockIndex];
+    blockIndex++;
 
     switch (next) {
-        case "I":
-            return new IBlock();
+        case 'I':
+            return new Iblock();
             break;
-        case "J":
-            return new JBlock();
+        case 'J':
+            return new Jblock();
             break;
-        case "L":
-            return new LBlock();
+        case 'L':
+            return new Lblock();
             break;
-        case "O":
-            return new OBlock();
+        case 'O':
+            return new Oblock();
             break;
-        case "S":
-            return new SBlock();
+        case 'S':
+            return new Sblock();
             break;
-        case "Z":
-            return new ZBlock();
+        case 'Z':
+            return new Zblock();
             break;
-        case "T":
-            return new TBlock();
+        case 'T':
+            return new Tblock();
             break;
         default:
-            return new IBlock();
+            return new Iblock();
+    }
+}
+
+Block* Level0::fileNextBlock() {
+    char next;
+    int size = file.size();
+
+    if (blockIndex == size) {
+        blockIndex = 0;
+    }
+    next = file[blockIndex];
+    blockIndex++;
+
+    switch (next) {
+        case 'I':
+            return new Iblock();
+            break;
+        case 'J':
+            return new Jblock();
+            break;
+        case 'L':
+            return new Lblock();
+            break;
+        case 'O':
+            return new Oblock();
+            break;
+        case 'S':
+            return new Sblock();
+            break;
+        case 'Z':
+            return new Zblock();
+            break;
+        case 'T':
+            return new Tblock();
+            break;
+        default:
+            return new Iblock();
     }
 }
 
 // method to take its blocks in sequence from the files sequence1.txt 
 // (for player 1) and sequence2.txt (for player 2), or other file with 
 // name specified
-void Level0::useFile1(string file) {
-    blockIndex1 = 0;
-    file1.clear();
+void Level0::useFile(string file) {
+    blockIndex = 0;
+    file.clear();
 
-    ifstream seq1{file};
+    ifstream seq{file};
     char curr;
 
-    while (seq1 >> curr) {
-        file1.push_back(curr);
+    while (seq >> curr) {
+        file.push_back(curr);
     }
 }
-/*
-void Level0::useFile2(string file) {
-    blockIndex2 = 0;
-    file2.clear();
-
-    ifstream seq2{file};
-    string curr;
-
-    while (seq2 >> curr) {
-        file2.push_back(curr);
-    }
-}
-*/

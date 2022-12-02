@@ -13,7 +13,9 @@ public:
 	Level2();
     ~Level2();
 
-    Block* nextBlock(Player* p);
+    Block* randomNextBlock();
+    Block* fileNextBlock();
+    void useFile(std::string file);
 	
 };
 
