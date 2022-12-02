@@ -3,20 +3,35 @@
 #include <fstream>
 #include <vector>
 
-Level0::Level0(): Level{0} {
-    ifstream seq1{"sequence1.txt"};
-	ifstream seq2{"sequence2.txt"};
+using namespace std;
+
+Level0::Level0(std::string fileToRead): Level{0} {
+    ifstream seq1{fileToRead};
+	/* ifstream seq2{"sequence2.txt"}; */
     string curr;
 
     while (seq1 >> curr) {
         file1.push_back(curr);
     }
+
+    /*
     while (seq2 >> curr) {
         file2.push_back(curr);
     }
+    */
+}
+Level0::Level0(std::string file){
+    ifstream seq1{file};
+    string curr;
+    while (seq1 >> curr) {
+        file1.push_back(curr);
+    }
 }
 
+
 Level0::~Level0() {}
+
+void changefile2(std::string file);
 
 Block* Level0::nextBlock(Player* p) {
     int pid = p->getPid();
@@ -77,7 +92,7 @@ void Level0::useFile1(string file) {
         file1.push_back(curr);
     }
 }
-
+/*
 void Level0::useFile2(string file) {
     blockIndex2 = 0;
     file2.clear();
@@ -89,4 +104,4 @@ void Level0::useFile2(string file) {
         file2.push_back(curr);
     }
 }
-
+*/

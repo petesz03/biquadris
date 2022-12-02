@@ -1,5 +1,6 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef _PLAYER_H_
+#define _PLAYER_H_
+#include <string>
 
 class Level;
 class Board;
@@ -45,6 +46,9 @@ class Player {
     // pointer to the special action, specialAction class
     SpecialAction* specialAction;
 
+    // Add file for input in level0:
+    std::string fileForLevel0;
+
 public:
     // ctor and dtor
     Player(
@@ -68,6 +72,7 @@ public:
     // function to change the status:
     void setOpponent(Player* opponent);
     void setTurn(bool turn);
+    void setFileForLevel0(std::string file);
 
     // pointer to the special action, specialAction class
     SpecialAction* specialAction();
@@ -79,6 +84,8 @@ public:
     int getLevel();
     bool getMyTurn();
     bool getIsOver();
+    std::string getFileForLevel0();
+
 
     // generate punish block if in level 4
     Block* level4punish();

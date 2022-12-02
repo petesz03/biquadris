@@ -1,5 +1,6 @@
 #include "player.h"
 #include "block.h"
+#include <string>
 
 Player::Player(
     int pid,
@@ -16,7 +17,8 @@ Player::Player(
     Player* opponent,
     bool isBlind = false,
     bool isHeavy = false,
-    bool isForce = false): 
+    bool isForce = false
+    std::string fileForLevel0): 
         pid{pid},
         count{0},
         score{0},
@@ -31,7 +33,8 @@ Player::Player(
         opponent{opponent},
         isBlind{false},
         isHeavy{false},
-        isForce{false} {}
+        isForce{false},
+        fileForLevel0{fileForLevel0} {}
 
 Player::~Player() {
     delete myLevel;
@@ -49,6 +52,10 @@ void Player::setOpponent(Player* opponent){ this->opponent = opponent; }
 
 void Player::setTurn(bool turn){ isMyTurn = turn; }
 
+void Player::setFileForLevel0(std::string file){
+    fileForLevel0 = file;
+}
+
 // retrieve player information
 int Player::getPid() { return pid; }
 
@@ -61,6 +68,8 @@ int Player::getLevel() { return currLevel; }
 bool Player::getMyTurn() { return isMyTurn; }
 
 bool Player::getIsOver() { return IsOver; }
+
+std::string Player::getFileForLevel0(){ return fileForLevel0 };
 
 // generate punish block if in level 4
 Block* Player::level4punish() {
@@ -100,7 +109,7 @@ void Player::levelDown() {
         switch (currLevel)
         {
         case 0:
-            myLevel = new Level0();
+            myLevel = new Level0(fileForLevel0);
             break;
         case 1:
             myLevel = new Level1();
@@ -121,7 +130,7 @@ void Player::levelDown() {
 void Player::restart() {
     delete myLevel;
     currLevel = 0;
-    myLevel = new Level0;
+    myLevel = new Level0{fileForLevel0};
     delete myBoard;
     myBoard = new Board();
     count = 0;
@@ -157,6 +166,7 @@ void Player::setHeavy() {
     currBlock.heaviness = 2;
 }
 
+/*
 void Player::setCurrBlockchar(char blockType) {
     isForce = true;
     delete currBlcok;
@@ -187,6 +197,7 @@ void Player::setCurrBlockchar(char blockType) {
             currBlock = new IBlock();
     }
 }
+*/
 
 void Player::unsetBlind() {
     isBlind = false;
@@ -203,7 +214,7 @@ void Player::unsetForce() {
 // method to update the current score and the max score
 int Player::updateScore(int n) {
     score += n;
-    updateMaxScore();
+    this->updateMaxScore();
 }
 int Player::updateMaxScore() {
     if (score > maxScore){
