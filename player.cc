@@ -13,8 +13,6 @@ Player::Player(
     int pid,
     Level* myLevel,
     Board* myBoard,
-    Block* currBlock,
-    Block* nextBlock,
     Player* opponent,
     std::string fileForLevel0): 
         pid{pid},
@@ -26,12 +24,7 @@ Player::Player(
         currLevel{0},
         myLevel{myLevel},
         myBoard{myBoard},
-        currBlock{nullptr},
-        nextBlock{nullptr},
         opponent{opponent},
-        isBlind{false},
-        isHeavy{false},
-        isForce{false},
         fileForLevel0{fileForLevel0} {}
 
 Player::~Player() {
@@ -142,13 +135,11 @@ void Player::doSpecialAction(int type, char blockType) {
 }
 
 void Player::setBlind() {
-    isBlind = true;
     myBoard->isblind = true;
 }
 
 void Player::setHeavy() {
-    isHeavy = true;
-    currBlock->heaviness = 2;
+    myBoard->currentBlock->special_action = true;
 }
 
 /*
@@ -185,15 +176,16 @@ void Player::setCurrBlockchar(char blockType) {
 */
 
 void Player::unsetBlind() {
-    isBlind = false;
+    myBoard->isblind = false;
 }
 
 void Player::unsetHeavy() {
-    isHeavy = false;
+    myBoard->isheavy = false;
+    myBoard->currentBlock->special_action = false;
 }
 
 void Player::unsetForce() {
-    isForce = false;
+    myBoard->isforce = false;
 }
 
 // method to update the current score and the max score
@@ -214,49 +206,28 @@ void Player::makeMoveLeft() {
 }
 
 void Player::makeMoveRight(Block& currBlock) {
-    if (isHeavy) {
-        currBlock.heaviness = 2;
-    }
-    currBlock->moveRight();
+    myBoard->moveRight();
     myBoard->render();
 }
 
 void Player::makeMoveDown(Block& currBlock) {
-    if (isHeavy) {
-        currBlock.heaviness = 2;
-    }
-    currBlock->moveDown(*this);
-    if (myBoard->checkColFull()) {
-        isOver = true;
-    }
+    myBoard->moveDown();
     myBoard->render();
-    if (myBoard->numRowFull > 0) {
-
-    }
 }
 
 void Player::makeClockwiseTurn(Block& currBlock) {
-    currBlock->clockwiseTurn(*this);
+    myBoard->clockWiseTurn();
     myBoard->render();
 }
 
 void Player::makeCounterTurn(Block& currBlock) {
-    currBlock->counterTurn(*this);
+    myBoard->counterTurn();
     myBoard->render();
 }
 
 void Player::makeDrop(Block& currBlock) {
-    currBlock->drop();
-    if (myBoard->checkColFull()) {
-        isOver = true;
-    }
+    myBoard->drop();
     myBoard->render();
-    int fullRow = myBoard->numRowFull;
-    if ( fullRow > 0) {
-        count = 0;
-        myBoard->clearRow();
-        updateScore(currLevel + fullRow);
-    }
     
     unsetBlind();
     unsetHeavy();

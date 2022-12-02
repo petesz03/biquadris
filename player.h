@@ -35,9 +35,6 @@ class Player {
     Player* opponent;
 
     // whether special action is triggered
-    bool isBlind = false;
-    bool isHeavy = false;
-    bool isForce = false;
 
 
     // Add file for input in level0:
@@ -49,8 +46,6 @@ public:
         int pid,
         Level* myLevel,
         Board* myBoard,
-        Block* currBlock,
-        Block* nextBlock,
         Player* opponent,
 	std::string fileForLevel0);
     ~Player();

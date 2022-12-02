@@ -15,8 +15,10 @@ public:
     virtual ~Level();
 
     // method for generating the next block for the given player
-    virtual Block* nextBlock(Player* p) = 0;
-};
+    virtual Block* randomNextBlock() = 0;
+    virtual Block* fileNextBlock() = 0;
+    virtual void useFile(std::string file) = 0;
 
+};
 
 #endif
