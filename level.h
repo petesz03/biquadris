@@ -11,7 +11,8 @@ protected:
 public:
     int level;
     // ctor and virtual dtor for Level class
-    Level(int level, bool random);
+    // Level(int level);
+    Level();
     virtual ~Level();
 
     // method for generating the next block for the given player
