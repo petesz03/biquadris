@@ -17,5 +17,5 @@ class GraphicDisplay: public DisplayObserver{
     // placeTile: 
     // Given a row, col, and pattern, input it onto the board:
     void placeTile(char pattern, int row, int col);
-}
+};
 #endif
