@@ -16,97 +16,10 @@ Board::Board(Player* owner, Level* owners_level):
 }
 
 Block* Board::createBlock() {
-    if (owners_level->level == 1) {
-        int value = rand() % 12;
-        if (value == 0) {
-            currentBlock = new Sblock{0, true, 1};
-        } else if (value == 1) {
-            currentBlock = new Zblock{0, true, 1};
-        } else if (value == 2) {
-            currentBlock = new Iblock{0, true, 1};
-        } else if (value == 3) {
-            currentBlock = new Iblock{0, true, 1};
-        } else if (value == 4) {
-            currentBlock = new Jblock{0, true, 1};
-        } else if (value == 5) {
-            currentBlock = new Jblock{0, true, 1};
-        } else if (value == 6) {
-            currentBlock = new Lblock{0, true, 1};
-        } else if (value == 7) {
-            currentBlock = new Lblock{0, true, 1};
-        } else if (value == 8) {
-            currentBlock = new Oblock{0, true, 1};
-        } else if (value == 9) {
-            currentBlock = new Oblock{0, true, 1};
-        } else if (value == 10) {
-            currentBlock = new Tblock{0, true, 1};
-        } else if (value == 11) {
-            currentBlock = new Tblock{0, true, 1};
-        }
-    }
-    if (owners_level->level == 2) {
-        int value = rand() % 7;
-        if (value == 0) {
-            currentBlock = new Iblock{0, true, 1};
-        } else if (value == 1) {
-            currentBlock = new Jblock{0, true, 1};
-        } else if (value == 2) {
-            currentBlock = new Lblock{0, true, 1};
-        } else if (value == 3) {
-            currentBlock = new Oblock{0, true, 1};
-        } else if (value == 4) {
-            currentBlock = new Sblock{0, true, 1};
-        } else if (value == 5) {
-            currentBlock = new Zblock{0, true, 1};
-        } else if (value == 6) {
-            currentBlock = new Tblock{0, true, 1};
-        }
-    }
-
-    if (owners_level->level == 3) {
-        int value = rand() % 9;
-        if (value == 0) {
-            currentBlock = new Sblock{0, true, 1};
-        } else if (value == 1) {
-            currentBlock = new Sblock{0, true, 1};
-        } else if (value == 2) {
-            currentBlock = new Zblock{0, true, 1};
-        } else if (value == 3) {
-            currentBlock = new Zblock{0, true, 1};
-        } else if (value == 4) {
-            currentBlock = new Iblock{0, true, 1};
-        } else if (value == 5) {
-            currentBlock = new Jblock{0, true, 1};
-        } else if (value == 6) {
-            currentBlock = new Lblock{0, true, 1};
-        } else if (value == 7) {
-            currentBlock = new Oblock{0, true, 1};
-        } else if (value == 8) {
-            currentBlock = new Tblock{0, true, 1};
-        }
-    }
-
-    if (owners_level->level == 4) {
-        int value = rand() % 9;
-        if (value == 0) {
-            currentBlock = new Sblock{0, true, 1};
-        } else if (value == 1) {
-            currentBlock = new Sblock{0, true, 1};
-        } else if (value == 2) {
-            currentBlock = new Zblock{0, true, 1};
-        } else if (value == 3) {
-            currentBlock = new Zblock{0, true, 1};
-        } else if (value == 4) {
-            currentBlock = new Iblock{0, true, 1};
-        } else if (value == 5) {
-            currentBlock = new Jblock{0, true, 1};
-        } else if (value == 6) {
-            currentBlock = new Lblock{0, true, 1};
-        } else if (value == 7) {
-            currentBlock = new Oblock{0, true, 1};
-        } else if (value == 8) {
-            currentBlock = new Tblock{0, true, 1};
-        }
+    if (owner->israndom) {
+        owners_level->randomNextBlock();
+    } else {
+        owners_level->fileNextBlock();
     }
 }
 
@@ -202,28 +115,106 @@ void Board::render(){
 
 // Left, right, down, turn should bring in heaviness
 void Board::moveLeft(){
-	std::vector<Posn> vec = {currentBlock.box1, currentBlock.box2, currentBlock.box3, currentBlock.box4};
 	// Set row1Index and row2Index to out of bounds boundaries:
-	int row1Index = 20;
-	int row2Index = 20;
+	int row1 = 0;
+	int row2 = 0;
+    int row3 = 0;
+    int row4 = 0;
 	// Get row1Index and row2Index:
-	for (auto it = vec.begin(); it != vec.end(); it++){
-		if (row1Index == 20){ row1Index = (*it).y; }
-		else if (row1Index != 20 && (*it).y != row1Index){
-			row2Index == (*it).y;
-			break;
-		}
-	}
-	int row1Left = 20;
-	int row2Left = 20;
-	for (auto it = vec.begin(); it != vec.end(); it++){
-		if ((*it).y == row1Index && (*it).x <= row1Left){ row1Left == (*it).x; }
-		else if ((*it).y == row2Index && (*it).x <= row2Left){ row2Left == (*it).y; }
-	}
-	if (charAt(row1Index, row1Left - 1) == ' ' && charAt(row2Index, row2Left - 1) == ' '){
-		currentBlock.moveLeft();
-	}
+    int x_value = currentBlock->box1.x;
+    int y_value = currentBlock->box1.y;
+    
+    for (auto b : blocks) {
+        if (b->box1.y == y_value && b->box1.x < x_value && b->box1.x > row1) {
+            row1 = b->box1.x;
+        }
+    }
+        
+    
+    x_value = currentBlock->box2.x;
+    y_value = currentBlock->box2.y;
+    
+    for (auto b : blocks) {
+        if (b->box2.y == y_value && b->box2.x < x_value && b->box2.x > row2) {
+            row2 = b->box2.x;
+        }
+    }
+        
+
+    x_value = currentBlock->box3.x;
+    y_value = currentBlock->box3.y;
+    
+    for (auto b : blocks) {
+        if (b->box3.y == y_value && b->box3.x < x_value && b->box3.x > row3) {
+            row3 = b->box3.x;
+        }
+    }
+
+    for (auto b : blocks) {
+        if (b->box4.y == y_value && b->box4.x < x_value && b->box4.x > row4) {
+            row4 = b->box4.x;
+        }
+    }
+
+    if ((currentBlock->box1.x -row1) > 0 && (currentBlock->box2.x -row2) > 0 && (currentBlock->box3.x -row3) > 0 && (currentBlock->box4.x -row4) > 0) {
+        if (isheavy) {
+            int col1 = 0;
+            int col2 = 0;
+            int col3 = 0;
+            int col4 = 0;
+            x_value = currentBlock->box1.x - 1;
+            y_value = currentBlock->box1.y;
+            
+            for (auto b : blocks) {
+                if (b->box1.x == x_value && b->box1.y > y_value && b->box1.y > col1) {
+                    col1 = b->box1.y;
+                }
+            }
+
+            x_value = currentBlock->box2.x - 1;
+            y_value = currentBlock->box2.y;
+            
+            for (auto b : blocks) {
+                if (b->box2.x == x_value && b->box2.y > y_value && b->box2.y > col2) {
+                    col2 = b->box2.y;
+                }
+            }
+
+            x_value = currentBlock->box3.x - 1;
+            y_value = currentBlock->box3.y;
+            
+            for (auto b : blocks) {
+                if (b->box3.x == x_value && b->box3.y > y_value && b->box3.y > col3) {
+                    col3 = b->box3.y;
+                }
+            }
+
+            x_value = currentBlock->box4.x - 1;
+            y_value = currentBlock->box4.y;
+            
+            for (auto b : blocks) {
+                if (b->box4.x == x_value && b->box4.y > y_value && b->box4.y > col4) {
+                    col4 = b->box4.y;
+                }
+            }
+
+            if ((col1 - currentBlock->box1.y) > 0 && (col2 - currentBlock->box2.x) > 0 && (col3 - currentBlock->box3.x) > 0 && (col4 - currentBlock->box4.x) > 0) {
+                currentBlock->moveleft();
+            } else {
+                return;
+            }
+        }
+    } else {
+        return;
+    }
+
+
+
+
+
 }
+
+	
 
 
 
