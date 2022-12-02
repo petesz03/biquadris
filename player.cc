@@ -1,23 +1,21 @@
 #include "player.h"
 #include "block.h"
+#include "level.h"
+#include "board.h"
 #include <string>
+#include "level0.h"
+#include "level1.h"
+#include "level2.h"
+#include "level3.h"
+#include "level4.h"
 
 Player::Player(
     int pid,
-    int count = 0,
-    int score = 0,
-    int maxScore = 0,
-    bool isOver = false,
-    bool isMyTurn = false;
-    int currLevel = 0,
     Level* myLevel,
     Board* myBoard,
     Block* currBlock,
     Block* nextBlock,
     Player* opponent,
-    bool isBlind = false,
-    bool isHeavy = false,
-    bool isForce = false
     std::string fileForLevel0): 
         pid{pid},
         count{0},
@@ -39,13 +37,6 @@ Player::Player(
 Player::~Player() {
     delete myLevel;
     delete myBoard;
-    delete currBlock;
-    delete nextBlock;
-}
-
-// pointer to the special action, specialAction class
-SpecialAction* Player::specialAction() {
-
 }
 
 void Player::setOpponent(Player* opponent){ this->opponent = opponent; }
@@ -67,15 +58,9 @@ int Player::getLevel() { return currLevel; }
 
 bool Player::getMyTurn() { return isMyTurn; }
 
-bool Player::getIsOver() { return IsOver; }
+bool Player::getIsOver() { return isOver; }
 
-std::string Player::getFileForLevel0(){ return fileForLevel0 };
-
-// generate punish block if in level 4
-Block* Player::level4punish() {
-    // NEED TO KNOW THE IMPLEMENTATION OF THIS BLOCK
-    // TO IMPLEMENT THIS METHOD
-}
+std::string Player::getFileForLevel0(){ return fileForLevel0; };
 
 // methods to increase and decrease level
 void Player::levelUp() {
@@ -85,16 +70,16 @@ void Player::levelUp() {
         switch (currLevel)
         {
         case 1:
-            myLevel = new Level1();
+            myLevel = new Level1{};
             break;
         case 2:
-            myLevel = new Level2();
+            myLevel = new Level2{};
             break;
         case 3:
-            myLevel = new Level3();
+            myLevel = new Level3{};
             break;
         case 4:
-            myLevel = new Level4();
+            myLevel = new Level4{};
             break;
         default:
             break;
