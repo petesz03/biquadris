@@ -18,11 +18,13 @@ class Level4;
 
 class BlockObserver;
 
-// We currently do not support text.
+// We currently do not support seed
 int main(int argc, char** args){
+    // Default is that we have a graphical display
     bool graphics = true;
 
     // The following two files are to replace level0's file:
+    // The default is "sequencex.txt"
     std::string filePlayer1 = "sequence1.txt"; 
     std::string filePlayer2 = "sequence2.txt";
 
@@ -178,9 +180,12 @@ int main(int argc, char** args){
         }
         else if (command == "I"){
             Block* currentBlock = boardInPlay->getCurrentBlock();
-
+            
         }
-
+        else if (command == "restart"){
+            player1->restart();
+            player2->restart();
+        }
     }
 
     /***** Section to free memory: *****/

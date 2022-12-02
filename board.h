@@ -65,7 +65,8 @@ public:
     Block* createBlock();
     Block* getCurrentBlock();
     Char charAt(int row, int col);
-    Block* getNextBlock()
+    Block* getNextBlock();
+    void setCurrent(Block* newBlock);
 };
 
 

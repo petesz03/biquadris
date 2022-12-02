@@ -202,6 +202,11 @@ Block* Board::getNextBlock(){
     return nextBlock;
 }
 
+void Board::setCurrent(Block* newBlock){
+    currentBlock = newBlock;
+    return;
+}
+
 /* Old:
 Board::Board(Player* owner, Level* owners_level):
     owner{owner}, owners_level{owners_level} {
