@@ -124,7 +124,7 @@ int main(int argc, char** args){
         Board* boardInPlay;
         if (player1.getMyTurn()){
             playerInPlay = player1;
-            boardInPlay = player1Board;
+            boardInPlay = player1Board; // What if reset board.
         }
         else{
             playerInPlay = player2;

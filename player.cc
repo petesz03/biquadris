@@ -117,7 +117,7 @@ void Player::restart() {
     currLevel = 0;
     myLevel = new Level0{fileForLevel0};
     delete myBoard;
-    myBoard = new Board();
+    myBoard = new Board(this, myLevel);
     count = 0;
     score = 0;
 }
@@ -143,12 +143,12 @@ void Player::doSpecialAction(int type, char blockType) {
 
 void Player::setBlind() {
     isBlind = true;
-    myBoard.isBlind = true;
+    myBoard->isblind = true;
 }
 
 void Player::setHeavy() {
     isHeavy = true;
-    currBlock.heaviness = 2;
+    currBlock->heaviness = 2;
 }
 
 /*
@@ -197,30 +197,27 @@ void Player::unsetForce() {
 }
 
 // method to update the current score and the max score
-int Player::updateScore(int n) {
+void Player::updateScore(int n) {
     score += n;
     this->updateMaxScore();
 }
-int Player::updateMaxScore() {
+void Player::updateMaxScore() {
     if (score > maxScore){
         maxScore = score;
     }
 }
 
 // methods to perform moves to the current blocks
-void Player::makeMoveLeft(Block& currBlock) {
-    if (isHeavy) {
-        currBlock.heaviness = 2;
-    }
-    currBlock->moveLeft(*this);
-    myBoard->render();
+void Player::makeMoveLeft() {
+	myBoard->MoveLeft();
+	myBoard->render();
 }
 
 void Player::makeMoveRight(Block& currBlock) {
     if (isHeavy) {
         currBlock.heaviness = 2;
     }
-    currBlock->moveRight(*this);
+    currBlock->moveRight();
     myBoard->render();
 }
 

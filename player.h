@@ -31,10 +31,6 @@ class Player {
     // pointer to my board, Board object
     Board* myBoard;
 
-    // current and next Block objects for the player
-    Block* currBlock;
-    Block* nextBlock;
-
     // pointer to the opponent player, player Opponent
     Player* opponent;
 
@@ -96,16 +92,16 @@ public:
     void unsetForce();
 
     // method to update the current score and the max score
-    int updateScore(int n);
-    int updateMaxScore();
+    void updateScore(int n);
+    void updateMaxScore();
     
     // methods to perform moves to the current blocks
-    void makeMoveLeft(Block& currBlock);
-    void makeMoveRight(Block& currBlock);
-    void makeMoveDown(Block& currBlock);
-    void makeClockwiseTurn(Block& currBlock);
-    void makeCounterTurn(Block& currBlock);
-    void makeDrop(Block& currBlock);
+    void makeMoveLeft();
+    void makeMoveRight();
+    void makeMoveDown();
+    void makeClockwiseTurn();
+    void makeCounterTurn();
+    void makeDrop();
 
 };
 
