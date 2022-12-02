@@ -4,6 +4,7 @@
 #include "window.h"
 
 class Board;
+class Player;
 
 class GraphicDisplay: public DisplayObserver{
     Board* subject;

@@ -58,10 +58,10 @@ void GraphicDisplay::placeTile(char pattern, int row, int col){
 }
 
 void GraphicDisplay::notify(){
-    int level = (control->getLevel())->level;
-    int score = (control->getScore());
-    w.drawString(0,12,"    Level:   "+level);
-    w.drawString(0,28,"    Score:   "+score);
+    int level = control->getLevel();
+    int score = control->getScore();
+    w->drawString(0,12,"    Level:   "+level);
+    w->drawString(0,28,"    Score:   "+score);
     for (int i = 0; i <= 17; i++){
         for (int j = 0; j <= 10; j++){
             // row 0 on board is row 2 on display:
@@ -69,8 +69,8 @@ void GraphicDisplay::notify(){
             placeTile(pattern, i, j);
         }
     }
-    // If it is not our term currently, we do not see extra blocks below "Next:"
-    if (!control->turn){
+    // If it is not our turn currently, we do not see extra blocks below "Next:"
+    if (!control->getMyTurn()){
         std::cout << std::endl << std::endl;
         return;
     }
