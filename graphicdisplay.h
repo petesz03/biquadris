@@ -1,8 +1,9 @@
 #ifndef _GRAPHICDISPLAY_H_
 #define _GRAPHICDISPLAY_H_
 #include "displayobserver.h"
-#include "board.h"
 #include "window.h"
+
+class Board;
 
 class GraphicDisplay: public DisplayObserver{
     Board* subject;
