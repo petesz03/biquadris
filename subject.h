@@ -7,11 +7,11 @@ class Block;
 class DisplayObserver;
 
 class Subject{
+public:
     std::vector<DisplayObserver*> displayobservers;
     std::vector<Block*> blocks;
-    public:
-    Subject(std::vector<DisplayObserver*> displayobservers,
-            std::vector<Block*> blocks);
+public:
+    Subject();
     void notifyObservers();
     void attach(DisplayObserver* ob);
     void attach(Block* ob);
