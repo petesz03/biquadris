@@ -243,4 +243,7 @@ void Player::makeDrop() {
     opponent->setTurn(true);
 }
 
-
+// Only used upon initiation: !!!
+void Player::setBoard(Board* newBoard){
+	myBoard = newBoard;
+}

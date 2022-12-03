@@ -78,16 +78,14 @@ int main(int argc, char** args){
     else{
         player1Level = new Level4{};
         player2Level = new Level4{};
-    }
+    } 
+    Player* player1 = new Player{1, player1Level, nullptr, nullptr, filePlayer1};
+    Board* player1Board = new Board{player1, player1Level};
     
-
-    Board* player1Board = new Board{nullptr, player1Level}; // Change depending on constructor of board.
-    Player* player1 = new Player{1, player1Level, player1Board, nullptr, filePlayer1};
-    player1Board->setPlayer(player1);
-    Board* player2Board = new Board{nullptr, player2Level}; // Change depending on constructor of board
-    Player* player2 = new Player{2, player2Level, player2Board, player1, filePlayer2};
-
-    player2Board->setPlayer(player2);
+    player1->setBoard(player1Board);
+    Player* player2 = new Player{2, player2Level, nullptr, player1, filePlayer2};
+    Board* player2Board = new Board{player2, player2Level}; // Change depending on constructor of board
+    player2->setBoard(player2Board);
 
     // Creating player1's text displays:
     TextDisplay* player1Text = new TextDisplay{player1Board, player1};

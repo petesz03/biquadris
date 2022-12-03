@@ -11,6 +11,7 @@
 #include "oblock.h"
 #include "tblock.h"
 #include <cstdlib>
+#include <iostream>
 
 using namespace std;
 
@@ -27,7 +28,7 @@ Level0::Level0(std::string fileToRead): Level{0}, blockIndex{0} {
 Level0::~Level0() {}
 
 Block* Level0::randomNextBlock() {
-    char next;
+	char next;
     int size = file.size();
 
     if (blockIndex == size) {

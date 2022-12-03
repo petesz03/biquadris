@@ -56,7 +56,7 @@ public:
     void setOpponent(Player* opponent);
     void setTurn(bool turn);
     void setFileForLevel0(std::string file);
-
+    void setBoard(Board* setBoard); // Only used during initiation
 
     // retrieve player information
     int getPid();
