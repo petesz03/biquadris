@@ -98,7 +98,7 @@ int main(int argc, char** args){
     // Creating player2's text displays:
     TextDisplay* player2Text = new TextDisplay{player2Board, player2};
     player2Board->attach(player2Text);
-    
+
     // If the filePlayer fields are not empty, we have to replace level0's file:
 
 
@@ -113,11 +113,13 @@ int main(int argc, char** args){
         player2Board->attach(player2Graphics);
     }
 
+    player1Board->render();
+
     // Since player1's opponent's pointer is nullptr, change the pointer:
     player1->setOpponent(player2);
 
     player1->setTurn(true);
-
+    player2->setTurn(false);
     /***** Input *****/
     std::string command;
     std::string file;
@@ -137,11 +139,11 @@ int main(int argc, char** args){
         Board* boardInPlay;
         if (player1->getMyTurn()){
             playerInPlay = player1;
-            boardInPlay = player1Board; // What if reset board.
+            boardInPlay = player1->getBoard(); 
         }
         else{
             playerInPlay = player2;
-            boardInPlay = player2Board;
+            boardInPlay = player2->getBoard();
         }
 
         // Read for input and call functions in playerInPlay,
@@ -160,11 +162,13 @@ int main(int argc, char** args){
             if (matched != std::string::npos){
                 commandsMatched++;
                 commandToExecute = (*it);
+		
             }
         }
         // If "command" only matches to one command, execute that command:
         if (commandsMatched == 1){
             command == commandToExecute;
+	    std::cout << "The command you entered is: " << command << std::endl;
         }
 
         if (command == "left"){
@@ -251,17 +255,27 @@ int main(int argc, char** args){
             player1->restart();
             player2->restart();
         }
+	// Testing functions: (delete in end)
+	else if (command == "newblock"){
+		Block* newblock = new Iblock{};
+		(player1->getBoard())->attach(newblock);
+		(player2->getBoard())->attach(newblock);
+	}
+	else if (command == "render"){
+		(player2->getBoard())->render();
+	}
+		
     }
 
     /***** Free Memory: *****/
     // Deleting players will delete its corresponding level and board, which
     //   will delete all the attached blocks:
-    delete player1;
-    delete player2;
+    //delete player1;
+    //delete player2;
 
     // Must delete graphic observers since they are not deleted:
-    delete player1Text;
-    delete player2Text;
+    //delete player1Text;
+    //delete player2Text;
     if (graphics){
         delete player1Graphics;
         delete player2Graphics;

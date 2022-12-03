@@ -66,6 +66,7 @@ public:
     bool getMyTurn();
     bool getIsOver();
     std::string getFileForLevel0();
+    Board* getBoard();
 
 
     // generate punish block if in level 4

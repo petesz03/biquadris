@@ -247,3 +247,7 @@ void Player::makeDrop() {
 void Player::setBoard(Board* newBoard){
 	myBoard = newBoard;
 }
+
+Board* Player::getBoard(){
+	return myBoard;
+}
