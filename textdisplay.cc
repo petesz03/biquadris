@@ -14,7 +14,7 @@ TextDisplay::~TextDisplay(){
 
 void TextDisplay::notify(){
     // Space have to change weith number of digits in score:
-    std::cout << "Level:    " << (control->getLevel())->level << std::endl;
+    std::cout << "Level:    " << control->getLevel()<< std::endl;
     std::cout << "Score:    " << (control->getScore()) << std::endl;
     for (int i = 0; i < 11; ++i) std::cout << '-';
     std::cout << std::endl;
@@ -29,7 +29,7 @@ void TextDisplay::notify(){
     std::cout << std::endl;
     std::cout <<"Next:" << std::endl;
     // If it is not our term currently, we do not see extra blocks below "Next:"
-    if (!control->turn){
+    if (!control->getMyTurn()){
         std::cout << std::endl << std::endl;
         return;
     }

@@ -6,7 +6,7 @@ public:
     int x;
     int y;
 public:
-    Posn(int x = 0, int y = 0);
+    Posn(int x, int y);
 };
 
 

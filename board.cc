@@ -2,7 +2,8 @@
 #include <vector>
 #include "subject.h"
 #include "displayobserver.h"
-
+#include "level.h"
+#include <iostream>
 
 Board::Board(Player* owner, Level* owners_level):
     owner{owner}, owners_level{owners_level} {
@@ -13,15 +14,20 @@ Board::Board(Player* owner, Level* owners_level):
     isblind = false;
     isforce = false;
     isheavy = false;
-
+    currentBlock = createBlock();
+    nextBlock = createBlock();
+    attach(currentBlock);
+    render();
 }
 
 Block* Board::createBlock() {
+    Block* newBlock;
     if (owner->israndom) {
-        return owners_level->randomNextBlock();
+        newBlock = owners_level->randomNextBlock();
     } else {
-        return owners_level->fileNextBlock();
+        newBlock = owners_level->fileNextBlock();
     }
+    return newBlock;
 }
 
 // CLEARING THE BOARD CLEARS ALLLLLL THE BLOCKS (NOT THE PLAYER AND LEVEL):
@@ -398,7 +404,7 @@ void Board::drop() {
             col4 = b->box4.y;
         }
     }
-    int curr_heavy = currentBlock->heaviness;
+    //int curr_heavy = currentBlock->heaviness;
     while ((col1 - currentBlock->box1.y) > 0 && (col2 - currentBlock->box2.x) > 0 && (col3 - currentBlock->box3.x) > 0 && (col4 - currentBlock->box4.x) > 0) {
         currentBlock->movedown();
     }
@@ -407,9 +413,17 @@ void Board::drop() {
 
 
 
+void Board::setPlayer(Player* newPlayer){
+	owner = newPlayer;
+}
 
+void Board::setLevel(Level* newLevel){
+	owners_level = newLevel;
+}
 
-
+void Board::setNext(Block* newBlock){
+	nextBlock = newBlock;
+}
 
 /* Old:
 Board::Board(Player* owner, Level* owners_level):

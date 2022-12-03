@@ -4,6 +4,11 @@
 #include "board.h"
 #include "textdisplay.h"
 #include "graphicdisplay.h"
+#include "level0.h"
+#include "level1.h"
+#include "level2.h"
+#include "level3.h"
+#include "level4.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -68,18 +73,21 @@ int main(int argc, char** args){
     }
     else if (levelInitiated == 3){
         player1Level = new Level3{};
-        player1Level = new Level3{};
+        player2Level = new Level3{};
     }
-    else if (levelInitiated == 4){
+    else{
         player1Level = new Level4{};
         player2Level = new Level4{};
     }
-
-    Board* player1Board = new Board{}; // Change depending on constructor of board.
-    Player* player1 = new Player{1, player1Level, player1Board, nullptr, filePlayer1};
     
-    Board* player2Board = new Board{}; // Change depending on constructor of board
+
+    Board* player1Board = new Board{nullptr, player1Level}; // Change depending on constructor of board.
+    Player* player1 = new Player{1, player1Level, player1Board, nullptr, filePlayer1};
+    player1Board->setPlayer(player1);
+    Board* player2Board = new Board{nullptr, player2Level}; // Change depending on constructor of board
     Player* player2 = new Player{2, player2Level, player2Board, player1, filePlayer2};
+
+    player2Board->setPlayer(player2);
 
     // Creating player1's text displays:
     TextDisplay* player1Text = new TextDisplay{player1Board, player1};
@@ -99,14 +107,14 @@ int main(int argc, char** args){
     if (graphics){
         player1Graphics = new GraphicDisplay{player1Board, player1};
         player1Board->attach(player1Graphics);
-        player2Graphcs = new GraphicDisplay{player2Board, player2};
+        player2Graphics = new GraphicDisplay{player2Board, player2};
         player2Board->attach(player2Graphics);
     }
 
     // Since player1's opponent's pointer is nullptr, change the pointer:
-    player1.setOpponent(player2);
+    player1->setOpponent(player2);
 
-    player1.setTurn(true);
+    player1->setTurn(true);
 
     /***** Input *****/
     std::string command;
@@ -125,7 +133,7 @@ int main(int argc, char** args){
         // Set who is moving for future commands:
         Player* playerInPlay;
         Board* boardInPlay;
-        if (player1.getMyTurn()){
+        if (player1->getMyTurn()){
             playerInPlay = player1;
             boardInPlay = player1Board; // What if reset board.
         }
@@ -146,40 +154,34 @@ int main(int argc, char** args){
         
         // Check how many different types of command that "command" matches to:
         for (auto it = listOfCommands.begin(); it != listOfCommands.end(); it++){
-            std::string matched = (*it).find(command);
+            size_t matched = (*it).find(command);
             if (matched != std::string::npos){
                 commandsMatched++;
                 commandToExecute = (*it);
             }
         }
         // If "command" only matches to one command, execute that command:
-        if (commandToExecute == 1){
+        if (commandsMatched == 1){
             command == commandToExecute;
         }
 
         if (command == "left"){
-            Block* currentBlock = boardInPlay->getCurrentBlock();
-            playerInPlay->makeMoveLeft(*currentBlock);
+            playerInPlay->makeMoveLeft();
         }
         else if (command == "right"){
-            Block* currentBlock = boardInPlay->getCurrentBlock();
-            playerInPlay->makeMoveRight(*currentBlock);
+            playerInPlay->makeMoveRight();
         }
         else if (command == "down"){
-            Block* currentBlock = boardInPlay->getCurrentBlock();
-            playerInPlay->makeMoveDown(*currentBlock);
+            playerInPlay->makeMoveDown();
         }
         else if (command == "clockwise"){
-            Block* currentBlock = boardInPlay->getCurrentBlock();
-            playerInPlay->makeClockwiseTurn(*currentBlock);
+            playerInPlay->makeClockwiseTurn();
         }
         else if (command == "counterclockwise"){
-            Block* currentBlock = boardInPlay->getCurrentBlock();
-            playerInPlay->makeCounterTurn(*currentBlock);
+            playerInPlay->makeCounterTurn();
         }
         else if (command == "drop"){
-            Block* currentBlock = boardInPlay->getCurrentBlock();
-            playerInPlay->makeDrop(*currentBlock);
+            playerInPlay->makeDrop();
         }
         else if (command == "levelup"){
             playerInPlay->levelUp();
@@ -210,13 +212,13 @@ int main(int argc, char** args){
             // Detach it first from the vector of Blocks:
             boardInPlay->detach(curBlock);
             // Delete the old "currentBlock" in Board:
-		    delete curBlock;
-		    // Create new Block
-		    Block* newblock = new Iblock{};
-		    // Attach:
-		    boardInPlay->attach(curBlock);
-		    // Set currentBlock in Board
-		    boardInPlay->setCurrent(curBlock); 
+	    delete curBlock;
+	    // Create new Block
+	    Block* newblock = new Iblock{};
+	    // Attach:
+	    boardInPlay->attach(newblock);  
+	    // Set currentBlock in Board
+	    boardInPlay->setCurrent(newblock); 
         }
 	    else if (command == "J"){                
 		    Block* curBlock = boardInPlay->getCurrentBlock();
@@ -227,9 +229,9 @@ int main(int argc, char** args){
 		    // Create new Block
 		    Block* newblock = new Jblock{};     
      		// Attach:                
-		    boardInPlay->attach(curBlock);
+		    boardInPlay->attach(newblock);
             // Set currentBlock in Board                
-		    boardInPlay->setCurrent(curBlock);
+		    boardInPlay->setCurrent(newblock);
 	    }
 	    else if (command == "L"){
             Block* curBlock = boardInPlay->getCurrentBlock();                   // Detach it first from the vector of Blocks:
@@ -239,9 +241,9 @@ int main(int argc, char** args){
             // Create new Block
             Block* newblock = new Lblock{};
             // Attach:
-            boardInPlay->attach(curBlock);
+            boardInPlay->attach(newblock);
             // Set currentBlock in Board
-            boardInPlay->setCurrent(curBlock);
+            boardInPlay->setCurrent(newblock);
         }
         else if (command == "restart"){
             player1->restart();

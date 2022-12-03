@@ -68,8 +68,10 @@ public:
     char charAt(int row, int col);
     Block* getNextBlock();
     void setCurrent(Block* newBlock);
+    void setNext(Block* newBlock);
     void render();
-
+    void setPlayer(Player* newPlayer);
+    void setLevel(Level* newLevel);
 
     // Move block functions:
     void moveLeft();

@@ -131,7 +131,8 @@ void Player::doSpecialAction(int type, char blockType) {
         opponent->setHeavy();
         break;
     case 3:
-        opponent->setForce(blockType);
+        // opponent->setForce(blockType);
+	break;
     }
 }
 
@@ -182,7 +183,6 @@ void Player::unsetBlind() {
 
 void Player::unsetHeavy() {
     myBoard->isheavy = false;
-    myBoard->special_action = false;
 }
 
 void Player::unsetForce() {
@@ -217,12 +217,12 @@ void Player::makeMoveDown() {
 }
 
 void Player::makeClockwiseTurn() {
-    myBoard->clockwiseTurn();
+    myBoard->currentBlock->clockwiseturn();
     myBoard->render();
 }
 
 void Player::makeCounterTurn() {
-    myBoard->counterTurn();
+    myBoard->currentBlock->counterturn();
     myBoard->render();
 }
 
@@ -233,6 +233,14 @@ void Player::makeDrop() {
     unsetBlind();
     unsetHeavy();
     unsetForce();
+    // Create new block:
+    Block* newBlock = myBoard->createBlock();
+    // Move next to current:
+    myBoard->setCurrent(myBoard->getNextBlock());
+    myBoard->attach(myBoard->getCurrentBlock());
+    myBoard->setNext(newBlock);
+    setTurn(false);
+    opponent->setTurn(true);
 }
 
 
