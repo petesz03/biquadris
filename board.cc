@@ -7,11 +7,11 @@
 
 Board::Board(Player* owner, Level* owners_level):
     owner{owner}, owners_level{owners_level},
-    currentBlock{nullptr},
-    nextBlock{nullptr},
     isblind{false},
     isforce{false},
     isheavy{false} {
+    currentBlock = createBlock(),
+    nextBlock = createBlock(),
     render();
 }
 
