@@ -8,7 +8,9 @@ class SpecialAction;
 class Block;
 
 class Player {
+public:
     // the player's id, 1 or 2
+    bool israndom;
     int pid;
 
     // counter for how many blocks dropped without clearing one row

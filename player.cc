@@ -15,6 +15,7 @@ Player::Player(
     Board* myBoard,
     Player* opponent,
     std::string fileForLevel0): 
+        israndom{true},
         pid{pid},
         count{0},
         score{0},
