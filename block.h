@@ -12,6 +12,7 @@ public:
     Posn box4;
     int heaviness;
     bool candown;
+
 public:
     void moveleft();
     void moveright();
