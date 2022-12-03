@@ -1,6 +1,7 @@
 #include "board.h"
 #include <vector>
 #include "subject.h"
+#include "displayobserver.h"
 
 
 Board::Board(Player* owner, Level* owners_level):
@@ -109,7 +110,7 @@ void Board::setCurrent(Block* newBlock){
 }
 void Board::render(){
 	for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
-		(*it)->notify;
+		(*it)->notify();
 	}
 }
 

@@ -1,5 +1,6 @@
 #ifndef LEVEL_H
 #define LEVEL_H
+#include <string>
 
 class Player;
 class Block;

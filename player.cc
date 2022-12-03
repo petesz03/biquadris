@@ -140,7 +140,7 @@ void Player::setBlind() {
 }
 
 void Player::setHeavy() {
-    myBoard->currentBlock->isheavy = true;
+    myBoard->isheavy = true;
 }
 
 /*
@@ -182,7 +182,7 @@ void Player::unsetBlind() {
 
 void Player::unsetHeavy() {
     myBoard->isheavy = false;
-    myBoard->currentBlock->special_action = false;
+    myBoard->special_action = false;
 }
 
 void Player::unsetForce() {
