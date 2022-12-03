@@ -2,8 +2,9 @@
 #include "displayobserver.h"
 #include "block.h"
 
-Subject::Subject():
-            displayobservers{displayobservers}, blocks{blocks}{}
+Subject::Subject() {
+    
+}
 
 
 void Subject::attach(DisplayObserver* ob){

@@ -12,14 +12,20 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
-class Block;
-
-class Level0;
-class Level1;
-class Level2;
-class Level3;
-class Level4;
+#include "blockobserver.h"
+#include "displayobserver.h"
+#include "graphicdisplay.h"
+#include "iblock.h"
+#include "jblock.h"
+#include "lblock.h"
+#include "oblock.h"
+#include "posn.h"
+#include "sblock.h"
+#include "subject.h"
+#include "tblock.h"
+#include "textdisplay.h"
+#include "window.h"
+#include "zblock.h"   
 
 class BlockObserver;
 
@@ -27,14 +33,11 @@ class BlockObserver;
 int main(int argc, char** args){
     // Default is that we have a graphical display
     bool graphics = true;
-
     // The following two files are to replace level0's file:
     // The default is "sequencex.txt"
     std::string filePlayer1 = "sequence1.txt"; 
     std::string filePlayer2 = "sequence2.txt";
-
     int levelInitiated = 0;
-
     for (int i = 1; i < argc; i++){
         std::string argument = args[i];
         if (argument == "-text"){ graphics = false;}
@@ -52,9 +55,7 @@ int main(int argc, char** args){
             levelInitiated = stoi(argument);
         }
     }
-    
     /***** Setup *****/
-
     // Set up a level according to levelInitiated:
     Level* player1Level;
     Level* player2Level;
@@ -78,14 +79,17 @@ int main(int argc, char** args){
     else{
         player1Level = new Level4{};
         player2Level = new Level4{};
-    } 
-    Player* player1 = new Player{1, player1Level, nullptr, nullptr, filePlayer1};
-    Board* player1Board = new Board{player1, player1Level};
-    
-    player1->setBoard(player1Board);
-    Player* player2 = new Player{2, player2Level, nullptr, player1, filePlayer2};
-    Board* player2Board = new Board{player2, player2Level}; // Change depending on constructor of board
-    player2->setBoard(player2Board);
+    }
+    Player* player1 = nullptr;
+    Player* player2 = nullptr;
+    Board* player1Board = nullptr;
+    Board* player2Board = nullptr;
+    player1Board = new Board{player1, player1Level};
+    player1 = new Player{1, player1Level, player1Board, player2, filePlayer1};
+    player1Board = new Board{player1, player1Level};
+
+    player2 = new Player{2, player2Level, player2Board, player1, filePlayer2};
+    player2Board = new Board{player2, player2Level}; // Change depending on constructor of board
 
     // Creating player1's text displays:
     TextDisplay* player1Text = new TextDisplay{player1Board, player1};
