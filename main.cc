@@ -167,7 +167,7 @@ int main(int argc, char** args){
         }
         // If "command" only matches to one command, execute that command:
         if (commandsMatched == 1){
-            command == commandToExecute;
+            command = commandToExecute;
 	    std::cout << "The command you entered is: " << command << std::endl;
         }
 
