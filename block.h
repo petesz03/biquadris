@@ -16,10 +16,10 @@ public:
     Board* the_board;
 
 public:
-    virtual void moveleft();
-    virtual void moveright();
-    virtual void movedown();
-    virtual void drop();
+    void moveleft();
+    void moveright();
+    void movedown();
+    void drop();
     void clean(int x, int y);
     virtual void clockwiseturn();
     virtual void counterturn();

@@ -1,8 +1,8 @@
 #include <vector>
 #include "lblock.h"
 
-Lblock::Lblock(int heaviness, bool candown, int dir):
-    Block{'L', Posn{4,2}, Posn{5,2}, Posn{6,2}, Posn{6,1}, heaviness, candown}, dir{dir} {}
+Lblock::Lblock(int heaviness, bool candown, int dir, Board* the_board):
+    Block{'L', Posn{4,2}, Posn{5,2}, Posn{6,2}, Posn{6,1}, heaviness, candown, the_board}, dir{dir} {}
 
 
 Lblock::~Lblock() {

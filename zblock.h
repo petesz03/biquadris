@@ -8,7 +8,7 @@ class Zblock : public Block {
 public:
     int dir;
 public:
-    Zblock(int heaviness = 0, bool candown = true, int dir = 1);
+    Zblock(int heaviness = 0, bool candown = true, int dir = 1, Board* the_board = nullptr);
     ~Zblock();
     void clockwiseturn();
     void counterturn();

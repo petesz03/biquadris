@@ -3,12 +3,13 @@
 
 #include <vector>
 #include "block.h"
+#include "board.h"
 
 class Oblock : public Block {
 public:
     int dir;
 public:
-    Oblock(int heaviness = 0, bool candown = true, int dir = 1);
+    Oblock(int heaviness = 0, bool candown = true, int dir = 1, Board* the_board = nullptr);
     ~Oblock();
     void clockwiseturn();
     void counterturn();

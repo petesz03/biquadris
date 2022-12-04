@@ -1,8 +1,8 @@
 #include <vector>
 #include "tblock.h"
 
-Tblock::Tblock(int heaviness, bool candown, int dir):
-    Block{'T', Posn{5,1}, Posn{4,1}, Posn{6,1}, Posn{5,2}, heaviness, candown}, dir{dir} {}
+Tblock::Tblock(int heaviness, bool candown, int dir, Board* the_board):
+    Block{'T', Posn{5,1}, Posn{4,1}, Posn{6,1}, Posn{5,2}, heaviness, candown, the_board}, dir{dir} {}
 
 
 Tblock::~Tblock() {

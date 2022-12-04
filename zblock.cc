@@ -1,8 +1,8 @@
 #include <vector>
 #include "zblock.h"
 
-Zblock::Zblock(int heaviness, bool candown, int dir):
-    Block{'Z', Posn{4,1}, Posn{5,1}, Posn{5,2}, Posn{6,2}, heaviness, candown}, dir{dir} {}
+Zblock::Zblock(int heaviness, bool candown, int dir, Board* the_board):
+    Block{'Z', Posn{4,1}, Posn{5,1}, Posn{5,2}, Posn{6,2}, heaviness, candown, the_board}, dir{dir} {}
 
 
 Zblock::~Zblock() {

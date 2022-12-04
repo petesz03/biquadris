@@ -1,7 +1,7 @@
 #include "sblock.h"
 
-Sblock::Sblock(int heaviness, bool candown, int dir):
-    Block{'S', Posn{4,2}, Posn{5,2}, Posn{5,1}, Posn{6,1}, heaviness, candown}, dir{dir} {}
+Sblock::Sblock(int heaviness, bool candown, int dir, Board* the_board):
+    Block{'S', Posn{4,2}, Posn{5,2}, Posn{5,1}, Posn{6,1}, heaviness, candown, the_board}, dir{dir} {}
 
 
 Sblock::~Sblock() {
