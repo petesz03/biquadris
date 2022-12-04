@@ -38,6 +38,11 @@ void Block::moveleft() {
                     drop();
                     return;
                 }
+            }
+            if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                drop();
+                return;
+            } else {
                 char temp9 = the_board->charAt(box1.x, box1.y + 1);
                 char temp10 = the_board->charAt(box2.x, box2.y + 1);
                 char temp11 = the_board->charAt(box3.x, box3.y + 1);
@@ -53,6 +58,24 @@ void Block::moveleft() {
                 }
             }
             
+        }
+        if (the_board->owners_level->level >= 3) {
+            if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                return;
+            } else {
+                char temp5 = the_board->charAt(box1.x, box1.y + 1);
+                char temp6 = the_board->charAt(box2.x, box2.y + 1);
+                char temp7 = the_board->charAt(box3.x, box3.y + 1);
+                char temp8 = the_board->charAt(box4.x, box4.y + 1);
+                if (temp5 == ' ' && temp6 == ' ' && temp7 == ' ' && temp8 == ' ') {
+                    box1.y += 1;
+                    box2.y += 1;
+                    box3.y += 1;
+                    box4.y += 1;
+                } else {
+                    return;
+                }
+            }
         }
     }
 }
@@ -89,6 +112,11 @@ void Block::moveright() {
                     drop();
                     return;
                 }
+            }
+            if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                drop();
+                return;
+            } else {
                 char temp9 = the_board->charAt(box1.x, box1.y + 1);
                 char temp10 = the_board->charAt(box2.x, box2.y + 1);
                 char temp11 = the_board->charAt(box3.x, box3.y + 1);
@@ -105,6 +133,24 @@ void Block::moveright() {
             }
             
         }
+        if (the_board->owners_level->level >= 3) {
+            if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                return;
+            } else {
+                char temp5 = the_board->charAt(box1.x, box1.y + 1);
+                char temp6 = the_board->charAt(box2.x, box2.y + 1);
+                char temp7 = the_board->charAt(box3.x, box3.y + 1);
+                char temp8 = the_board->charAt(box4.x, box4.y + 1);
+                if (temp5 == ' ' && temp6 == ' ' && temp7 == ' ' && temp8 == ' ') {
+                    box1.y += 1;
+                    box2.y += 1;
+                    box3.y += 1;
+                    box4.y += 1;
+                } else {
+                    return;
+                }
+            }
+        }
     }
 }
 
@@ -112,25 +158,41 @@ void Block::movedown() {
     if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
         drop();
         return;
-    }
-    for (int i = 0; i <= heaviness; i++) {
-        if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
-            return;
+    } else {
+        char temp5 = the_board->charAt(box1.x, box1.y + 1);
+        char temp6 = the_board->charAt(box2.x, box2.y + 1);
+        char temp7 = the_board->charAt(box3.x, box3.y + 1);
+        char temp8 = the_board->charAt(box4.x, box4.y + 1);
+        if (temp5 == ' ' && temp6 == ' ' && temp7 == ' ' && temp8 == ' ') {
+            box1.y += 1;
+            box2.y += 1;
+            box3.y += 1;
+            box4.y += 1;
         } else {
-            char temp5 = the_board->charAt(box1.x, box1.y + 1);
-            char temp6 = the_board->charAt(box2.x, box2.y + 1);
-            char temp7 = the_board->charAt(box3.x, box3.y + 1);
-            char temp8 = the_board->charAt(box4.x, box4.y + 1);
-            if (temp5 == ' ' && temp6 == ' ' && temp7 == ' ' && temp8 == ' ') {
-                box1.y += 1;
-                box2.y += 1;
-                box3.y += 1;
-                box4.y += 1;
-            } else {
-                return;
-            }
+            drop();
+            return;
         }
     }
+    if (the_board->owners_level->level >= 3) {
+            if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                drop();
+                return;
+            } else {
+                char temp5 = the_board->charAt(box1.x, box1.y + 1);
+                char temp6 = the_board->charAt(box2.x, box2.y + 1);
+                char temp7 = the_board->charAt(box3.x, box3.y + 1);
+                char temp8 = the_board->charAt(box4.x, box4.y + 1);
+                if (temp5 == ' ' && temp6 == ' ' && temp7 == ' ' && temp8 == ' ') {
+                    box1.y += 1;
+                    box2.y += 1;
+                    box3.y += 1;
+                    box4.y += 1;
+                } else {
+                    drop();
+                    return;
+                }
+            }
+        }
 }
 
 void Block::drop() {
