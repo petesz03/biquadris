@@ -10,8 +10,8 @@ Board::Board(Player* owner, Level* owners_level):
     isblind{false},
     isforce{false},
     isheavy{false} {
-    currentBlock = createBlock(),
-    nextBlock = createBlock(),
+    currentBlock = createBlock();
+    nextBlock = createBlock();
     render();
 }
 

@@ -80,16 +80,15 @@ int main(int argc, char** args){
         player1Level = new Level4{};
         player2Level = new Level4{};
     }
-    Player* player1 = nullptr;
-    Player* player2 = nullptr;
-    Board* player1Board = nullptr;
-    Board* player2Board = nullptr;
-    player1Board = new Board{player1, player1Level};
-    player1 = new Player{1, player1Level, player1Board, player2, filePlayer1};
-    player1Board = new Board{player1, player1Level};
-
-    player2 = new Player{2, player2Level, player2Board, player1, filePlayer2};
-    player2Board = new Board{player2, player2Level}; // Change depending on constructor of board
+    
+    /*** Don't touch: ***/
+    Player* player1 = new Player{1, player1Level, nullptr, nullptr, filePlayer1};
+    Board* player1Board = new Board{player1, player1Level};
+    player1->setBoard(player1Board);
+    Player* player2 = new Player{2, player2Level, nullptr, player1, filePlayer2};
+    Board* player2Board = new Board{player2, player2Level}; // Change depending on constructor of board
+    player2->setBoard(player2Board);
+    /******/
 
     // Creating player1's text displays:
     TextDisplay* player1Text = new TextDisplay{player1Board, player1};
@@ -114,6 +113,7 @@ int main(int argc, char** args){
     }
 
     player1Board->render();
+    player2Board->render();
 
     // Since player1's opponent's pointer is nullptr, change the pointer:
     player1->setOpponent(player2);
@@ -263,6 +263,7 @@ int main(int argc, char** args){
 	}
 	else if (command == "render"){
 		(player2->getBoard())->render();
+		(player1->getBoard())->render();
 	}
 		
     }
@@ -270,12 +271,12 @@ int main(int argc, char** args){
     /***** Free Memory: *****/
     // Deleting players will delete its corresponding level and board, which
     //   will delete all the attached blocks:
-    //delete player1;
-    //delete player2;
+    delete player1;
+    delete player2;
 
     // Must delete graphic observers since they are not deleted:
-    //delete player1Text;
-    //delete player2Text;
+    delete player1Text;
+    delete player2Text;
     if (graphics){
         delete player1Graphics;
         delete player2Graphics;

@@ -13,7 +13,6 @@ TextDisplay::~TextDisplay(){
 }
 
 void TextDisplay::notify(){
-	std::cout << "we are here" << std::endl;
     // Space have to change weith number of digits in score:
     std::cout << "Level:    " << control->getLevel()<< std::endl;
     std::cout << "Score:    " << (control->getScore()) << std::endl;
