@@ -47,6 +47,9 @@ void Block::moveleft() {
                     box2.y += 1;
                     box3.y += 1;
                     box4.y += 1;
+                } else {
+                    drop();
+                    return;
                 }
             }
             
@@ -95,6 +98,9 @@ void Block::moveright() {
                     box2.y += 1;
                     box3.y += 1;
                     box4.y += 1;
+                } else {
+                    drop();
+                    return;
                 }
             }
             
