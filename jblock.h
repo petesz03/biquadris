@@ -13,10 +13,6 @@ public:
     ~Jblock();
     void clockwiseturn();
     void counterturn();
-    void moveleft();
-    void moveright();
-    void movedown();
-    void drop();
 };
 
 

@@ -8,23 +8,6 @@ Jblock::~Jblock() {
 
 }
 
-void Jblock::moveleft() {
-    
-
-}
-void Jblock::moveright() {
-
-}
-void Jblock::movedown() {
-
-}
-void Jblock::drop() {
-
-}
-
-
-
-
 
 void Jblock::clockwiseturn() {
     if (dir == 1) {
