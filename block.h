@@ -2,7 +2,8 @@
 #define __BLOCK_H__
 #include "posn.h"
 #include <vector>
-#include "board.h"
+
+class Board;
 
 class Block {
 public:
