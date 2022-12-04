@@ -196,7 +196,21 @@ void Block::movedown() {
 }
 
 void Block::drop() {
-
+	if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17){
+		return;
+	}
+	char temp1 = the_board->charAt(box1.x, box1.y + 1);
+	char temp2 = the_board->charAt(box2.x, box2.y + 1);
+	char temp3 = the_board->charAt(box3.x, box3.y + 1);
+	char temp4 = the_board->charAt(box4.x, box4.y + 1);
+	if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ' && temp4 == ' '){
+		box1.y += 1;
+		box2.y += 1;
+		box3.y += 1;
+		box4.y += 1;
+		drop();
+	}
+	else{ return; }
 }
 
 void Block::clean(int x, int y) {
