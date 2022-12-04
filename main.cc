@@ -226,30 +226,31 @@ int main(int argc, char** args){
 	    // Set currentBlock in Board
 	    boardInPlay->setCurrent(newblock); 
         }
-	    else if (command == "J"){                
-		    Block* curBlock = boardInPlay->getCurrentBlock();
-            // Detach it first from the vector of Blocks:       
-            boardInPlay->detach(curBlock);
-            // Delete the old "currentBlock" in Board:
-		    delete curBlock;
-		    // Create new Block
-		    Block* newblock = new Jblock{};     
+	else if (command == "J"){                
+		Block* curBlock = boardInPlay->getCurrentBlock();
+		// Detach it first from the vector of Blocks:       
+		boardInPlay->detach(curBlock);
+		// Delete the old "currentBlock" in Board:
+		delete curBlock;
+		// Create new Block
+		Block* newblock = new Jblock{};     
      		// Attach:                
-		    boardInPlay->attach(newblock);
-            // Set currentBlock in Board                
-		    boardInPlay->setCurrent(newblock);
+		boardInPlay->attach(newblock);
+            	// Set currentBlock in Board                
+		boardInPlay->setCurrent(newblock);
 	    }
-	    else if (command == "L"){
-            Block* curBlock = boardInPlay->getCurrentBlock();                   // Detach it first from the vector of Blocks:
-		    boardInPlay->detach(curBlock);                
-		    // Delete the old "currentBlock" in Board:
-            delete curBlock;
-            // Create new Block
-            Block* newblock = new Lblock{};
-            // Attach:
-            boardInPlay->attach(newblock);
-            // Set currentBlock in Board
-            boardInPlay->setCurrent(newblock);
+	else if (command == "L"){
+		Block* curBlock = boardInPlay->getCurrentBlock();
+		// Detach it first from the vector of Blocks:
+		boardInPlay->detach(curBlock);                
+		// Delete the old "currentBlock" in Board:
+            	delete curBlock;
+            	// Create new Block
+            	Block* newblock = new Lblock{};
+            	// Attach:
+            	boardInPlay->attach(newblock);
+            	// Set currentBlock in Board
+            	boardInPlay->setCurrent(newblock);
         }
         else if (command == "restart"){
             player1->restart();
@@ -258,12 +259,14 @@ int main(int argc, char** args){
 	// Testing functions: (delete in end)
 	else if (command == "newblock"){
 		Block* newblock = new Iblock{};
-		(player1->getBoard())->attach(newblock);
-		(player2->getBoard())->attach(newblock);
+		(playerInPlay->getBoard())->attach(newblock);
 	}
 	else if (command == "render"){
-		(player2->getBoard())->render();
+		if (player1->getMyTurn()){ std::cout << "Player 1 moving" << std::endl; }
+		else if (player2->getMyTurn()){ std::cout << "Player2 moving" << std::endl; }
+		else{ std::cout << "What is going on" << std::endl; }
 		(player1->getBoard())->render();
+		(player2->getBoard())->render();
 	}
 		
     }

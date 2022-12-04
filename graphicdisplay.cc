@@ -4,6 +4,7 @@
 #include "window.h"
 #include <iostream>
 #include <string>
+#include <vector>
 
 GraphicDisplay::GraphicDisplay(Board* subject, Player* control):
     subject{subject}, control{control} {
@@ -62,20 +63,41 @@ void GraphicDisplay::notify(){
     int score = control->getScore();
     w->drawString(0,12,"    Level:   "+level);
     w->drawString(0,28,"    Score:   "+score);
+
+   Block* currentBlock = subject->getCurrentBlock(); 
+
+   std::vector<Posn> vec;
+   char currentChar;
+
+   if (currentBlock != nullptr){
+	   currentChar = currentBlock->getItem();
+	   vec = {currentBlock->box1, currentBlock->box2, currentBlock->box3, currentBlock->box4};
+   }
     for (int i = 0; i <= 17; i++){
         for (int j = 0; j <= 10; j++){
             // row 0 on board is row 2 on display:
-            char pattern = subject->charAt(i+2, j);
-            placeTile(pattern, i, j);
+            char pattern;
+	    bool printed = false;
+	    for (auto it = vec.begin(); it != vec.end(); it++){
+		    if ((*it).x == j && (*it).y == i){
+		    	pattern = currentChar;
+		    	printed = true;
+		    }
+	    }
+	    if (!printed){ pattern = subject->charAt(i, j); }
+            placeTile(pattern, i+2 , j);
         }
     }
     // If it is not our turn currently, we do not see extra blocks below "Next:"
+    w->drawString(0,21*15-2, "           Next:");
+
     if (!control->getMyTurn()){
-        std::cout << std::endl << std::endl;
         return;
     }
+
+    if (subject->getNextBlock() == nullptr){ return; }
     
-    char nextChar = (subject->getNextBlock())->getItem();
+    char nextChar = toupper((subject->getNextBlock())->getItem());
     int nextBlockStart = 21; // Row that nextblock starts at.
     
     // Prints next block on the bottom:
