@@ -62,6 +62,16 @@ void Board::checkfullrow(){
 
 // Add score additions in here somehow!!
 void Board::clearRow(int row){
+    for (int i = 0; i < 11; i++) {
+        grid[i][row] = ' ';
+    }
+    for (int i = row; i > 0; i--) {
+        for (int a = 0; a < 11; a++) {
+            grid[a][i] = grid[a][i - 1];
+        }
+    }
+
+///////////////////////////////////////////////////////////////////    
     for (auto it = blocks.begin(); it != blocks.end(); it++){
         Posn box1 = (*it)->box1;
         Posn box2 = (*it)->box2;
