@@ -1,7 +1,7 @@
 #include "block.h"
 
-Block::Block(char item, Posn box1, Posn box2, Posn box3, Posn box4, int heaviness = 0, bool candown = true):
-    item{item}, box1{box1}, box2{box2}, box3{box3}, box4{box4}, heaviness{heaviness}, candown{candown} {}
+Block::Block(char item, Posn box1, Posn box2, Posn box3, Posn box4, int heaviness = 0, bool candown = true, Board* the_board):
+    item{item}, box1{box1}, box2{box2}, box3{box3}, box4{box4}, heaviness{heaviness}, candown{candown}, the_board{the_board} {}
 
 
 void Block::moveleft() {
