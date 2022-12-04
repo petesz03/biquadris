@@ -8,14 +8,16 @@
 
 class Player;
 
+class Board;
+
 class Level1 : public Level {
 public:
     
 	Level1();
     ~Level1();
 
-    Block* randomNextBlock();
-    Block* fileNextBlock();
+    Block* randomNextBlock(Board* subject);
+    Block* fileNextBlock(Board* subject);
     void useFile(std::string file);
 	
 };

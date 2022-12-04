@@ -8,6 +8,7 @@
 #include "oblock.h"
 #include "tblock.h"
 #include "player.h"
+#include "board.h"
 #include <cstdlib>
 using namespace std;
 
@@ -15,7 +16,7 @@ Level3::Level3(): Level{3}, blockIndex{0} {}
 
 Level3::~Level3() {}
 
-Block* Level3::randomNextBlock() {
+Block* Level3::randomNextBlock(Board* subject) {
     // set the given seed value
     srand((unsigned) time(NULL));
     // generate a random number
@@ -25,32 +26,32 @@ Block* Level3::randomNextBlock() {
     switch (random % 9 + 1)
     {
     case 1: case 2:
-        return new Sblock();
+        return new Sblock(subject);
         break;
     case 3: case 4:
-        return new Zblock();
+        return new Zblock(subject);
         break;
     case 5:
-        return new Iblock();
+        return new Iblock(subject);
         break;
     case 6:
-        return new Jblock();
+        return new Jblock(subject);
         break;
     case 7:
-        return new Lblock();
+        return new Lblock(subject);
         break;
     case 8:
-        return new Oblock();
+        return new Oblock(subject);
         break;
     case 9:
-        return new Tblock();
+        return new Tblock(subject);
         break;
     default:
-        return new Iblock();
+        return new Iblock(subject);
     }
 }
 
-Block* Level3::fileNextBlock() {
+Block* Level3::fileNextBlock(Board* subject) {
     char next;
 
     int size = file.size();
@@ -62,28 +63,28 @@ Block* Level3::fileNextBlock() {
 
     switch (next) {
         case 'I':
-            return new Iblock();
+            return new Iblock(subject);
             break;
         case 'J':
-            return new Jblock();
+            return new Jblock(subject);
             break;
         case 'L':
-            return new Lblock();
+            return new Lblock(subject);
             break;
         case 'O':
-            return new Oblock();
+            return new Oblock(subject);
             break;
         case 'S':
-            return new Sblock();
+            return new Sblock(subject);
             break;
         case 'Z':
-            return new Zblock();
+            return new Zblock(subject);
             break;
         case 'T':
-            return new Tblock();
+            return new Tblock(subject);
             break;
         default:
-            return new Iblock();
+            return new Iblock(subject);
     }
 
 }

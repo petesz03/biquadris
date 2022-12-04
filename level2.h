@@ -7,14 +7,15 @@
 #include "level.h"
 
 class Player;
+class Board;
 
 class Level2 : public Level {
 public:
-	Level2();
+    Level2();
     ~Level2();
 
-    Block* randomNextBlock();
-    Block* fileNextBlock();
+    Block* randomNextBlock(Board* subject);
+    Block* fileNextBlock(Board* subject);
     void useFile(std::string file);
 	
 };

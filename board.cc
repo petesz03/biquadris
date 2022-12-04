@@ -18,9 +18,9 @@ Board::Board(Player* owner, Level* owners_level):
 Block* Board::createBlock() {
     Block* newBlock;
     if (owner->israndom) {
-        newBlock = owners_level->randomNextBlock();
+        newBlock = owners_level->randomNextBlock(this);
     } else {
-        newBlock = owners_level->fileNextBlock();
+        newBlock = owners_level->fileNextBlock(this);
     }
     return newBlock;
 }

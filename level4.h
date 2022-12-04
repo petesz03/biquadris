@@ -7,6 +7,7 @@
 #include "level.h"
 
 class Player;
+class Board;
 
 class Level4 : public Level {
 	//  store its blocks in sequence from the files 
@@ -20,8 +21,8 @@ public:
 	Level4();
     ~Level4();
 
-    Block* randomNextBlock();
-    Block* fileNextBlock();
+    Block* randomNextBlock(Board* subject);
+    Block* fileNextBlock(Board* subject);
 
 	// method to take its blocks in sequence from the files sequence1.txt 
     // (for player 1) and sequence2.txt (for player 2), or other file with 

@@ -7,12 +7,13 @@
 #include "oblock.h"
 #include "tblock.h"
 #include <cstdlib>
+#include "board.h"
 
 Level1::Level1(): Level(1) {}
 
 Level1::~Level1() {}
 
-Block* Level1::randomNextBlock() {
+Block* Level1::randomNextBlock(subject) {
     // set the given seed value
 	srand((unsigned) time(NULL));
 	// generate a random number
@@ -22,32 +23,32 @@ Block* Level1::randomNextBlock() {
     switch (random % 12 + 1)
     {
     case 1:
-        return new Sblock();
+        return new Sblock(subject);
         break;
     case 2:
-        return new Zblock();
+        return new Zblock(subject);
         break;
     case 3: case 4:
-        return new Iblock();
+        return new Iblock(subject);
         break;
     case 5: case 6:
-        return new Jblock();
+        return new Jblock(subject);
         break;
     case 7: case 8:
-        return new Lblock();
+        return new Lblock(subject);
         break;
     case 9: case 10:
-        return new Oblock();
+        return new Oblock(subject);
         break;
     case 11: case 12:
-        return new Tblock();
+        return new Tblock(subject);
         break;
     default:
-        return new Iblock();
+        return new Iblock(subject);
     }
 }
 
-Block* Level1::fileNextBlock() {
+Block* Level1::fileNextBlock(subject) {
     // set the given seed value
 	srand((unsigned) time(NULL));
 	// generate a random number
@@ -57,28 +58,28 @@ Block* Level1::fileNextBlock() {
     switch (random % 12 + 1)
     {
     case 1:
-        return new Sblock();
+        return new Sblock(subject);
         break;
     case 2:
-        return new Zblock();
+        return new Zblock(subject);
         break;
     case 3: case 4:
-        return new Iblock();
+        return new Iblock(subject);
         break;
     case 5: case 6:
-        return new Jblock();
+        return new Jblock(subject);
         break;
     case 7: case 8:
-        return new Lblock();
+        return new Lblock(subject);
         break;
     case 9: case 10:
-        return new Oblock();
+        return new Oblock(subject);
         break;
     case 11: case 12:
-        return new Tblock();
+        return new Tblock(subject);
         break;
     default:
-        return new Iblock();
+        return new Iblock(subject);
     }
 }
 
