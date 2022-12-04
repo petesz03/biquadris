@@ -63,6 +63,26 @@ void Jblock::clockwiseturn() {
             setbox4(x_val, y_val - 1);
         }
     }
+    if (the_board->owners_level->level >= 3) {
+            if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                drop();
+                return;
+            } else {
+                char temp5 = the_board->charAt(box1.x, box1.y + 1);
+                char temp6 = the_board->charAt(box2.x, box2.y + 1);
+                char temp7 = the_board->charAt(box3.x, box3.y + 1);
+                char temp8 = the_board->charAt(box4.x, box4.y + 1);
+                if (temp5 == ' ' && temp6 == ' ' && temp7 == ' ' && temp8 == ' ') {
+                    box1.y += 1;
+                    box2.y += 1;
+                    box3.y += 1;
+                    box4.y += 1;
+                } else {
+                    drop();
+                    return;
+                }
+            }
+    }
 }
 
 void Jblock::counterturn() {
@@ -118,6 +138,26 @@ void Jblock::counterturn() {
             setbox3(x_val + 2, y_val);
             setbox4(x_val, y_val - 1);
         }
+    }
+    if (the_board->owners_level->level >= 3) {
+            if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                drop();
+                return;
+            } else {
+                char temp5 = the_board->charAt(box1.x, box1.y + 1);
+                char temp6 = the_board->charAt(box2.x, box2.y + 1);
+                char temp7 = the_board->charAt(box3.x, box3.y + 1);
+                char temp8 = the_board->charAt(box4.x, box4.y + 1);
+                if (temp5 == ' ' && temp6 == ' ' && temp7 == ' ' && temp8 == ' ') {
+                    box1.y += 1;
+                    box2.y += 1;
+                    box3.y += 1;
+                    box4.y += 1;
+                } else {
+                    drop();
+                    return;
+                }
+            }
     }
 }
 
