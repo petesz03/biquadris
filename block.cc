@@ -1,6 +1,7 @@
 #include "block.h"
 #include "board.h"
 #include "posn.h"
+#include <iostream>
 
 Block::Block(char item, Posn box1, Posn box2, Posn box3, Posn box4, int heaviness, bool candown, Board* the_board):
     item{item}, box1{box1}, box2{box2}, box3{box3}, box4{box4}, heaviness{heaviness}, candown{candown}, the_board{the_board} {}
@@ -13,10 +14,10 @@ void Block::moveleft() {
                 return;
         }
     } else {
-        char temp1 = the_board->charAt(box1.x - 1, box1.y);
-        char temp2 = the_board->charAt(box2.x - 1, box2.y);
-        char temp3 = the_board->charAt(box3.x - 1, box3.y);
-        char temp4 = the_board->charAt(box4.x - 1, box4.y);
+        char temp1 = the_board->charAt(box1.y, box1.x - 1);
+        char temp2 = the_board->charAt(box2.y, box2.x - 1);
+        char temp3 = the_board->charAt( box3.y, box3.x - 1);
+        char temp4 = the_board->charAt( box4.y, box4.x - 1);
         if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ' && temp4 == ' ') {
             box1.x -= 1;
             box2.x -= 1;
@@ -32,10 +33,10 @@ void Block::moveleft() {
                 drop();
                 return;
             } else {
-                char temp5 = the_board->charAt(box1.x, box1.y + 1);
-                char temp6 = the_board->charAt(box2.x, box2.y + 1);
-                char temp7 = the_board->charAt(box3.x, box3.y + 1);
-                char temp8 = the_board->charAt(box4.x, box4.y + 1);
+                char temp5 = the_board->charAt(box1.y + 1, box1.x);
+                char temp6 = the_board->charAt(box2.y + 1, box2.x);
+                char temp7 = the_board->charAt(box3.y + 1, box3.x);
+                char temp8 = the_board->charAt(box4.y + 1, box4.x);
                 if (temp5 == ' ' && temp6 == ' ' && temp7 == ' ' && temp8 == ' ') {
                     box1.y += 1;
                     box2.y += 1;
@@ -50,10 +51,10 @@ void Block::moveleft() {
                 drop();
                 return;
             } else {
-                char temp9 = the_board->charAt(box1.x, box1.y + 1);
-                char temp10 = the_board->charAt(box2.x, box2.y + 1);
-                char temp11 = the_board->charAt(box3.x, box3.y + 1);
-                char temp12 = the_board->charAt(box4.x, box4.y + 1);
+                char temp9 = the_board->charAt(box1.y + 1, box1.x);
+                char temp10 = the_board->charAt(box2.y + 1, box2.x);
+                char temp11 = the_board->charAt(box3.y + 1, box3.x);
+                char temp12 = the_board->charAt(box4.y + 1, box4.x);
                 if (temp9 == ' ' && temp10 == ' ' && temp11 == ' ' && temp12 == ' ') {
                     box1.y += 1;
                     box2.y += 1;
@@ -70,10 +71,10 @@ void Block::moveleft() {
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
                 return;
             } else {
-                char temp5 = the_board->charAt(box1.x, box1.y + 1);
-                char temp6 = the_board->charAt(box2.x, box2.y + 1);
-                char temp7 = the_board->charAt(box3.x, box3.y + 1);
-                char temp8 = the_board->charAt(box4.x, box4.y + 1);
+                char temp5 = the_board->charAt(box1.y + 1, box1.x);
+                char temp6 = the_board->charAt(box2.y + 1, box2.x);
+                char temp7 = the_board->charAt(box3.y + 1, box3.x);
+                char temp8 = the_board->charAt(box4.y + 1, box4.x);
                 if (temp5 == ' ' && temp6 == ' ' && temp7 == ' ' && temp8 == ' ') {
                     box1.y += 1;
                     box2.y += 1;
@@ -94,10 +95,10 @@ void Block::moveright() {
                 return;
         }
     } else {
-        char temp1 = the_board->charAt(box1.x + 1, box1.y);
-        char temp2 = the_board->charAt(box2.x + 1, box2.y);
-        char temp3 = the_board->charAt(box3.x + 1, box3.y);
-        char temp4 = the_board->charAt(box4.x + 1, box4.y);
+        char temp1 = the_board->charAt(box1.y, box1.x + 1);
+        char temp2 = the_board->charAt(box2.y, box2.x + 1);
+        char temp3 = the_board->charAt(box3.y, box3.x + 1);
+        char temp4 = the_board->charAt(box4.y, box4.x + 1);
         if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ' && temp4 == ' ') {
             box1.x += 1;
             box2.x += 1;
@@ -113,10 +114,10 @@ void Block::moveright() {
                 drop();
                 return;
             } else {
-                char temp5 = the_board->charAt(box1.x, box1.y + 1);
-                char temp6 = the_board->charAt(box2.x, box2.y + 1);
-                char temp7 = the_board->charAt(box3.x, box3.y + 1);
-                char temp8 = the_board->charAt(box4.x, box4.y + 1);
+                char temp5 = the_board->charAt(box1.y + 1, box1.x);
+                char temp6 = the_board->charAt(box2.y + 1, box2.x);
+                char temp7 = the_board->charAt(box3.y + 1, box3.x);
+                char temp8 = the_board->charAt(box4.y + 1, box4.x);
                 if (temp5 == ' ' && temp6 == ' ' && temp7 == ' ' && temp8 == ' ') {
                     box1.y += 1;
                     box2.y += 1;
@@ -131,10 +132,10 @@ void Block::moveright() {
                 drop();
                 return;
             } else {
-                char temp9 = the_board->charAt(box1.x, box1.y + 1);
-                char temp10 = the_board->charAt(box2.x, box2.y + 1);
-                char temp11 = the_board->charAt(box3.x, box3.y + 1);
-                char temp12 = the_board->charAt(box4.x, box4.y + 1);
+                char temp9 = the_board->charAt(box1.y + 1, box1.x);
+                char temp10 = the_board->charAt(box2.y + 1, box2.x);
+                char temp11 = the_board->charAt(box3.y + 1, box3.x);
+                char temp12 = the_board->charAt(box4.y + 1, box4.x);
                 if (temp9 == ' ' && temp10 == ' ' && temp11 == ' ' && temp12 == ' ') {
                     box1.y += 1;
                     box2.y += 1;
@@ -151,10 +152,10 @@ void Block::moveright() {
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
                 return;
             } else {
-                char temp5 = the_board->charAt(box1.x, box1.y + 1);
-                char temp6 = the_board->charAt(box2.x, box2.y + 1);
-                char temp7 = the_board->charAt(box3.x, box3.y + 1);
-                char temp8 = the_board->charAt(box4.x, box4.y + 1);
+                char temp5 = the_board->charAt(box1.y + 1, box1.x);
+                char temp6 = the_board->charAt(box2.y + 1,box2.x);
+                char temp7 = the_board->charAt(box3.y + 1, box3.x);
+                char temp8 = the_board->charAt(box4.y + 1, box4.x);
                 if (temp5 == ' ' && temp6 == ' ' && temp7 == ' ' && temp8 == ' ') {
                     box1.y += 1;
                     box2.y += 1;
@@ -173,10 +174,10 @@ void Block::movedown() {
         drop();
         return;
     } else {
-        char temp5 = the_board->charAt(box1.x, box1.y + 1);
-        char temp6 = the_board->charAt(box2.x, box2.y + 1);
-        char temp7 = the_board->charAt(box3.x, box3.y + 1);
-        char temp8 = the_board->charAt(box4.x, box4.y + 1);
+        char temp5 = the_board->charAt(box1.y + 1, box1.x);
+        char temp6 = the_board->charAt(box2.y + 1,box2.x);
+        char temp7 = the_board->charAt(box3.y + 1, box3.x);
+        char temp8 = the_board->charAt(box4.y + 1, box4.x);
         if (temp5 == ' ' && temp6 == ' ' && temp7 == ' ' && temp8 == ' ') {
             box1.y += 1;
             box2.y += 1;
@@ -192,10 +193,10 @@ void Block::movedown() {
                 drop();
                 return;
             } else {
-                char temp5 = the_board->charAt(box1.x, box1.y + 1);
-                char temp6 = the_board->charAt(box2.x, box2.y + 1);
-                char temp7 = the_board->charAt(box3.x, box3.y + 1);
-                char temp8 = the_board->charAt(box4.x, box4.y + 1);
+                char temp5 = the_board->charAt(box1.y + 1, box1.x);
+                char temp6 = the_board->charAt(box2.y + 1, box2.x);
+                char temp7 = the_board->charAt(box3.y + 1, box3.x);
+                char temp8 = the_board->charAt(box4.y + 1, box4.x);
                 if (temp5 == ' ' && temp6 == ' ' && temp7 == ' ' && temp8 == ' ') {
                     box1.y += 1;
                     box2.y += 1;
@@ -211,20 +212,24 @@ void Block::movedown() {
 
 void Block::drop() {
 	if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17){
+        std::cout << "bottom" << std::endl;
 		return;
 	}
-	char temp1 = the_board->charAt(box1.x, box1.y + 1);
-	char temp2 = the_board->charAt(box2.x, box2.y + 1);
-	char temp3 = the_board->charAt(box3.x, box3.y + 1);
-	char temp4 = the_board->charAt(box4.x, box4.y + 1);
+	char temp1 = the_board->charAt(box1.y + 1, box1.x);
+	char temp2 = the_board->charAt(box2.y + 1, box2.x);
+	char temp3 = the_board->charAt(box3.y + 1, box3.x);
+	char temp4 = the_board->charAt(box4.y + 1, box4.x);
 	if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ' && temp4 == ' '){
 		box1.y += 1;
 		box2.y += 1;
 		box3.y += 1;
 		box4.y += 1;
+        std::cout << "value:" <<temp1 << temp2 << temp3 << temp4 << std::endl;
 		drop();
-	}
-	else{ return; }
+	} else {
+        std::cout << "end" <<temp1 << temp2 << temp3 << temp4 << std::endl;
+        return;
+    }
 }
 
 void Block::clean(int x, int y) {
@@ -280,3 +285,13 @@ void Block::setbox4(int x, int y) {
 }
 
 char Block::getItem(){ return item; }
+
+void Block::debug() {
+    std::cout <<"(" <<box1.x << "," << box1.y << ")";
+    std::cout <<"(" <<box2.x << "," << box2.y << ")";
+    std::cout <<"(" <<box3.x << "," << box3.y << ")";
+    std::cout <<"(" <<box4.x << "," << box4.y << ")";
+    std::cout << std::endl;
+}
+
+

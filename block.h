@@ -34,6 +34,7 @@ public:
     void setbox3(int x, int y);
     void setbox4(int x, int y);
     char getItem();
+    void debug();
 };
 
 
