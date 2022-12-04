@@ -224,7 +224,7 @@ void Block::drop() {
 		box2.y += 1;
 		box3.y += 1;
 		box4.y += 1;
-        std::cout << "value:" <<temp1 << temp2 << temp3 << temp4 << std::endl;
+        // std::cout << "value:" <<temp1 << temp2 << temp3 << temp4 << std::endl;
 		drop();
 	} else {
         std::cout << "end" <<temp1 << temp2 << temp3 << temp4 << std::endl;

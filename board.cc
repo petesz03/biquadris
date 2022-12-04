@@ -17,9 +17,15 @@ Board::Board(Player* owner, Level* owners_level):
 
 Block* Board::createBlock() {
     Block* newBlock;
+
+    std::cout << "5" << std::endl;
     if (owner->israndom) {
+
+        std::cout << "6" << std::endl;
         newBlock = owners_level->randomNextBlock(this);
     } else {
+
+        std::cout << "7" << std::endl;
         newBlock = owners_level->fileNextBlock(this);
     }
     return newBlock;
@@ -43,7 +49,7 @@ void Board::checkfullrow(){
         bool rowfull = true;
         for (int j = 0; j <= 10; j++){
             // board starts at col 0, ends at 10
-            if (charAt(i,j) == ' '){
+            if (charAt(i, j) == ' '){
                 // One block is empty inside row i:
                 rowfull = false;
             }
@@ -428,12 +434,19 @@ void Board::drop(){
     grid[currentBlock->box3.x][currentBlock->box3.y] = currentBlock->item;
     grid[currentBlock->box4.x][currentBlock->box4.y] = currentBlock->item;
 	attach(currentBlock);
+    for (auto i : blocks) {
+            i->debug();
+        }
+    std::cout << "1" << std::endl;
 	// After dropped, check if any row is full and clear it.
 	checkfullrow();
+    std::cout << "2" << std::endl;
 
 	// Create new blocks:
 	currentBlock = nextBlock;
+    std::cout << "3" << std::endl;
 	nextBlock = createBlock();
+    std::cout << "4" << std::endl;
 }
 
 void Board::clockwiseTurn(){ currentBlock->clockwiseturn();}

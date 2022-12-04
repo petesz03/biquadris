@@ -80,6 +80,7 @@ void Player::levelUp() {
             break;
         }
     }
+    myBoard->owners_level = myLevel;
 }
 
 void Player::levelDown() {
@@ -104,6 +105,7 @@ void Player::levelDown() {
             break;
         }
     }
+    myBoard->owners_level = myLevel;
 }
 
 // method to restart the current game
