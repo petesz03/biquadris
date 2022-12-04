@@ -2,6 +2,7 @@
 #define __BLOCK_H__
 #include "posn.h"
 #include <vector>
+#include "board.h"
 
 class Block {
 public:
@@ -12,16 +13,18 @@ public:
     Posn box4;
     int heaviness;
     bool candown;
+    Board* the_board;
 
 public:
-    void moveleft();
-    void moveright();
-    void movedown();
+    virtual void moveleft();
+    virtual void moveright();
+    virtual void movedown();
+    virtual void drop();
     void clean(int x, int y);
     virtual void clockwiseturn();
     virtual void counterturn();
     //ctor
-    Block(char, Posn, Posn, Posn, Posn, int, bool);
+    Block(char, Posn, Posn, Posn, Posn, int, bool, Board*);
     //dtor
     virtual ~Block();
     void cantmove();

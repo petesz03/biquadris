@@ -3,15 +3,20 @@
 
 #include <vector>
 #include "block.h"
+#include "board.h"
 
 class Jblock : public Block {
 public:
     int dir;
 public:
-    Jblock(int heaviness = 0, bool candown = true, int dir = 1);
+    Jblock(int heaviness = 0, bool candown = true, int dir = 1, Board* the_board = nullptr);
     ~Jblock();
     void clockwiseturn();
     void counterturn();
+    void moveleft();
+    void moveright();
+    void movedown();
+    void drop();
 };
 
 
