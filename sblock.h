@@ -9,7 +9,7 @@ class Sblock : public Block {
 public:
     int dir;
 public:
-    Sblock(int heaviness = 0, bool candown = true, int dir = 1, Board* the_board = nullptr);
+    Sblock(Board* the_board = nullptr, int heaviness = 0, bool candown = true, int dir = 1);
     ~Sblock();
     void clockwiseturn();
     void counterturn();

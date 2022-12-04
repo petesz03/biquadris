@@ -2,7 +2,7 @@
 #include "iblock.h"
 #include "posn.h"
 
-Iblock::Iblock(int heaviness, bool candown, int dir, Board* the_board):
+Iblock::Iblock(Board* the_board, int heaviness, bool candown, int dir):
     Block{'I', Posn{3,2}, Posn{4,2}, Posn{5,2}, Posn{6,2}, heaviness, candown, the_board}, dir{dir} {}
 
 

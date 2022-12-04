@@ -9,7 +9,7 @@ class Jblock : public Block {
 public:
     int dir;
 public:
-    Jblock(int heaviness = 0, bool candown = true, int dir = 1, Board* the_board = nullptr);
+    Jblock(Board* the_board = nullptr, int heaviness = 0, bool candown = true, int dir = 1);
     ~Jblock();
     void clockwiseturn();
     void counterturn();
