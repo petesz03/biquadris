@@ -3,7 +3,10 @@
 #include "block.h"
 
 Subject::Subject() {
-    
+    grid.resize(11);
+    for (int i = 0; i < 11; i++) {
+        grid[i].resize(18, ' ');
+    }
 }
 
 

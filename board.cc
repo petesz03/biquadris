@@ -91,6 +91,7 @@ void Board::clearRow(int row){
 }
 
 char Board::charAt(int row, int col){
+    /*
     for (auto it = blocks.begin(); it != blocks.end(); it++){
         std::vector<Posn> vec{(*it)->box1, (*it)->box2, (*it)->box3, (*it)->box4};
         // iterate through all 4 Posns:
@@ -99,6 +100,8 @@ char Board::charAt(int row, int col){
         }
     }
     return ' ';
+    */
+   return grid[col][row];
 }
 
 Block* Board::getCurrentBlock() {
@@ -419,12 +422,12 @@ void Board::moveDown(){ currentBlock->movedown(); }
 void Board::drop(){
 	// switching player's turn will be implemented in player
 	//    for stylistic sense.
-       	currentBlock->drop();
-        
+    currentBlock->drop();
+    grid[currentBlock->box1.x][currentBlock->box1.y] = currentBlock->item;
+    grid[currentBlock->box2.x][currentBlock->box2.y] = currentBlock->item;
+    grid[currentBlock->box3.x][currentBlock->box3.y] = currentBlock->item;
+    grid[currentBlock->box4.x][currentBlock->box4.y] = currentBlock->item;
 	attach(currentBlock);
-    for (auto i : blocks) {
-            i->debug();
-        }
 	// After dropped, check if any row is full and clear it.
 	checkfullrow();
 

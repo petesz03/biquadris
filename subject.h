@@ -10,6 +10,7 @@ class Subject{
 public:
     std::vector<DisplayObserver*> displayobservers;
     std::vector<Block*> blocks;
+    std::vector<std::vector<char>> grid;
 public:
     Subject();
     void notifyObservers();
