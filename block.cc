@@ -8,7 +8,10 @@ Block::Block(char item, Posn box1, Posn box2, Posn box3, Posn box4, int heavines
 
 void Block::moveleft() {
     if (box1.x == 0 || box2.x == 0 || box3.x == 0 || box4.x == 0) {
-        return;
+        if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                drop();
+                return;
+        }
     } else {
         char temp1 = the_board->charAt(box1.x - 1, box1.y);
         char temp2 = the_board->charAt(box2.x - 1, box2.y);
@@ -20,6 +23,10 @@ void Block::moveleft() {
             box3.x -= 1;
             box4.x -= 1;
         }
+        if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                drop();
+                return;
+            }
         if (the_board->isheavy) {
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
                 drop();
@@ -82,7 +89,10 @@ void Block::moveleft() {
 
 void Block::moveright() {
     if (box1.x == 10 || box2.x == 10 || box3.x == 10 || box4.x == 10) {
-        return;
+        if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                drop();
+                return;
+        }
     } else {
         char temp1 = the_board->charAt(box1.x + 1, box1.y);
         char temp2 = the_board->charAt(box2.x + 1, box2.y);
@@ -93,6 +103,10 @@ void Block::moveright() {
             box2.x += 1;
             box3.x += 1;
             box4.x += 1;
+        }
+        if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                drop();
+                return;
         }
         if (the_board->isheavy) {
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
