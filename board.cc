@@ -420,6 +420,7 @@ void Board::drop(){
 	// switching player's turn will be implemented in player
 	//    for stylistic sense.
        	currentBlock->drop();
+	attach(currentBlock);
 	// After dropped, check if any row is full and clear it.
 	checkfullrow();
 
