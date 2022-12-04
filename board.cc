@@ -48,10 +48,13 @@ void Board::checkfullrow(){
                 rowfull = false;
             }
         }
-        if (rowfull){ clearRow(i); } // since row full, call clearRow on row i
+        if (rowfull){
+	       	clearRow(i); 
+       	} 
     }
 }
 
+// Add score additions in here somehow!!
 void Board::clearRow(int row){
     for (auto it = blocks.begin(); it != blocks.end(); it++){
         Posn box1 = (*it)->box1;
@@ -115,6 +118,7 @@ void Board::render(){
 	}
 }
 
+/*
 // Left, right, down, turn should bring in heaviness
 void Board::moveLeft(){
 	// Set row1Index and row2Index to out of bounds boundaries:
@@ -404,9 +408,29 @@ void Board::drop() {
         currentBlock->movedown();
     }
 }
+*/
 
+void Board::moveLeft(){ currentBlock->moveleft(); }
 
+void Board::moveRight(){ currentBlock->moveright(); }
 
+void Board::moveDown(){ currentBlock->movedown(); }
+
+void Board::drop(){
+	// switching player's turn will be implemented in player
+	//    for stylistic sense.
+       	currentBlock->drop();
+	// After dropped, check if any row is full and clear it.
+	checkfullrow();
+
+	// Create new blocks:
+	currentBlock = nextBlock;
+	nextBlock = createBlock();
+}
+
+void Board::clockwiseTurn(){ currentBlock->clockwiseturn();}
+
+void Board::counterClockwiseTurn(){ currentBlock->counterturn(); }
 
 void Board::setPlayer(Player* newPlayer){
 	owner = newPlayer;
@@ -418,6 +442,13 @@ void Board::setLevel(Level* newLevel){
 
 void Board::setNext(Block* newBlock){
 	nextBlock = newBlock;
+}
+
+bool Board::checkLose(){
+	for (int i = 0; i <= 10; i++){
+		if (charAt(2,i) != ' '){ return true; }
+	}
+	return false;
 }
 
 /* Old:

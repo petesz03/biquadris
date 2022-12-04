@@ -188,6 +188,11 @@ int main(int argc, char** args){
         }
         else if (command == "drop"){
             playerInPlay->makeDrop();
+	    if (playerInPlay->getIsOver()){
+		    (player1->getBoard())->render();
+		    (player2->getBoard())->render();
+		    return 0;
+	    }
         }
         else if (command == "levelup"){
             playerInPlay->levelUp();
@@ -214,41 +219,29 @@ int main(int argc, char** args){
             commandfile.open(file, std::fstream::in);
         }
         else if (command == "I"){
-            Block* curBlock = boardInPlay->getCurrentBlock();
-            // Detach it first from the vector of Blocks:
-            boardInPlay->detach(curBlock);
-            // Delete the old "currentBlock" in Board:
-	    delete curBlock;
-	    // Create new Block
-	    Block* newblock = new Iblock{};
-	    // Attach:
-	    boardInPlay->attach(newblock);  
-	    // Set currentBlock in Board
-	    boardInPlay->setCurrent(newblock); 
+            	Block* curBlock = boardInPlay->getCurrentBlock();
+            	// Delete the old "currentBlock" in Board:
+	    	delete curBlock;
+	    	// Create new Block
+	    	Block* newblock = new Iblock{boardInPlay};
+	    	// Set currentBlock in Board
+	    	boardInPlay->setCurrent(newblock); 
         }
 	else if (command == "J"){                
 		Block* curBlock = boardInPlay->getCurrentBlock();
-		// Detach it first from the vector of Blocks:       
-		boardInPlay->detach(curBlock);
 		// Delete the old "currentBlock" in Board:
 		delete curBlock;
 		// Create new Block
-		Block* newblock = new Jblock{};     
-     		// Attach:                
-		boardInPlay->attach(newblock);
+		Block* newblock = new Jblock{boardInPlay};     
             	// Set currentBlock in Board                
 		boardInPlay->setCurrent(newblock);
 	    }
 	else if (command == "L"){
-		Block* curBlock = boardInPlay->getCurrentBlock();
-		// Detach it first from the vector of Blocks:
-		boardInPlay->detach(curBlock);                
+		Block* curBlock = boardInPlay->getCurrentBlock();          
 		// Delete the old "currentBlock" in Board:
             	delete curBlock;
             	// Create new Block
-            	Block* newblock = new Lblock{};
-            	// Attach:
-            	boardInPlay->attach(newblock);
+            	Block* newblock = new Lblock{boardInPlay};
             	// Set currentBlock in Board
             	boardInPlay->setCurrent(newblock);
         }
@@ -259,7 +252,6 @@ int main(int argc, char** args){
 	// Testing functions: (delete in end)
 	else if (command == "newblock"){
 		Block* newblock = new Iblock{};
-		(playerInPlay->getBoard())->attach(newblock);
 	}
 	else if (command == "render"){
 		if (player1->getMyTurn()){ std::cout << "Player 1 moving" << std::endl; }

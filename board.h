@@ -72,12 +72,15 @@ public:
     void render();
     void setPlayer(Player* newPlayer);
     void setLevel(Level* newLevel);
+    bool checkLose();
 
     // Move block functions:
     void moveLeft();
     void moveRight();
     void moveDown();
     void drop();
+    void clockwiseTurn();
+    void counterClockwiseTurn();
 };
 
 

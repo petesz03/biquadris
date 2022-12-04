@@ -8,6 +8,7 @@
 #include "level2.h"
 #include "level3.h"
 #include "level4.h"
+#include <iostream>
 
 Player::Player(
     int pid,
@@ -217,30 +218,29 @@ void Player::makeMoveDown() {
 }
 
 void Player::makeClockwiseTurn() {
-    myBoard->currentBlock->clockwiseturn();
+    myBoard->clockwiseTurn();
     myBoard->render();
 }
 
 void Player::makeCounterTurn() {
-    myBoard->currentBlock->counterturn();
+    myBoard->counterClockwiseTurn();
     myBoard->render();
 }
 
 void Player::makeDrop() {
     myBoard->drop();
     myBoard->render();
-    
     unsetBlind();
     unsetHeavy();
     unsetForce();
-    // Create new block:
-    Block* newBlock = myBoard->createBlock();
-    // Move next to current:
-    myBoard->setCurrent(myBoard->getNextBlock());
-    myBoard->attach(myBoard->getCurrentBlock());
-    myBoard->setNext(newBlock);
+    // Blocks creation and row clearing is implemented in board
+    //   for stylistic sense.
     setTurn(false);
     opponent->setTurn(true);
+    if (myBoard->checkLose()){
+	    std::cout << "player " << pid << "'s board is full" << std::endl;
+	    isOver = true;
+    }
 }
 
 // Only used upon initiation: !!!

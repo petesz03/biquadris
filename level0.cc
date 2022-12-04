@@ -12,6 +12,7 @@
 #include "tblock.h"
 #include <cstdlib>
 #include <iostream>
+#include "board.h"
 
 using namespace std;
 
@@ -27,7 +28,7 @@ Level0::Level0(std::string fileToRead): Level{0}, blockIndex{0} {
 
 Level0::~Level0() {}
 
-Block* Level0::randomNextBlock() {
+Block* Level0::randomNextBlock(Board* subject) {
 	char next;
     int size = file.size();
 
@@ -39,32 +40,32 @@ Block* Level0::randomNextBlock() {
 
     switch (next) {
         case 'I':
-            return new Iblock();
+            return new Iblock(subject);
             break;
         case 'J':
-            return new Jblock();
+            return new Jblock(subject);
             break;
         case 'L':
-            return new Lblock();
+            return new Lblock(subject);
             break;
         case 'O':
-            return new Oblock();
+            return new Oblock(subject);
             break;
         case 'S':
-            return new Sblock();
+            return new Sblock(subject);
             break;
         case 'Z':
-            return new Zblock();
+            return new Zblock(subject);
             break;
         case 'T':
-            return new Tblock();
+            return new Tblock(subject);
             break;
         default:
-            return new Iblock();
+            return new Iblock(subject);
     }
 }
 
-Block* Level0::fileNextBlock() {
+Block* Level0::fileNextBlock(Board* subject) {
     char next;
     int size = file.size();
 
@@ -76,28 +77,28 @@ Block* Level0::fileNextBlock() {
 
     switch (next) {
         case 'I':
-            return new Iblock();
+            return new Iblock(subject);
             break;
         case 'J':
-            return new Jblock();
+            return new Jblock(subject);
             break;
         case 'L':
-            return new Lblock();
+            return new Lblock(subject);
             break;
         case 'O':
-            return new Oblock();
+            return new Oblock(subject);
             break;
         case 'S':
-            return new Sblock();
+            return new Sblock(subject);
             break;
         case 'Z':
-            return new Zblock();
+            return new Zblock(subject);
             break;
         case 'T':
-            return new Tblock();
+            return new Tblock(subject);
             break;
         default:
-            return new Iblock();
+            return new Iblock(subject);
     }
 }
 

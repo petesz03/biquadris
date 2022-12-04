@@ -4,6 +4,7 @@
 
 class Player;
 class Block;
+class Board;
 
 class Level {
 protected:
@@ -16,8 +17,8 @@ public:
     virtual ~Level();
 
     // method for generating the next block for the given player
-    virtual Block* randomNextBlock() = 0;
-    virtual Block* fileNextBlock() = 0;
+    virtual Block* randomNextBlock(Board* subject) = 0;
+    virtual Block* fileNextBlock(Board* subject) = 0;
     virtual void useFile(std::string file) = 0;
 
 };
