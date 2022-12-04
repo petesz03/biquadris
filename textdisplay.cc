@@ -6,68 +6,94 @@
 #include <string>
 #include <vector>
 
-TextDisplay::TextDisplay(Board* subject, Player* control):
-    subject{subject}, control{control} {}
+TextDisplay::TextDisplay(Board* b1, Board* b2):
+    b1{b1}, b2{b2} {}
 
 TextDisplay::~TextDisplay(){
-    subject->detach( this );
+    b1->detach( this );
+    b2->detach( this );
 }
 
 void TextDisplay::notify(){
     // Space have to change weith number of digits in score:
-    std::cout << "Level:    " << control->getLevel()<< std::endl;
-    std::cout << "Score:    " << (control->getScore()) << std::endl;
+    // level and score
+    std::cout << "Level:    " << b1->owner->getLevel() << "\t" << "Level:    " << b2->owner->getLevel() << std::endl;
+    std::cout << "Score:    " << b1->owner->getScore() << "\t" << "Score:    " << b2->owner->getScore() << std::endl;
+
+    // first divider
+    for (int i = 0; i < 11; ++i) std::cout << '-';
+    std::cout << "\t";
     for (int i = 0; i < 11; ++i) std::cout << '-';
     std::cout << std::endl;
 
-    Block* currentBlock = subject->getCurrentBlock();
-
-    std::vector<Posn> vec;
-    char currentChar = ' ';
-  
-    if (currentBlock != nullptr){
-	currentChar = currentBlock->getItem();  
-    	vec = {currentBlock->box1, currentBlock->box2, currentBlock->box3, currentBlock->box4};
-    }
-    for (int i = 0; i <= 17; i++){
-        for (int j = 0; j <= 10; j++){
-            // i is row, j is column. Call the getCurrentBlock and get its pattern
-	    	bool printed = false;
-		// This is to check if row and row is in currentBlock:
-		for (auto it = vec.begin(); it != vec.end(); it++){
-			if ((*it).x == j && (*it).y == i){
-			       	std::cout << currentChar;
-				printed = true;
-			}
-		}	
-		if (!printed){ std::cout << subject->charAt(i,j); }
+    // print board
+    for (int i = 0; i < 18; i++) {
+        for (int j = 0; j < 11; j++) {
+            std::cout << b1->grid[i][j];
+        }
+        std::cout << "\t";
+        for (int j = 0; j < 11; j++) {
+            std::cout << b2->grid[i][j];
         }
         std::cout << std::endl;
     }
+
+    // second divider
+    for (int i = 0; i < 11; ++i) std::cout << '-';
+    std::cout << "\t";
     for (int i = 0; i < 11; ++i) std::cout << '-';
     std::cout << std::endl;
-    std::cout <<"Next:" << std::endl;
-    // If it is not our term currently, we do not see extra blocks below "Next:"
-	    
 
-    if (!(control->getMyTurn())){
-        std::cout<< "Not my turn yet!"  << std::endl << std::endl;
-        return;
+    // next block
+    std::cout << "Next:      " << "\t" << "Next:      " << std::endl;
+    
+    std::string next1, next2;
+    char item = ' ';
+    if (b1->owner->getMyTurn()){
+        item = (b1->getNextBlock())->getItem();
     }
-    if (subject->getNextBlock() == nullptr){
-	    std::cout << "No more blocks!"  <<  std::endl << std::endl;
-	    return;
+    else {
+        item = (b2->getNextBlock())->getItem();
+    }
+    switch (item) {
+        case 'I':
+            next1 = "IIII";
+            next2 = "    ";
+            break;
+        case 'J':
+            next1 = "J   ";
+            next2 = "JJJ ";
+            break;
+        case 'L':
+            next1 = "  L ";
+            next2 = "LLL ";
+            break;
+        case 'S':
+            next1 = " SS ";
+            next2 = "SS  ";
+            break;
+        case 'T':
+            next1 = "TTT ";
+            next2 = " T  ";
+            break;
+        case 'Z':
+            next1 = "ZZ  ";
+            next2 = " ZZ ";
+            break;
+        case 'O':
+            next1 = "OO  ";
+            next2 = "OO  ";
+            break;
     }
 
-    // Print according to nextblock's item:
-    char nextChar = (subject->getNextBlock())->getItem();
-    if (toupper(nextChar) == 'I'){ std::cout << std::endl << "IIII"; }
-    else if (toupper(nextChar) == 'J'){ std::cout << 'J' << std::endl << "JJJ"; }
-    else if (toupper(nextChar) == 'L'){ std::cout << "  L" << std::endl << "LLL"; }
-    else if (toupper(nextChar) == 'O'){ std::cout << "OO" << std::endl << "OO "; }
-    else if (toupper(nextChar) == 'S'){ std::cout << " SS" << std::endl << "SS "; }
-    else if (toupper(nextChar) == 'Z'){ std::cout << "ZZ" << std::endl << " ZZ"; }
-    else if (toupper(nextChar) == 'T'){ std::cout << "TTT" << std::endl << " T "; }
-    else{ std::cout << nextChar << std::endl; }
+    if (b1->owner->getMyTurn()){
+        std::cout << next1 << std::endl;
+        std::cout << next2 << std::endl;
+    }
+    else {
+        std::cout << "           \t" << next1 << std::endl;
+        std::cout << "           \t" << next2 << std::endl;
+    }
+
     std::cout << std::endl;
 }

@@ -4,11 +4,11 @@
 #include "board.h"
 
 class TextDisplay: public DisplayObserver{
-    Board* subject;
-    Player* control;
+    Board* b1;
+    Board* b2;
     
     public:
-    TextDisplay(Board* subject, Player* control);
+    TextDisplay(Board* b1, Board* b2);
     void notify() override;
     ~TextDisplay();
 };

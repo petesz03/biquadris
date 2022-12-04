@@ -91,12 +91,10 @@ int main(int argc, char** args){
     /******/
 
     // Creating player1's text displays:
-    TextDisplay* player1Text = new TextDisplay{player1Board, player1};
-    player1Board->attach(player1Text);
-    
-    // Creating player2's text displays:
-    TextDisplay* player2Text = new TextDisplay{player2Board, player2};
-    player2Board->attach(player2Text);
+    TextDisplay* textDisplay = new TextDisplay{player1Board, player2Board};
+    player1Board->attach(textDisplay);
+    player2Board->attach(textDisplay);
+
 
     // If the filePlayer fields are not empty, we have to replace level0's file:
 
@@ -112,8 +110,8 @@ int main(int argc, char** args){
         player2Board->attach(player2Graphics);
     }
 
+
     player1Board->render();
-    player2Board->render();
 
     // Since player1's opponent's pointer is nullptr, change the pointer:
     player1->setOpponent(player2);
@@ -270,8 +268,7 @@ int main(int argc, char** args){
     delete player2;
 
     // Must delete graphic observers since they are not deleted:
-    delete player1Text;
-    delete player2Text;
+    delete textDisplay;
     if (graphics){
         delete player1Graphics;
         delete player2Graphics;

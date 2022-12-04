@@ -3,9 +3,9 @@
 #include "block.h"
 
 Subject::Subject() {
-    grid.resize(11);
-    for (int i = 0; i < 11; i++) {
-        grid[i].resize(18, ' ');
+    grid.resize(18);
+    for (int i = 0; i < 18; i++) {
+        grid[i].resize(11, ' ');
     }
 }
 
