@@ -55,6 +55,8 @@ void Board::checkfullrow(){
         }
         if (rowfull){
 	       	clearRow(i); 
+            int score = (owner->getLevel() + 1) * (owner->getLevel() + 1);
+            owner->updateScore(score);
        	} 
     }
 }
