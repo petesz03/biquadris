@@ -18,7 +18,7 @@ void Block::moveleft() {
         the_board->grid[box3.y][box3.x] = item;
         the_board->grid[box4.y][box4.x] = item;
         if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
-            drop();
+            the_board->owner->makeDrop();
             return;
         }
     } else {
@@ -37,7 +37,7 @@ void Block::moveleft() {
             the_board->grid[box2.y][box2.x] = item;
             the_board->grid[box3.y][box3.x] = item;
             the_board->grid[box4.y][box4.x] = item;
-                drop();
+                the_board->owner->makeDrop();
                 return;
             }
         if (the_board->isheavy) {
@@ -46,7 +46,7 @@ void Block::moveleft() {
                 the_board->grid[box2.y][box2.x] = item;
                 the_board->grid[box3.y][box3.x] = item;
                 the_board->grid[box4.y][box4.x] = item;
-                drop();
+                the_board->owner->makeDrop();
                 return;
             } else {
                 char temp5 = the_board->charAt(box1.y + 1, box1.x);
@@ -63,7 +63,7 @@ void Block::moveleft() {
                     the_board->grid[box2.y][box2.x] = item;
                     the_board->grid[box3.y][box3.x] = item;
                     the_board->grid[box4.y][box4.x] = item;
-                    drop();
+                    the_board->owner->makeDrop();
                     return;
                 }
             }
@@ -72,7 +72,7 @@ void Block::moveleft() {
                 the_board->grid[box2.y][box2.x] = item;
                 the_board->grid[box3.y][box3.x] = item;
                 the_board->grid[box4.y][box4.x] = item;
-                drop();
+                the_board->owner->makeDrop();
                 return;
             } else {
                 char temp9 = the_board->charAt(box1.y + 1, box1.x);
@@ -89,7 +89,7 @@ void Block::moveleft() {
                     the_board->grid[box2.y][box2.x] = item;
                     the_board->grid[box3.y][box3.x] = item;
                     the_board->grid[box4.y][box4.x] = item;
-                    drop();
+                    the_board->owner->makeDrop();
                     return;
                 }
             }
@@ -101,7 +101,7 @@ void Block::moveleft() {
                 the_board->grid[box2.y][box2.x] = item;
                 the_board->grid[box3.y][box3.x] = item;
                 the_board->grid[box4.y][box4.x] = item;
-                drop();
+                the_board->owner->makeDrop();
                 return;
             } else {
                 char temp5 = the_board->charAt(box1.y + 1, box1.x);
@@ -118,7 +118,7 @@ void Block::moveleft() {
                     the_board->grid[box2.y][box2.x] = item;
                     the_board->grid[box3.y][box3.x] = item;
                     the_board->grid[box4.y][box4.x] = item;
-                    drop();
+                    the_board->owner->makeDrop();
                     return;
                 }
             }
@@ -141,7 +141,7 @@ void Block::moveright() {
         the_board->grid[box3.y][box3.x] = item;
         the_board->grid[box4.y][box4.x] = item;
         if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
-            drop();
+            the_board->owner->makeDrop();
             return;
         }
     } else {
@@ -160,7 +160,7 @@ void Block::moveright() {
             the_board->grid[box2.y][box2.x] = item;
             the_board->grid[box3.y][box3.x] = item;
             the_board->grid[box4.y][box4.x] = item;
-                drop();
+                the_board->owner->makeDrop();
                 return;
         }
         if (the_board->isheavy) {
@@ -169,7 +169,7 @@ void Block::moveright() {
             the_board->grid[box2.y][box2.x] = item;
             the_board->grid[box3.y][box3.x] = item;
             the_board->grid[box4.y][box4.x] = item;
-                drop();
+                the_board->owner->makeDrop();
                 return;
             } else {
                 char temp5 = the_board->charAt(box1.y + 1, box1.x);
@@ -186,7 +186,7 @@ void Block::moveright() {
                     the_board->grid[box2.y][box2.x] = item;
                     the_board->grid[box3.y][box3.x] = item;
                     the_board->grid[box4.y][box4.x] = item;
-                    drop();
+                    the_board->owner->makeDrop();
                     return;
                 }
             }
@@ -195,7 +195,7 @@ void Block::moveright() {
                 the_board->grid[box2.y][box2.x] = item;
                 the_board->grid[box3.y][box3.x] = item;
                 the_board->grid[box4.y][box4.x] = item;
-                drop();
+                the_board->owner->makeDrop();
                 return;
             } else {
                 char temp9 = the_board->charAt(box1.y + 1, box1.x);
@@ -212,7 +212,7 @@ void Block::moveright() {
                     the_board->grid[box2.y][box2.x] = item;
                     the_board->grid[box3.y][box3.x] = item;
                     the_board->grid[box4.y][box4.x] = item;
-                    drop();
+                    the_board->owner->makeDrop();
                     return;
                 }
             }
@@ -224,7 +224,7 @@ void Block::moveright() {
                 the_board->grid[box2.y][box2.x] = item;
                 the_board->grid[box3.y][box3.x] = item;
                 the_board->grid[box4.y][box4.x] = item;
-                drop();
+                the_board->owner->makeDrop();
                 return;
             } else {
                 char temp5 = the_board->charAt(box1.y + 1, box1.x);
@@ -241,7 +241,7 @@ void Block::moveright() {
                     the_board->grid[box2.y][box2.x] = item;
                     the_board->grid[box3.y][box3.x] = item;
                     the_board->grid[box4.y][box4.x] = item;
-                    drop();
+                    the_board->owner->makeDrop();
                     return;
                 }
             }
@@ -263,7 +263,7 @@ void Block::movedown() {
         the_board->grid[box2.y][box2.x] = item;
         the_board->grid[box3.y][box3.x] = item;
         the_board->grid[box4.y][box4.x] = item;
-        drop();
+        the_board->owner->makeDrop();
         return;
     } else {
         char temp5 = the_board->charAt(box1.y + 1, box1.x);
@@ -280,7 +280,7 @@ void Block::movedown() {
             the_board->grid[box2.y][box2.x] = item;
             the_board->grid[box3.y][box3.x] = item;
             the_board->grid[box4.y][box4.x] = item;
-            drop();
+            the_board->owner->makeDrop();
             return;
         }
     }
@@ -290,7 +290,7 @@ void Block::movedown() {
                 the_board->grid[box2.y][box2.x] = item;
                 the_board->grid[box3.y][box3.x] = item;
                 the_board->grid[box4.y][box4.x] = item;
-                drop();
+                the_board->owner->makeDrop();
                 return;
             } else {
                 char temp5 = the_board->charAt(box1.y + 1, box1.x);
@@ -307,7 +307,7 @@ void Block::movedown() {
                     the_board->grid[box2.y][box2.x] = item;
                     the_board->grid[box3.y][box3.x] = item;
                     the_board->grid[box4.y][box4.x] = item;
-                    drop();
+                    the_board->owner->makeDrop();
                     return;
                 }
             }

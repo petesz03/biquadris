@@ -84,7 +84,7 @@ void Sblock::clockwiseturn() {
             the_board->grid[box2.y][box2.x] = item;
             the_board->grid[box3.y][box3.x] = item;
             the_board->grid[box4.y][box4.x] = item;
-            drop();
+            the_board->owner->makeDrop();
             return;
         } else {
             char temp5 = the_board->charAt(box1.y + 1, box1.x);
@@ -101,7 +101,7 @@ void Sblock::clockwiseturn() {
                 the_board->grid[box2.y][box2.x] = item;
                 the_board->grid[box3.y][box3.x] = item;
                 the_board->grid[box4.y][box4.x] = item;
-                drop();
+                the_board->owner->makeDrop();
                 return;
             }
         }
@@ -188,7 +188,7 @@ void Sblock::counterturn() {
             the_board->grid[box2.y][box2.x] = item;
             the_board->grid[box3.y][box3.x] = item;
             the_board->grid[box4.y][box4.x] = item;
-            drop();
+            the_board->owner->makeDrop();
             return;
         } else {
             char temp5 = the_board->charAt(box1.y + 1, box1.x);
@@ -205,7 +205,7 @@ void Sblock::counterturn() {
                 the_board->grid[box2.y][box2.x] = item;
                 the_board->grid[box3.y][box3.x] = item;
                 the_board->grid[box4.y][box4.x] = item;
-                drop();
+                the_board->owner->makeDrop();
                 return;
             }
         }
