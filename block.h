@@ -35,6 +35,7 @@ public:
     void setbox4(int x, int y);
     char getItem();
     void debug();
+    bool inrange(Posn box1, Posn box2, Posn box3, Posn box4);
 };
 
 

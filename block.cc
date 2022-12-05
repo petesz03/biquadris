@@ -416,4 +416,25 @@ void Block::debug() {
     std::cout << std::endl;
 }
 
-
+bool Block::inrange(Posn box1, Posn box2, Posn box3, Posn box4) {
+    if (box1.x >= 0
+    && box1.x <= 10
+    && box2.x >= 0
+    && box2.x <= 10
+    && box3.x >= 0
+    && box3.x <= 10
+    && box4.x >= 0
+    && box4.x <= 10
+    && box1.y >= 0
+    && box1.y <= 17
+    && box2.y >= 0
+    && box2.y <= 17
+    && box3.y >= 0
+    && box3.y <= 17
+    && box4.y >= 0
+    && box4.y <= 17) {
+        return true;
+    } else {
+        return false;
+    }
+}

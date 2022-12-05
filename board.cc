@@ -64,11 +64,11 @@ void Board::checkfullrow(){
 // Add score additions in here somehow!!
 void Board::clearRow(int row){
     for (int i = 0; i < 11; i++) {
-        grid[i][row] = ' ';
+        grid[row][i] = ' ';
     }
     for (int i = row; i > 0; i--) {
         for (int a = 0; a < 11; a++) {
-            grid[a][i] = grid[a][i - 1];
+            grid[i][a] = grid[i - 1][a];
         }
     }
 

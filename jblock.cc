@@ -21,7 +21,8 @@ void Jblock::clockwiseturn() {
         char temp1 = the_board->charAt(y_val - 1, x_val);
         char temp2 = the_board->charAt(y_val - 2, x_val);
         char temp3 = the_board->charAt(y_val - 2, x_val + 1);
-        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ') {
+        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' '
+        && inrange({x_val, y_val - 1}, {x_val, y_val - 2}, {x_val + 1, y_val - 2}, {x_val, y_val})) {
             setbox2(x_val, y_val - 1);
             setbox3(x_val, y_val - 2);
             setbox4(x_val + 1, y_val - 2);
@@ -34,7 +35,8 @@ void Jblock::clockwiseturn() {
         char temp2 = the_board->charAt(y_val - 1, x_val + 1);
         char temp3 = the_board->charAt(y_val - 1, x_val + 2);
         char temp4 = the_board->charAt(y_val, x_val + 2);
-        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ' && temp4 == ' ') {
+        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ' && temp4 == ' '
+        && inrange({x_val, y_val - 1}, {x_val + 1, y_val - 1}, {x_val + 2, y_val - 1}, {x_val + 2, y_val})) {
             setbox1(x_val, y_val - 1);
             setbox2(x_val + 1, y_val - 1);
             setbox3(x_val + 2, y_val - 1);
@@ -48,7 +50,8 @@ void Jblock::clockwiseturn() {
         char temp2 = the_board->charAt(y_val + 1, x_val + 1);
         char temp3 = the_board->charAt(y_val, x_val + 1);
         char temp4 = the_board->charAt(y_val - 1, x_val + 1);
-        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ' && temp4 == ' ') {
+        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ' && temp4 == ' '
+        && inrange({x_val, y_val + 1}, {x_val + 1, y_val + 1}, {x_val + 1, y_val}, {x_val + 1, y_val - 1})) {
             setbox1(x_val, y_val + 1);
             setbox2(x_val + 1, y_val + 1);
             setbox3(x_val + 1, y_val);
@@ -61,7 +64,8 @@ void Jblock::clockwiseturn() {
         char temp1 = the_board->charAt(y_val - 1, x_val);
         char temp2 = the_board->charAt(y_val, x_val + 1);
         char temp3 = the_board->charAt(y_val, x_val + 2);
-        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ') {
+        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' '
+        && inrange({x_val, y_val}, {x_val + 1, y_val}, {x_val + 2, y_val}, {x_val, y_val - 1})) {
             setbox2(x_val + 1, y_val);
             setbox3(x_val + 2, y_val);
             setbox4(x_val, y_val - 1);
@@ -117,7 +121,8 @@ void Jblock::counterturn() {
         char temp1 = the_board->charAt(y_val - 1, x_val + 1);
         char temp2 = the_board->charAt(y_val, x_val + 1);
         char temp3 = the_board->charAt(y_val - 2, x_val + 1);
-        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ') {
+        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' '
+        && inrange({x_val, y_val}, {x_val + 1, y_val}, {x_val + 1, y_val - 1}, {x_val + 1, y_val - 2})) {
             setbox2(x_val + 1, y_val);
             setbox3(x_val + 1, y_val - 1);
             setbox4(x_val + 1, y_val - 2);
@@ -130,7 +135,8 @@ void Jblock::counterturn() {
         char temp2 = the_board->charAt(y_val - 1, x_val + 2);
         char temp3 = the_board->charAt(y_val - 1, x_val + 1);
         char temp4 = the_board->charAt(y_val, x_val + 2);
-        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ' && temp4 == ' ') {
+        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ' && temp4 == ' '
+        && inrange({x_val, y_val - 1}, {x_val + 1, y_val - 1}, {x_val + 2, y_val - 1}, {x_val + 2, y_val})) {
             setbox1(x_val, y_val - 1);
             setbox2(x_val + 1, y_val - 1);
             setbox3(x_val + 2, y_val - 1);
@@ -144,7 +150,8 @@ void Jblock::counterturn() {
         char temp2 = the_board->charAt(y_val, x_val);
         char temp3 = the_board->charAt(y_val - 1, x_val);
         char temp4 = the_board->charAt(y_val - 1, x_val + 1);
-        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ' && temp4 == ' ') {
+        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ' && temp4 == ' '
+        && inrange({x_val, y_val + 1}, {x_val, y_val}, {x_val, y_val - 1}, {x_val + 1, y_val - 1})) {
             setbox1(x_val, y_val + 1);
             setbox2(x_val, y_val);
             setbox3(x_val, y_val - 1);
@@ -157,7 +164,8 @@ void Jblock::counterturn() {
         char temp1 = the_board->charAt(y_val, x_val + 1);
         char temp2 = the_board->charAt(y_val, x_val + 2);
         char temp3 = the_board->charAt(y_val - 1, x_val);
-        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' ') {
+        if (temp1 == ' ' && temp2 == ' ' && temp3 == ' '
+        && inrange({x_val + 1, y_val}, {x_val, y_val}, {x_val + 2, y_val}, {x_val, y_val - 1})) {
             setbox2(x_val + 1, y_val);
             setbox3(x_val + 2, y_val);
             setbox4(x_val, y_val - 1);
