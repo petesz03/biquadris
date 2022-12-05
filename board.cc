@@ -64,6 +64,8 @@ void Board::checkfullrow(){
 // Add score additions in here somehow!!
 void Board::clearRow(int row){
     
+    std::vector<Block*> temp;
+    std::vector<Block*> to_delete;
     for (auto a : blocks) {
         if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
 
@@ -74,6 +76,9 @@ void Board::clearRow(int row){
                 if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
                     int score = (a->level_when_create + 1) * (a->level_when_create + 1);
                     a->the_board->owner->updateScore(score);
+                    to_delete.emplace_back(a);
+                } else {
+                    temp.emplace_back(a);
                 }
             }
             if (a->box2.y == row) {
@@ -82,6 +87,9 @@ void Board::clearRow(int row){
                 if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
                     int score = (a->level_when_create + 1) * (a->level_when_create + 1);
                     a->the_board->owner->updateScore(score);
+                    to_delete.emplace_back(a);
+                } else {
+                    temp.emplace_back(a);
                 }
             }
             if (a->box3.y == row) {
@@ -90,6 +98,9 @@ void Board::clearRow(int row){
                 if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
                     int score = (a->level_when_create + 1) * (a->level_when_create + 1);
                     a->the_board->owner->updateScore(score);
+                    to_delete.emplace_back(a);
+                } else {
+                    temp.emplace_back(a);
                 }
             }
             if (a->box4.y == row) {
@@ -98,10 +109,17 @@ void Board::clearRow(int row){
                 if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
                     int score = (a->level_when_create + 1) * (a->level_when_create + 1);
                     a->the_board->owner->updateScore(score);
+                    to_delete.emplace_back(a);
+                } else {
+                    temp.emplace_back(a);
                 }
             }
             
         }
+    }
+    blocks = temp;
+    for (auto a : to_delete) {
+        delete a;
     }
 	
     for (int i = 0; i < 11; i++) {
@@ -113,42 +131,7 @@ void Board::clearRow(int row){
         }
     }
 
-///////////////////////////////////////////////////////////////////    
-    for (auto it = blocks.begin(); it != blocks.end(); it++){
-        Posn box1 = (*it)->box1;
-        Posn box2 = (*it)->box2;
-        Posn box3 = (*it)->box3;
-        Posn box4 = (*it)->box4;
-        std::vector<Posn> vec{box1, box2, box3, box4};
-        // iterate through all 4 Posns:
-        /*
-        for (auto vecIt = vec.begin(); vecIt != vec.end(); vecIt++){
-            if ((vecIt)->y == row){
-                // This means that the position is in row.
-                // Therefore, we must remove this by assigning it to -1, -1
-                vecIt->x = -1;
-                vecIt->y = -1;
-            }
-            else if ((vecIt)->y < row){
-                // This means that the position is above row.
-                // Since row is clearing, each block above will fall by one block:
-                (vecIt->y)--;
-            }
-        }
-        // Check this part!! Remove if needed:
-        */
-       /*
-        if (box1.x < 0 && box1.y < 0 && box2.x < 0 && box2.y < 0 && box3.x < 0 &&
-        box3.y < 0 && box4.x < 0 && box4.y < 0){
-            // This means that "it" is fully empty, we will remove it while we can
-            //   to improve efficiency as the game progresses.
-            auto temp = it;
-            (*it)--; // SINCE WE ARE DELETING THIS CURRENT OBSERVER
-            detach(*temp); // We have to detach temp first from the list of blockobs.
-            delete *temp;
-        }
-        */
-    }
+
 }
 
 char Board::charAt(int row, int col){
