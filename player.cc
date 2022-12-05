@@ -231,7 +231,6 @@ void Player::makeCounterTurn() {
 
 void Player::makeDrop() {
     myBoard->drop();
-    myBoard->render();
     unsetBlind();
     unsetHeavy();
     unsetForce();
@@ -243,6 +242,7 @@ void Player::makeDrop() {
 	    std::cout << "player " << pid << "'s board is full" << std::endl;
 	    isOver = true;
     }
+    myBoard->render();
 }
 
 // Only used upon initiation: !!!

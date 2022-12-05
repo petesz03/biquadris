@@ -52,9 +52,6 @@ void Board::checkfullrow(){
                 // One block is empty inside row i:
                 rowfull = false;
             }
-	    if (charAt(i, j) != ' '){
-		    std::cout << i << ", " << j << std::endl;
-	    }
         }
         if (rowfull){
 	       	clearRow(i); 
@@ -149,14 +146,14 @@ void Board::moveDown(){ currentBlock->movedown(); }
 void Board::drop(){
 	// switching player's turn will be implemented in player
 	//    for stylistic sense.
-    currentBlock->drop();
+    	currentBlock->drop();
 	// After dropped, check if any row is full and clear it.
 	checkfullrow();
 
 	// Create new blocks:
 	currentBlock = nextBlock;
 	nextBlock = createBlock();
-    attach(currentBlock);
+    	attach(currentBlock);
 }
 
 void Board::clockwiseTurn(){ currentBlock->clockwiseturn();}
