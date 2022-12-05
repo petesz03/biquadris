@@ -214,10 +214,13 @@ int main(int argc, char** args){
             playerInPlay->levelDown();
         }
         else if (command == "norandom"){
-            // What does this mean?? 
+            playerInPlay->setIsRandom(false);
+	    std::string file;
+	    std::cin >> file;
+	    (playerInPlay->myLevel)->useFile(file);
         }
         else if (command == "random"){
-            // What does this mean??
+            playerInPlay->setIsRandom(true);
         }
         else if (command == "sequence"){
             std::string file;

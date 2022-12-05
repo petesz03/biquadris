@@ -88,6 +88,8 @@ public:
     void unsetBlind();
     void unsetHeavy();
     void unsetForce();
+    void setIsRandom(bool random);
+
 
     // method to update the current score and the max score
     void updateScore(int n);

@@ -255,3 +255,7 @@ Board* Player::getBoard(){
 void Player::setIsOver(bool over){
 	isOver = over;
 }
+
+void Player::setIsRandom(bool random){
+	israndom = random;
+}
