@@ -77,7 +77,7 @@ public:
     void detach(Block* newBlock) override;
     void attach(DisplayObserver* ob) override;
     void detach(DisplayObserver* ob) override;
-
+    void unsetBlind(int pid);
     // Move block functions:
     void moveLeft();
     void moveRight();

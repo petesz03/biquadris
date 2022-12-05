@@ -139,9 +139,7 @@ void Player::doSpecialAction(int type, char blockType) {
     }
 }
 
-void Player::setBlind() {
-    myBoard->isblind = true;
-}
+void Player::setBlind() {}
 
 void Player::setHeavy() {
     myBoard->isheavy = true;
@@ -181,7 +179,7 @@ void Player::setCurrBlockchar(char blockType) {
 */
 
 void Player::unsetBlind() {
-    myBoard->isblind = false;
+    myBoard->unsetBlind(pid);
 }
 
 void Player::unsetHeavy() {

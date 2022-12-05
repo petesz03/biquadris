@@ -10,6 +10,7 @@ class TextDisplay: public DisplayObserver{
     public:
     TextDisplay(Board* b1, Board* b2);
     void notify() override;
+    void setBlind(int player, bool blind);
     ~TextDisplay();
 };
 

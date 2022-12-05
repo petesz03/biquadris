@@ -7,7 +7,7 @@
 #include <vector>
 
 TextDisplay::TextDisplay(Board* b1, Board* b2):
-    b1{b1}, b2{b2} {
+    DisplayObserver{}, b1{b1}, b2{b2}{
     b1->attach(this);
     b2->attach(this);
     }
@@ -17,6 +17,14 @@ TextDisplay::~TextDisplay(){
     b2->detach( this );
 }
 
+void TextDisplay::setBlind(int player, bool blind){
+	if (player == 1){
+		p1Blind = blind;
+	}
+	else if (player == 2){
+		p2Blind = blind;
+	}
+}
 void TextDisplay::notify(){
     // Space have to change weith number of digits in score:
     // level and score
@@ -32,11 +40,20 @@ void TextDisplay::notify(){
     // print board
     for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 11; j++) {
-            std::cout << b1->grid[i][j];
+		if (p1Blind && i <= 12 && i >= 3 && j <= 9 && j >= 3){
+			std::cout << '?';
+		}
+		else{
+			std::cout << b1->grid[i][j];
+		}
         }
         std::cout << "\t";
         for (int j = 0; j < 11; j++) {
-            std::cout << b2->grid[i][j];
+		if (p2Blind && i <= 12 && i >= 3 && j <= 9 && j >= 3){
+			std::cout << '?';
+		}
+		else{
+			std::cout << b2->grid[i][j];}
         }
         std::cout << std::endl;
     }

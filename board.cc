@@ -45,7 +45,8 @@ void Board::checkfullrow(){
     // We need to check every row!
     for (int i = 3; i <= 17; i++){
         // board starts at row 3, ends at 17 (rows 0 - 3 is for showing currentblock)
-        bool rowfull = true;
+        int rowscleared = 0;
+	bool rowfull = true;
         for (int j = 0; j <= 10; j++){
             // board starts at col 0, ends at 10
             if (charAt(i, j) == ' '){
@@ -55,10 +56,29 @@ void Board::checkfullrow(){
         }
         if (rowfull){
 	       	clearRow(i); 
+		rowscleared++;
             int score = (owner->getLevel() + 1) * (owner->getLevel() + 1);
             owner->updateScore(score);
        	} 
+	if (rowscleared >= 2){
+	       if (owner->getPid() == 1){
+		       for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
+			       (*it)->setBlind(2, true);
+		       }
+	       }
+	       else{
+		       for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
+                               (*it)->setBlind(1, true);
+                       }
+	       }
+	}
     }
+}
+
+void Board::unsetBlind(int pid){
+	for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
+		(*it)->setBlind(pid, false);
+	}
 }
 
 // Add score additions in here somehow!!

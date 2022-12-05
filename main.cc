@@ -180,6 +180,9 @@ int main(int argc, char** args){
 				commandToExecute = (*it);
 	    		}
 		}
+		if (commandsMatched == 1){
+			command = commandToExecute;
+		}
 	}
         if (command == "left"){
             playerInPlay->makeMoveLeft();

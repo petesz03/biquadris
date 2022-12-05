@@ -7,7 +7,7 @@
 #include <vector>
 
 GraphicDisplay::GraphicDisplay(Board* b1, Board* b2):
-    b1{b1}, b2{b2} {
+    DisplayObserver{}, b1{b1}, b2{b2} {
         Xwindow *win = new Xwindow{30*15,24*15};
         w = win;
 	b1->attach(this);
@@ -19,6 +19,8 @@ GraphicDisplay::~GraphicDisplay(){
 	b1->detach(this);
 	b2->detach(this);
 }
+
+void GraphicDisplay::setBlind(int player, bool blind){}
 
 // Create helper fn that prints according to the character:
 void GraphicDisplay::placeTile(char pattern, int row, int col){
