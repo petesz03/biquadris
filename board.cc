@@ -121,6 +121,7 @@ void Board::clearRow(int row){
         Posn box4 = (*it)->box4;
         std::vector<Posn> vec{box1, box2, box3, box4};
         // iterate through all 4 Posns:
+        /*
         for (auto vecIt = vec.begin(); vecIt != vec.end(); vecIt++){
             if ((vecIt)->y == row){
                 // This means that the position is in row.
@@ -135,7 +136,8 @@ void Board::clearRow(int row){
             }
         }
         // Check this part!! Remove if needed:
-        
+        */
+       /*
         if (box1.x < 0 && box1.y < 0 && box2.x < 0 && box2.y < 0 && box3.x < 0 &&
         box3.y < 0 && box4.x < 0 && box4.y < 0){
             // This means that "it" is fully empty, we will remove it while we can
@@ -143,8 +145,9 @@ void Board::clearRow(int row){
             auto temp = it;
             (*it)--; // SINCE WE ARE DELETING THIS CURRENT OBSERVER
             detach(*temp); // We have to detach temp first from the list of blockobs.
-            //delete *temp;
+            delete *temp;
         }
+        */
     }
 }
 
