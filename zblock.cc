@@ -2,7 +2,7 @@
 #include "zblock.h"
 
 Zblock::Zblock(Board* the_board, int heaviness, bool candown, int dir):
-    Block{'Z', Posn{4,1}, Posn{5,1}, Posn{5,2}, Posn{6,2}, heaviness, candown, the_board}, dir{dir} {}
+    Block{'Z', Posn{4,2}, Posn{5,2}, Posn{5,3}, Posn{6,3}, heaviness, candown, the_board}, dir{dir} {}
 
 
 Zblock::~Zblock() {

@@ -2,7 +2,7 @@
 #include "tblock.h"
 
 Tblock::Tblock(Board* the_board, int heaviness, bool candown, int dir):
-    Block{'T', Posn{5,1}, Posn{4,1}, Posn{6,1}, Posn{5,2}, heaviness, candown, the_board}, dir{dir} {}
+    Block{'T', Posn{5,2}, Posn{4,2}, Posn{6,2}, Posn{5,3}, heaviness, candown, the_board}, dir{dir} {}
 
 
 Tblock::~Tblock() {

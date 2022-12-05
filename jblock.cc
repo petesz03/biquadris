@@ -2,7 +2,7 @@
 #include "jblock.h"
 
 Jblock::Jblock(Board* the_board, int heaviness, bool candown, int dir):
-    Block{'J', Posn{4,2}, Posn{5,2}, Posn{6,2}, Posn{4, 1}, heaviness, candown, the_board}, dir{dir} {}
+    Block{'J', Posn{4,3}, Posn{5,3}, Posn{6,3}, Posn{4, 2}, heaviness, candown, the_board}, dir{dir} {}
 
 Jblock::~Jblock() {
 

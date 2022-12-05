@@ -3,7 +3,7 @@
 #include "posn.h"
 
 Iblock::Iblock(Board* the_board, int heaviness, bool candown, int dir):
-    Block{'I', Posn{3,2}, Posn{4,2}, Posn{5,2}, Posn{6,2}, heaviness, candown, the_board}, dir{dir} {}
+    Block{'I', Posn{3,3}, Posn{4,3}, Posn{5,3}, Posn{6,3}, heaviness, candown, the_board}, dir{dir} {}
 
 
 Iblock::~Iblock() {

@@ -2,7 +2,7 @@
 #include "lblock.h"
 
 Lblock::Lblock(Board* the_board, int heaviness, bool candown, int dir):
-    Block{'L', Posn{4,2}, Posn{5,2}, Posn{6,2}, Posn{6,1}, heaviness, candown, the_board}, dir{dir} {}
+    Block{'L', Posn{4,3}, Posn{5,3}, Posn{6,3}, Posn{6,2}, heaviness, candown, the_board}, dir{dir} {}
 
 
 Lblock::~Lblock() {
