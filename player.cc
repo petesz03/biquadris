@@ -253,3 +253,7 @@ void Player::setBoard(Board* newBoard){
 Board* Player::getBoard(){
 	return myBoard;
 }
+
+void Player::setIsOver(bool over){
+	isOver = over;
+}

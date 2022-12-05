@@ -57,7 +57,7 @@ public:
     void setTurn(bool turn);
     void setFileForLevel0(std::string file);
     void setBoard(Board* setBoard); // Only used during initiation
-
+    void setIsOver(bool over);
     // retrieve player information
     int getPid();
     int getScore();

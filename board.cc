@@ -190,8 +190,15 @@ void Board::attach(Block* newBlock){
 	char item = newBlock->getItem();
 
 	for (auto it = posnVec.begin(); it != posnVec.end(); it++){
+		if (grid[(*it).y][(*it).x] != ' '){
+			owner->setIsOver(true);
+			return;
+		}
+	}
+	for (auto it = posnVec.begin(); it != posnVec.end(); it++){
 		grid[(*it).y][(*it).x] = item;
 	}
+	blocks.emplace_back(newBlock);
 }
 
 void Board::detach(Block* oldBlock){
