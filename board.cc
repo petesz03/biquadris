@@ -52,6 +52,9 @@ void Board::checkfullrow(){
                 // One block is empty inside row i:
                 rowfull = false;
             }
+	    if (charAt(i, j) != ' '){
+		    std::cout << i << ", " << j << std::endl;
+	    }
         }
         if (rowfull){
 	       	clearRow(i); 
@@ -61,6 +64,7 @@ void Board::checkfullrow(){
 
 // Add score additions in here somehow!!
 void Board::clearRow(int row){
+	std::cout << row << std::endl;
     for (int i = 0; i < 11; i++) {
         grid[row][i] = ' ';
     }
@@ -116,7 +120,7 @@ char Board::charAt(int row, int col){
     }
     return ' ';
     */
-   return grid[col][row];
+   return grid[row][col];
 }
 
 Block* Board::getCurrentBlock() {
@@ -438,19 +442,12 @@ void Board::drop(){
 	// switching player's turn will be implemented in player
 	//    for stylistic sense.
     currentBlock->drop();
-    for (auto i : blocks) {
-            i->debug();
-        }
-    std::cout << "1" << std::endl;
 	// After dropped, check if any row is full and clear it.
 	checkfullrow();
-    std::cout << "2" << std::endl;
 
 	// Create new blocks:
 	currentBlock = nextBlock;
-    std::cout << "3" << std::endl;
 	nextBlock = createBlock();
-    std::cout << "4" << std::endl;
     attach(currentBlock);
 }
 
@@ -472,7 +469,7 @@ void Board::setNext(Block* newBlock){
 
 bool Board::checkLose(){
 	for (int i = 0; i <= 10; i++){
-		if (charAt(2,i) != ' '){ return true; }
+		if (charAt(i,2) != ' '){ return true; }
 	}
 	return false;
 }
