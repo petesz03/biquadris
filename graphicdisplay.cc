@@ -58,7 +58,9 @@ void GraphicDisplay::placeTile(char pattern, int row, int col){
     else if (pattern == 'T'){
         w->fillRectangle(x, y, multiplier, multiplier, Xwindow::Magenta);
     }
-    else{ return; }
+    else{
+	    w->fillRectangle(x,y,multiplier, multiplier, Xwindow::White);
+    }
 }
 
 void GraphicDisplay::notify(){

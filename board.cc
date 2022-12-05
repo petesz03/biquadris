@@ -438,7 +438,6 @@ void Board::drop(){
 	// switching player's turn will be implemented in player
 	//    for stylistic sense.
     currentBlock->drop();
-	attach(currentBlock);
     for (auto i : blocks) {
             i->debug();
         }
@@ -452,6 +451,7 @@ void Board::drop(){
     std::cout << "3" << std::endl;
 	nextBlock = createBlock();
     std::cout << "4" << std::endl;
+    attach(currentBlock);
 }
 
 void Board::clockwiseTurn(){ currentBlock->clockwiseturn();}

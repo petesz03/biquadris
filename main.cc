@@ -287,6 +287,7 @@ int main(int argc, char** args){
 		(player2->getBoard())->render();
 	}
 	repetition--;
+	boardInPlay->render();
 		
     }
 
