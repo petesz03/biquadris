@@ -504,6 +504,19 @@ void Board::detach(Block* oldBlock){
 	}
 }
 
+void Board::attach(DisplayObserver* ob){
+    displayobservers.emplace_back(ob);
+}
+
+void Board::detach(DisplayObserver* ob){
+    for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
+        if (*it == ob){
+            displayobservers.erase(it);
+            break;
+        }
+    }
+}
+
 /* Old:
 Board::Board(Player* owner, Level* owners_level):
     owner{owner}, owners_level{owners_level} {

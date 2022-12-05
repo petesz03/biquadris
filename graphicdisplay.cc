@@ -71,7 +71,6 @@ void GraphicDisplay::notify(){
 	int p1Score = player1->getScore();
 	int p2Score = player2->getScore();
 
-	int p1ColEnd = 10; // Last column in player1's board (column 0 to 10)
 	int p2ColStart = 19; // player2's board is column 19 to 29.
 	// Row 0 is player's name, 1 is Level, 2 is Score.
 	int rowStart = 3; 

@@ -73,6 +73,10 @@ public:
     void setPlayer(Player* newPlayer);
     void setLevel(Level* newLevel);
     bool checkLose();
+    void attach(Block* newBlock) override;
+    void detach(Block* newBlock) override;
+    void attach(DisplayObserver* ob) override;
+    void detach(DisplayObserver* ob) override;
 
     // Move block functions:
     void moveLeft();
@@ -81,8 +85,6 @@ public:
     void drop();
     void clockwiseTurn();
     void counterClockwiseTurn();
-    void attach(Block* newBlock);
-    void detach(Block* oldBlock);
 };
 
 

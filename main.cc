@@ -151,9 +151,13 @@ int main(int argc, char** args){
                 	}
                		 else{ break; }
         	}
-        	repetition = std::stoi(command.substr(0, commandDigit));
-        	command = command.substr(commandDigit, command.length()-1);	
-		if (repetition == 0){ repetition = 1; }
+		if (commandDigit == 0){
+			repetition = 1;
+		}
+		else{
+			repetition = stoi(command.substr(0, commandDigit));
+        		command = command.substr(commandDigit, command.size() - 1);	
+		}
 		std::vector<std::string> listOfCommands = {"left", "right", "down", "clockwise",            "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random",            "sequence", "I", "J", "L", "restart"};
 		// Check how many different types of command that "command" matches to:
 		for (auto it = listOfCommands.begin(); it != listOfCommands.end(); it++){            
@@ -213,46 +217,52 @@ int main(int argc, char** args){
         }
         else if (command == "I"){
             	Block* curBlock = boardInPlay->getCurrentBlock();
+		boardInPlay->detach(curBlock);
             	// Delete the old "currentBlock" in Board:
 	    	delete curBlock;
 	    	// Create new Block
 	    	Block* newblock = new Iblock{boardInPlay};
+		boardInPlay->attach(curBlock);
 	    	// Set currentBlock in Board
 	    	boardInPlay->setCurrent(newblock); 
         }
 	else if (command == "J"){                
 		Block* curBlock = boardInPlay->getCurrentBlock();
+		boardInPlay->detach(curBlock);
 		// Delete the old "currentBlock" in Board:
 		delete curBlock;
 		// Create new Block
-		Block* newblock = new Jblock{boardInPlay};     
-            	// Set currentBlock in Board                
+		Block* newblock = new Jblock{boardInPlay};	
+            	boardInPlay->attach(curBlock);
+		// Set currentBlock in Board                
 		boardInPlay->setCurrent(newblock);
 	    }
 	else if (command == "L"){
-		Block* curBlock = boardInPlay->getCurrentBlock();          
+		Block* curBlock = boardInPlay->getCurrentBlock();
+		boardInPlay->detach(curBlock);
 		// Delete the old "currentBlock" in Board:
             	delete curBlock;
             	// Create new Block
             	Block* newblock = new Lblock{boardInPlay};
+		boardInPlay->attach(curBlock);
             	// Set currentBlock in Board
             	boardInPlay->setCurrent(newblock);
         }
         else if (command == "restart"){
 		// Delete old displays in main to avoid
 		//   multiple deletes of the same displays
-		(player1->getBoard())->detach(graphicsDisplay);
+		(player1->getBoard())->detach(graphicDisplay);
 		(player1->getBoard())->detach(textDisplay);
-		delete graphicsDisplay;
+		delete graphicDisplay;
 		delete textDisplay;
 
 		// Get new boards for player1 and player2:
-		player1.restart();
-		player2.restart();
+		player1->restart();
+		player2->restart();
 
 		// Build new displays:
-		GraphicDisplay* newGraphics = new GraphicDisplay{player1.getBoard(), player2.getBoard()};
-		TextDisplay* newText = new TextDisplay{player1.getBoard(), player2.getBoard()};
+		GraphicDisplay* newGraphics = new GraphicDisplay{player1->getBoard(), player2->getBoard()};
+		TextDisplay* newText = new TextDisplay{player1->getBoard(), player2->getBoard()};
 		// Reassign the textDisplay and graphicDisplay
 		textDisplay = newText;
 		graphicDisplay = newGraphics;
