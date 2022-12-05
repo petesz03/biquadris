@@ -13,20 +13,18 @@ Board::Board(Player* owner, Level* owners_level):
     isheavy{false} {
     currentBlock = createBlock();
     nextBlock = createBlock();
+    attach(currentBlock);
     render();
 }
 
 Block* Board::createBlock() {
     Block* newBlock;
 
-    std::cout << "5" << std::endl;
     if (owner->israndom) {
 
-        std::cout << "6" << std::endl;
         newBlock = owners_level->randomNextBlock(this);
     } else {
 
-        std::cout << "7" << std::endl;
         newBlock = owners_level->fileNextBlock(this);
     }
     return newBlock;
