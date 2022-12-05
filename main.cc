@@ -92,8 +92,6 @@ int main(int argc, char** args){
 
     // Creating player1's text displays:
     TextDisplay* textDisplay = new TextDisplay{player1Board, player2Board};
-    player1Board->attach(textDisplay);
-    player2Board->attach(textDisplay);
 
 
     // If the filePlayer fields are not empty, we have to replace level0's file:
@@ -101,74 +99,71 @@ int main(int argc, char** args){
 
     // Creating player1 and player2's text displays:
 
-    GraphicDisplay* player1Graphics = nullptr;
-    GraphicDisplay* player2Graphics = nullptr;
+    GraphicDisplay* graphicDisplay = nullptr;
     if (graphics){
-        player1Graphics = new GraphicDisplay{player1Board, player1};
-        player1Board->attach(player1Graphics);
-        player2Graphics = new GraphicDisplay{player2Board, player2};
-        player2Board->attach(player2Graphics);
+        graphicDisplay = new GraphicDisplay{player1Board, player2Board};
     }
-
-
-    player1Board->render();
 
     // Since player1's opponent's pointer is nullptr, change the pointer:
     player1->setOpponent(player2);
 
     player1->setTurn(true);
     player2->setTurn(false);
+    player1Board->render();
     /***** Input *****/
     std::string command;
     std::string file;
     bool readFromFile = false;
     std::fstream commandfile;
+    int repetition = 0;
     while (true){
-        if (!readFromFile){
-            if (std::cin >> command){}
-            else{ break; }
-        }
-        else{
-            if (commandfile >> command){}
-            else{ std::cin >> command; }
-        }
-        // Set who is moving for future commands:
-        Player* playerInPlay;
+	// Set who is moving for future commands:
+	Player* playerInPlay;
         Board* boardInPlay;
         if (player1->getMyTurn()){
             playerInPlay = player1;
-            boardInPlay = player1->getBoard(); 
+            boardInPlay = player1->getBoard();
         }
         else{
             playerInPlay = player2;
             boardInPlay = player2->getBoard();
         }
+	if (repetition == 0){
+        	if (!readFromFile){
+            		if (std::cin >> command){}
+            		else{ return 0;}
+        	}
+        	else{
+            		if (commandfile >> command){}
+            		else{ std::cin >> command; }
+		}
+		// Read for input and call functions in playerInPlay,
+        	//   WHILE checking for similar commands:
 
-        // Read for input and call functions in playerInPlay,
-        //   WHILE checking for similar commands:
+        	// We check for similar commands that "command" matches to:
+        	int commandsMatched = 0;
+        	std::string commandToExecute = "";
 
-        // We check for similar commands that "command" matches to:
-        int commandsMatched = 0;
-        std::string commandToExecute = "";
-        std::vector<std::string> listOfCommands = {"left", "right", "down", "clockwise",
-            "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random",
-            "sequence", "I", "J", "L", "restart"};
-        
-        // Check how many different types of command that "command" matches to:
-        for (auto it = listOfCommands.begin(); it != listOfCommands.end(); it++){
-            size_t matched = (*it).find(command);
-            if (matched != std::string::npos){
-                commandsMatched++;
-                commandToExecute = (*it);
-		
-            }
-        }
-        // If "command" only matches to one command, execute that command:
-        if (commandsMatched == 1){
-            command = commandToExecute;
-	    std::cout << "The command you entered is: " << command << std::endl;
-        }
-
+        	int commandDigit = 0;
+        	for (size_t i = 0; i <= command.size(); i++){
+        	        if (isdigit(command[i])){
+                	        commandDigit++;
+                	}
+               		 else{ break; }
+        	}
+        	repetition = std::stoi(command.substr(0, commandDigit));
+        	command = command.substr(commandDigit, command.length()-1);	
+		if (repetition == 0){ repetition = 1; }
+		std::vector<std::string> listOfCommands = {"left", "right", "down", "clockwise",            "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random",            "sequence", "I", "J", "L", "restart"};
+		// Check how many different types of command that "command" matches to:
+		for (auto it = listOfCommands.begin(); it != listOfCommands.end(); it++){            
+			size_t matched = (*it).find(command);
+			if (matched != std::string::npos){
+				commandsMatched++;
+				commandToExecute = (*it);
+	    		}
+		}
+	}
         if (command == "left"){
             playerInPlay->makeMoveLeft();
         }
@@ -244,8 +239,31 @@ int main(int argc, char** args){
             	boardInPlay->setCurrent(newblock);
         }
         else if (command == "restart"){
-            player1->restart();
-            player2->restart();
+		// Delete old displays in main to avoid
+		//   multiple deletes of the same displays
+		(player1->getBoard())->detach(graphicsDisplay);
+		(player1->getBoard())->detach(textDisplay);
+		delete graphicsDisplay;
+		delete textDisplay;
+
+		// Get new boards for player1 and player2:
+		player1.restart();
+		player2.restart();
+
+		// Build new displays:
+		GraphicDisplay* newGraphics = new GraphicDisplay{player1.getBoard(), player2.getBoard()};
+		TextDisplay* newText = new TextDisplay{player1.getBoard(), player2.getBoard()};
+		// Reassign the textDisplay and graphicDisplay
+		textDisplay = newText;
+		graphicDisplay = newGraphics;
+
+		// Call the restart function to get new boards for player 1 and 2.
+
+		// Attach the new displays:
+		(player1->getBoard())->attach(newGraphics);
+		(player2->getBoard())->attach(newGraphics);
+		(player1->getBoard())->attach(newText);
+		(player2->getBoard())->attach(newText);
         }
 	// Testing functions: (delete in end)
 	else if (command == "newblock"){
@@ -258,6 +276,7 @@ int main(int argc, char** args){
 		(player1->getBoard())->render();
 		(player2->getBoard())->render();
 	}
+	repetition--;
 		
     }
 
@@ -270,7 +289,6 @@ int main(int argc, char** args){
     // Must delete graphic observers since they are not deleted:
     delete textDisplay;
     if (graphics){
-        delete player1Graphics;
-        delete player2Graphics;
+        delete graphicDisplay;
     }
 }

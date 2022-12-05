@@ -15,9 +15,7 @@ public:
     Subject();
     void notifyObservers();
     void attach(DisplayObserver* ob);
-    void attach(Block* ob);
     void detach(DisplayObserver* ob);
-    void detach(Block* ob);
     virtual ~Subject() = default;
 
 };

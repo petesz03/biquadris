@@ -1,6 +1,7 @@
 #include "subject.h"
 #include "displayobserver.h"
 #include "block.h"
+#include "posn.h"
 
 Subject::Subject() {
     grid.resize(18);
@@ -13,9 +14,7 @@ Subject::Subject() {
 void Subject::attach(DisplayObserver* ob){
     displayobservers.emplace_back(ob);
 }
-void Subject::attach(Block* ob){
-    blocks.emplace_back(ob);
-}
+
 void Subject::detach(DisplayObserver* ob){
     for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
         if (*it == ob){
@@ -24,14 +23,7 @@ void Subject::detach(DisplayObserver* ob){
         }
     }
 }
-void Subject::detach(Block* ob){
-    for (auto it = blocks.begin(); it != blocks.end(); it++){
-        if (*it == ob){
-            blocks.erase(it);
-            break;
-        }
-    }
-}
+
 void Subject::notifyObservers(){
     for (auto ob : displayobservers){
         ob->notify();

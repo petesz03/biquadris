@@ -4,6 +4,7 @@
 #include "displayobserver.h"
 #include "level.h"
 #include <iostream>
+#include "posn.h"
 
 Board::Board(Player* owner, Level* owners_level):
     owner{owner}, owners_level{owners_level},
@@ -476,6 +477,31 @@ bool Board::checkLose(){
 		if (charAt(2,i) != ' '){ return true; }
 	}
 	return false;
+}
+
+void Board::attach(Block* newBlock){
+	Posn boxA = newBlock->box1;
+	Posn boxB = newBlock->box2;
+	Posn boxC = newBlock->box3;
+	Posn boxD = newBlock->box4;
+	std::vector<Posn> posnVec = {boxA, boxB, boxC, boxD};
+	char item = newBlock->getItem();
+
+	for (auto it = posnVec.begin(); it != posnVec.end(); it++){
+		grid[(*it).y][(*it).x] = item;
+	}
+}
+
+void Board::detach(Block* oldBlock){
+	Posn boxA = oldBlock->box1;
+	Posn boxB = oldBlock->box2;
+	Posn boxC = oldBlock->box3;
+	Posn boxD = oldBlock->box4;
+	std::vector<Posn> posnVec = {boxA, boxB, boxC, boxD};
+
+	for (auto it = posnVec.begin(); it != posnVec.end(); it++){
+		grid[(*it).y][(*it).x] = ' ';
+	}
 }
 
 /* Old:

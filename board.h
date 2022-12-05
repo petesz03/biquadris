@@ -81,6 +81,8 @@ public:
     void drop();
     void clockwiseTurn();
     void counterClockwiseTurn();
+    void attach(Block* newBlock);
+    void detach(Block* oldBlock);
 };
 
 
