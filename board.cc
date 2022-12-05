@@ -63,7 +63,47 @@ void Board::checkfullrow(){
 
 // Add score additions in here somehow!!
 void Board::clearRow(int row){
-	std::cout << row << std::endl;
+    
+    for (auto a : blocks) {
+        if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
+
+        } else {
+            if (a->box1.y == row) {
+                a->box1.x = -1;
+                a->box1.y = -1;
+                if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
+                    int score = (a->level_when_create + 1) * (a->level_when_create + 1);
+                    a->the_board->owner->updateScore(score);
+                }
+            }
+            if (a->box2.y == row) {
+                a->box2.x = -1;
+                a->box2.y = -1;
+                if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
+                    int score = (a->level_when_create + 1) * (a->level_when_create + 1);
+                    a->the_board->owner->updateScore(score);
+                }
+            }
+            if (a->box3.y == row) {
+                a->box3.x = -1;
+                a->box3.y = -1;
+                if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
+                    int score = (a->level_when_create + 1) * (a->level_when_create + 1);
+                    a->the_board->owner->updateScore(score);
+                }
+            }
+            if (a->box4.y == row) {
+                a->box4.x = -1;
+                a->box4.y = -1;
+                if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
+                    int score = (a->level_when_create + 1) * (a->level_when_create + 1);
+                    a->the_board->owner->updateScore(score);
+                }
+            }
+            
+        }
+    }
+	
     for (int i = 0; i < 11; i++) {
         grid[row][i] = ' ';
     }
@@ -103,7 +143,7 @@ void Board::clearRow(int row){
             auto temp = it;
             (*it)--; // SINCE WE ARE DELETING THIS CURRENT OBSERVER
             detach(*temp); // We have to detach temp first from the list of blockobs.
-            delete *temp;
+            //delete *temp;
         }
     }
 }

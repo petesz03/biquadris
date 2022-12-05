@@ -4,7 +4,9 @@
 #include <iostream>
 
 Block::Block(char item, Posn box1, Posn box2, Posn box3, Posn box4, int heaviness, bool candown, Board* the_board):
-    item{item}, box1{box1}, box2{box2}, box3{box3}, box4{box4}, heaviness{heaviness}, candown{candown}, the_board{the_board} {}
+    item{item}, box1{box1}, box2{box2}, box3{box3}, box4{box4}, heaviness{heaviness}, candown{candown}, the_board{the_board} {
+        level_when_create = the_board->owner->getLevel();
+    }
 
 
 void Block::moveleft() {

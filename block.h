@@ -15,7 +15,7 @@ public:
     int heaviness;
     bool candown;
     Board* the_board;
-
+    int level_when_create;
 public:
     void moveleft();
     void moveright();
