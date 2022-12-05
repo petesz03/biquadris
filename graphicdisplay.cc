@@ -6,15 +6,18 @@
 #include <string>
 #include <vector>
 
-GraphicDisplay::GraphicDisplay(Board* subject, Player* control):
-    subject{subject}, control{control} {
-        Xwindow *win = new Xwindow{11*15,23*15};
+GraphicDisplay::GraphicDisplay(Board* b1, Board* b2):
+    b1{b1}, b2{b2} {
+        Xwindow *win = new Xwindow{30*15,24*15};
         w = win;
-        subject->attach(this);
+	b1->attach(this);
+	b2->attach(this);
     }
 
-GraphicDisplay::~GraphicDisplay(){
-    delete w; // w is heap allocated
+GraphicDisplay::~GraphicDisplay(){ 
+	delete w; // w is heap allocated
+	b1->detach(this);
+	b2->detach(this);
 }
 
 // Create helper fn that prints according to the character:
@@ -58,6 +61,121 @@ void GraphicDisplay::placeTile(char pattern, int row, int col){
     else{ return; }
 }
 
+void GraphicDisplay::notify(){
+	Player* player1 = b1->owner;
+	Player* player2 = b2->owner;
+
+	// Define constants:
+	int p1Level = player1->getLevel();
+	int p2Level = player2->getLevel();
+	int p1Score = player1->getScore();
+	int p2Score = player2->getScore();
+
+	int p1ColEnd = 10; // Last column in player1's board (column 0 to 10)
+	int p2ColStart = 19; // player2's board is column 19 to 29.
+	// Row 0 is player's name, 1 is Level, 2 is Score.
+	int rowStart = 3; 
+	
+	// Initiating Board:
+	w->drawString(0,12,"    Player 1");
+	w->drawString(0,28,"    Level:     "+p1Level);
+	w->drawString(0,43,"    Score:     "+p1Score);
+	w->drawString(p2ColStart*15,12,"     Player 2");
+	w->drawString(p2ColStart*15,28,"     Level:     "+p2Level);
+	w->drawString(p2ColStart*15,43,"     Score:     "+p2Score);
+
+	// Prints board:
+	for (int row = 0; row < 18; row++){
+		for (int b1col = 0; b1col < 11; b1col++){
+			char pattern = b1->grid[row][b1col];
+			placeTile(pattern, row + rowStart, b1col);
+		}
+		for (int b2col = 0; b2col < 11; b2col++){
+			char pattern = b2->grid[row][b2col];
+			placeTile(pattern, row + rowStart, b2col + p2ColStart);
+		}
+	}
+
+	// Prints nextblock (if any):
+	w->drawString(0,22*15 - 1,"     Next:");	
+	w->drawString(p2ColStart*15,22*15 - 1, "     Next:");
+
+	// Define constants:
+	int nextRowStart = 22;
+	int nextColStart = 0;
+	Player* playerInPlay;
+	Board* boardInPlay;
+	char nextItem = ' ';
+
+	// set boardInPlay and boardInPlay:
+	if (player1->getMyTurn()){
+		playerInPlay = player1;
+		boardInPlay = b1;
+	}
+	else{
+		playerInPlay = player2;
+		boardInPlay = b2;
+		nextColStart = p2ColStart;
+	}
+
+	// Set nextItem, keep ' ' if nextBlock is nullptr:
+	if (boardInPlay->getNextBlock() != nullptr){
+		nextItem = (boardInPlay->getNextBlock())->getItem();
+	}
+	
+	// Place tiles accordingly:
+	switch(nextItem){
+		case 'I':
+			placeTile(nextItem, nextRowStart+1, nextColStart);
+			placeTile(nextItem, nextRowStart+1, nextColStart+1);
+			placeTile(nextItem, nextRowStart+1, nextColStart+2);
+			placeTile(nextItem, nextRowStart+1, nextColStart+3);
+			break;
+		case 'J':
+			placeTile(nextItem, nextRowStart, nextColStart);
+                        placeTile(nextItem, nextRowStart+1, nextColStart);
+                        placeTile(nextItem, nextRowStart+1, nextColStart+1);
+                        placeTile(nextItem, nextRowStart+1, nextColStart+2);
+			break;
+		case 'L':
+			placeTile(nextItem, nextRowStart, nextColStart+2);
+                        placeTile(nextItem, nextRowStart+1, nextColStart);
+                        placeTile(nextItem, nextRowStart+1, nextColStart+1);
+                        placeTile(nextItem, nextRowStart+1, nextColStart+2);
+			break;
+		case 'O':
+			placeTile(nextItem, nextRowStart, nextColStart);
+                        placeTile(nextItem, nextRowStart, nextColStart+1);
+                        placeTile(nextItem, nextRowStart+1, nextColStart);
+                        placeTile(nextItem, nextRowStart+1, nextColStart+1);
+			break;
+		case 'S':
+			placeTile(nextItem, nextRowStart, nextColStart+1);
+                        placeTile(nextItem, nextRowStart, nextColStart+2);
+                        placeTile(nextItem, nextRowStart+1, nextColStart);
+                        placeTile(nextItem, nextRowStart+1, nextColStart+1);
+			break;
+		case 'Z':
+			placeTile(nextItem, nextRowStart, nextColStart);
+                        placeTile(nextItem, nextRowStart, nextColStart+1);
+                        placeTile(nextItem, nextRowStart+1, nextColStart+1);
+                        placeTile(nextItem, nextRowStart+1, nextColStart+2);
+			break;
+		case 'T':
+			placeTile(nextItem, nextRowStart, nextColStart);
+                        placeTile(nextItem, nextRowStart, nextColStart+1);
+                        placeTile(nextItem, nextRowStart, nextColStart+2);
+                        placeTile(nextItem, nextRowStart+1, nextColStart+1);
+			break;
+		case ' ':
+			break;
+	}
+}
+
+
+
+
+/*
 void GraphicDisplay::notify(){
     int level = control->getLevel();
     int score = control->getScore();
@@ -145,3 +263,5 @@ void GraphicDisplay::notify(){
         placeTile(nextChar, nextBlockStart+1, 1);
     }
 }
+
+*/

@@ -7,7 +7,10 @@
 #include <vector>
 
 TextDisplay::TextDisplay(Board* b1, Board* b2):
-    b1{b1}, b2{b2} {}
+    b1{b1}, b2{b2} {
+    b1->attach(this);
+    b2->attach(this);
+    }
 
 TextDisplay::~TextDisplay(){
     b1->detach( this );
@@ -49,12 +52,18 @@ void TextDisplay::notify(){
     
     std::string next1, next2;
     char item = ' ';
+    
     if (b1->owner->getMyTurn()){
-        item = (b1->getNextBlock())->getItem();
+	    if (b1->getNextBlock() != nullptr){
+		    item = (b1->getNextBlock())->getItem();
+	    }
     }
     else {
-        item = (b2->getNextBlock())->getItem();
+	    if (b2->getNextBlock() != nullptr){
+		    item = (b2->getNextBlock())->getItem();
+	    }
     }
+
     switch (item) {
         case 'I':
             next1 = "IIII";
@@ -84,6 +93,10 @@ void TextDisplay::notify(){
             next1 = "OO  ";
             next2 = "OO  ";
             break;
+	case ' ':
+	    next1 = "    ";
+	    next2 = "    ";
+	    break;
     }
 
     if (b1->owner->getMyTurn()){
