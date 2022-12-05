@@ -15,10 +15,10 @@ Iblock::~Iblock() {
 void Iblock::clockwiseturn() {
     int x_val = box1.x;
     int y_val = box1.y;
-    the_board->grid[box1.x][box1.y] = ' ';
-    the_board->grid[box2.x][box2.y] = ' ';
-    the_board->grid[box3.x][box3.y] = ' ';
-    the_board->grid[box4.x][box4.y] = ' ';
+    the_board->grid[box1.y][box1.x] = ' ';
+    the_board->grid[box2.y][box2.x] = ' ';
+    the_board->grid[box3.y][box3.x] = ' ';
+    the_board->grid[box4.y][box4.x] = ' ';
     if (dir == 1) {
         dir = 2;
         char temp1 = the_board->charAt(y_val - 1, x_val);
@@ -60,21 +60,21 @@ void Iblock::clockwiseturn() {
             setbox4(x_val + 3, y_val);
         }
     }
-    the_board->grid[box1.x][box1.y] = item;
-    the_board->grid[box2.x][box2.y] = item;
-    the_board->grid[box3.x][box3.y] = item;
-    the_board->grid[box4.x][box4.y] = item;
+    the_board->grid[box1.y][box1.x] = item;
+    the_board->grid[box2.y][box2.x] = item;
+    the_board->grid[box3.y][box3.x] = item;
+    the_board->grid[box4.y][box4.x] = item;
 
     if (the_board->owners_level->level >= 3) {
-        the_board->grid[box1.x][box1.y] = ' ';
-        the_board->grid[box2.x][box2.y] = ' ';
-        the_board->grid[box3.x][box3.y] = ' ';
-        the_board->grid[box4.x][box4.y] = ' ';
+        the_board->grid[box1.y][box1.x] = ' ';
+        the_board->grid[box2.y][box2.x] = ' ';
+        the_board->grid[box3.y][box3.x] = ' ';
+        the_board->grid[box4.y][box4.x] = ' ';
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
-                the_board->grid[box1.x][box1.y] = item;
-                the_board->grid[box2.x][box2.y] = item;
-                the_board->grid[box3.x][box3.y] = item;
-                the_board->grid[box4.x][box4.y] = item;
+                the_board->grid[box1.y][box1.x] = item;
+                the_board->grid[box2.y][box2.x] = item;
+                the_board->grid[box3.y][box3.x] = item;
+                the_board->grid[box4.y][box4.x] = item;
                 drop();
                 return;
             } else {
@@ -87,29 +87,29 @@ void Iblock::clockwiseturn() {
                     box2.y += 1;
                     box3.y += 1;
                     box4.y += 1;
-                    the_board->grid[box1.x][box1.y] = item;
-                    the_board->grid[box2.x][box2.y] = item;
-                    the_board->grid[box3.x][box3.y] = item;
-                    the_board->grid[box4.x][box4.y] = item;
                 } else {
-                    the_board->grid[box1.x][box1.y] = item;
-                    the_board->grid[box2.x][box2.y] = item;
-                    the_board->grid[box3.x][box3.y] = item;
-                    the_board->grid[box4.x][box4.y] = item;
+                    the_board->grid[box1.y][box1.x] = item;
+                    the_board->grid[box2.y][box2.x] = item;
+                    the_board->grid[box3.y][box3.x] = item;
+                    the_board->grid[box4.y][box4.x] = item;
                     drop();
                     return;
                 }
             }
     }
+    the_board->grid[box1.y][box1.x] = item;
+    the_board->grid[box2.y][box2.x] = item;
+    the_board->grid[box3.y][box3.x] = item;
+    the_board->grid[box4.y][box4.x] = item;
 }
 
 void Iblock::counterturn() {
     int x_val = box1.x;
     int y_val = box1.y;
-    the_board->grid[box1.x][box1.y] = ' ';
-    the_board->grid[box2.x][box2.y] = ' ';
-    the_board->grid[box3.x][box3.y] = ' ';
-    the_board->grid[box4.x][box4.y] = ' ';
+    the_board->grid[box1.y][box1.x] = ' ';
+    the_board->grid[box2.y][box2.x] = ' ';
+    the_board->grid[box3.y][box3.x] = ' ';
+    the_board->grid[box4.y][box4.x] = ' ';
     if (dir == 1) {
         dir = 4;
         char temp1 = the_board->charAt(y_val - 1, x_val);
@@ -152,21 +152,21 @@ void Iblock::counterturn() {
         }
     }
 
-    the_board->grid[box1.x][box1.y] = item;
-    the_board->grid[box2.x][box2.y] = item;
-    the_board->grid[box3.x][box3.y] = item;
-    the_board->grid[box4.x][box4.y] = item;
+    the_board->grid[box1.y][box1.x] = item;
+    the_board->grid[box2.y][box2.x] = item;
+    the_board->grid[box3.y][box3.x] = item;
+    the_board->grid[box4.y][box4.x] = item;
 
     if (the_board->owners_level->level >= 3) {
-        the_board->grid[box1.x][box1.y] = ' ';
-        the_board->grid[box2.x][box2.y] = ' ';
-        the_board->grid[box3.x][box3.y] = ' ';
-        the_board->grid[box4.x][box4.y] = ' ';
+        the_board->grid[box1.y][box1.x] = ' ';
+        the_board->grid[box2.y][box2.x] = ' ';
+        the_board->grid[box3.y][box3.x] = ' ';
+        the_board->grid[box4.y][box4.x] = ' ';
         if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
-            the_board->grid[box1.x][box1.y] = item;
-            the_board->grid[box2.x][box2.y] = item;
-            the_board->grid[box3.x][box3.y] = item;
-            the_board->grid[box4.x][box4.y] = item;
+            the_board->grid[box1.y][box1.x] = item;
+            the_board->grid[box2.y][box2.x] = item;
+            the_board->grid[box3.y][box3.x] = item;
+            the_board->grid[box4.y][box4.x] = item;
             drop();
             return;
         } else {
@@ -179,18 +179,18 @@ void Iblock::counterturn() {
                 box2.y += 1;
                 box3.y += 1;
                 box4.y += 1;
-                the_board->grid[box1.x][box1.y] = item;
-                the_board->grid[box2.x][box2.y] = item;
-                the_board->grid[box3.x][box3.y] = item;
-                the_board->grid[box4.x][box4.y] = item;
             } else {
-                the_board->grid[box1.x][box1.y] = item;
-                the_board->grid[box2.x][box2.y] = item;
-                the_board->grid[box3.x][box3.y] = item;
-                the_board->grid[box4.x][box4.y] = item;
+                the_board->grid[box1.y][box1.x] = item;
+                the_board->grid[box2.y][box2.x] = item;
+                the_board->grid[box3.y][box3.x] = item;
+                the_board->grid[box4.y][box4.x] = item;
                 drop();
                 return;
             }
         }
     }
+    the_board->grid[box1.y][box1.x] = item;
+    the_board->grid[box2.y][box2.x] = item;
+    the_board->grid[box3.y][box3.x] = item;
+    the_board->grid[box4.y][box4.x] = item;
 }

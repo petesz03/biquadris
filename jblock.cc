@@ -10,6 +10,10 @@ Jblock::~Jblock() {
 
 
 void Jblock::clockwiseturn() {
+    the_board->grid[box1.y][box1.x] = ' ';
+    the_board->grid[box2.y][box2.x] = ' ';
+    the_board->grid[box3.y][box3.x] = ' ';
+    the_board->grid[box4.y][box4.x] = ' ';
     if (dir == 1) {
         dir = 2;
         int x_val = box1.x;
@@ -64,7 +68,15 @@ void Jblock::clockwiseturn() {
         }
     }
     if (the_board->owners_level->level >= 3) {
+        the_board->grid[box1.y][box1.x] = ' ';
+        the_board->grid[box2.y][box2.x] = ' ';
+        the_board->grid[box3.y][box3.x] = ' ';
+        the_board->grid[box4.y][box4.x] = ' ';
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                the_board->grid[box1.y][box1.x] = item;
+                the_board->grid[box2.y][box2.x] = item;
+                the_board->grid[box3.y][box3.x] = item;
+                the_board->grid[box4.y][box4.x] = item;
                 drop();
                 return;
             } else {
@@ -78,14 +90,26 @@ void Jblock::clockwiseturn() {
                     box3.y += 1;
                     box4.y += 1;
                 } else {
+                    the_board->grid[box1.y][box1.x] = item;
+                    the_board->grid[box2.y][box2.x] = item;
+                    the_board->grid[box3.y][box3.x] = item;
+                    the_board->grid[box4.y][box4.x] = item;
                     drop();
                     return;
                 }
             }
     }
+    the_board->grid[box1.y][box1.x] = item;
+    the_board->grid[box2.y][box2.x] = item;
+    the_board->grid[box3.y][box3.x] = item;
+    the_board->grid[box4.y][box4.x] = item;
 }
 
 void Jblock::counterturn() {
+    the_board->grid[box1.y][box1.x] = ' ';
+    the_board->grid[box2.y][box2.x] = ' ';
+    the_board->grid[box3.y][box3.x] = ' ';
+    the_board->grid[box4.y][box4.x] = ' ';
     if (dir == 1) {
         dir = 4;
         int x_val = box1.x;
@@ -140,7 +164,15 @@ void Jblock::counterturn() {
         }
     }
     if (the_board->owners_level->level >= 3) {
+        the_board->grid[box1.y][box1.x] = ' ';
+        the_board->grid[box2.y][box2.x] = ' ';
+        the_board->grid[box3.y][box3.x] = ' ';
+        the_board->grid[box4.y][box4.x] = ' ';
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                the_board->grid[box1.y][box1.x] = item;
+                the_board->grid[box2.y][box2.x] = item;
+                the_board->grid[box3.y][box3.x] = item;
+                the_board->grid[box4.y][box4.x] = item;
                 drop();
                 return;
             } else {
@@ -154,11 +186,19 @@ void Jblock::counterturn() {
                     box3.y += 1;
                     box4.y += 1;
                 } else {
+                    the_board->grid[box1.y][box1.x] = item;
+                    the_board->grid[box2.y][box2.x] = item;
+                    the_board->grid[box3.y][box3.x] = item;
+                    the_board->grid[box4.y][box4.x] = item;
                     drop();
                     return;
                 }
             }
     }
+    the_board->grid[box1.y][box1.x] = item;
+    the_board->grid[box2.y][box2.x] = item;
+    the_board->grid[box3.y][box3.x] = item;
+    the_board->grid[box4.y][box4.x] = item;
 }
 
 

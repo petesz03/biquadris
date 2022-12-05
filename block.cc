@@ -8,10 +8,18 @@ Block::Block(char item, Posn box1, Posn box2, Posn box3, Posn box4, int heavines
 
 
 void Block::moveleft() {
+    the_board->grid[box1.y][box1.x] = ' ';
+    the_board->grid[box2.y][box2.x] = ' ';
+    the_board->grid[box3.y][box3.x] = ' ';
+    the_board->grid[box4.y][box4.x] = ' ';
     if (box1.x == 0 || box2.x == 0 || box3.x == 0 || box4.x == 0) {
+        the_board->grid[box1.y][box1.x] = item;
+        the_board->grid[box2.y][box2.x] = item;
+        the_board->grid[box3.y][box3.x] = item;
+        the_board->grid[box4.y][box4.x] = item;
         if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
-                drop();
-                return;
+            drop();
+            return;
         }
     } else {
         char temp1 = the_board->charAt(box1.y, box1.x - 1);
@@ -25,11 +33,19 @@ void Block::moveleft() {
             box4.x -= 1;
         }
         if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+            the_board->grid[box1.y][box1.x] = item;
+            the_board->grid[box2.y][box2.x] = item;
+            the_board->grid[box3.y][box3.x] = item;
+            the_board->grid[box4.y][box4.x] = item;
                 drop();
                 return;
             }
         if (the_board->isheavy) {
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                the_board->grid[box1.y][box1.x] = item;
+                the_board->grid[box2.y][box2.x] = item;
+                the_board->grid[box3.y][box3.x] = item;
+                the_board->grid[box4.y][box4.x] = item;
                 drop();
                 return;
             } else {
@@ -43,11 +59,19 @@ void Block::moveleft() {
                     box3.y += 1;
                     box4.y += 1;
                 } else {
+                    the_board->grid[box1.y][box1.x] = item;
+                    the_board->grid[box2.y][box2.x] = item;
+                    the_board->grid[box3.y][box3.x] = item;
+                    the_board->grid[box4.y][box4.x] = item;
                     drop();
                     return;
                 }
             }
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                the_board->grid[box1.y][box1.x] = item;
+                the_board->grid[box2.y][box2.x] = item;
+                the_board->grid[box3.y][box3.x] = item;
+                the_board->grid[box4.y][box4.x] = item;
                 drop();
                 return;
             } else {
@@ -61,6 +85,10 @@ void Block::moveleft() {
                     box3.y += 1;
                     box4.y += 1;
                 } else {
+                    the_board->grid[box1.y][box1.x] = item;
+                    the_board->grid[box2.y][box2.x] = item;
+                    the_board->grid[box3.y][box3.x] = item;
+                    the_board->grid[box4.y][box4.x] = item;
                     drop();
                     return;
                 }
@@ -69,6 +97,11 @@ void Block::moveleft() {
         }
         if (the_board->owners_level->level >= 3) {
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                the_board->grid[box1.y][box1.x] = item;
+                the_board->grid[box2.y][box2.x] = item;
+                the_board->grid[box3.y][box3.x] = item;
+                the_board->grid[box4.y][box4.x] = item;
+                drop();
                 return;
             } else {
                 char temp5 = the_board->charAt(box1.y + 1, box1.x);
@@ -81,18 +114,35 @@ void Block::moveleft() {
                     box3.y += 1;
                     box4.y += 1;
                 } else {
+                    the_board->grid[box1.y][box1.x] = item;
+                    the_board->grid[box2.y][box2.x] = item;
+                    the_board->grid[box3.y][box3.x] = item;
+                    the_board->grid[box4.y][box4.x] = item;
+                    drop();
                     return;
                 }
             }
         }
     }
+    the_board->grid[box1.y][box1.x] = item;
+    the_board->grid[box2.y][box2.x] = item;
+    the_board->grid[box3.y][box3.x] = item;
+    the_board->grid[box4.y][box4.x] = item;
 }
 
 void Block::moveright() {
+    the_board->grid[box1.y][box1.x] = ' ';
+    the_board->grid[box2.y][box2.x] = ' ';
+    the_board->grid[box3.y][box3.x] = ' ';
+    the_board->grid[box4.y][box4.x] = ' ';
     if (box1.x == 10 || box2.x == 10 || box3.x == 10 || box4.x == 10) {
+        the_board->grid[box1.y][box1.x] = item;
+        the_board->grid[box2.y][box2.x] = item;
+        the_board->grid[box3.y][box3.x] = item;
+        the_board->grid[box4.y][box4.x] = item;
         if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
-                drop();
-                return;
+            drop();
+            return;
         }
     } else {
         char temp1 = the_board->charAt(box1.y, box1.x + 1);
@@ -106,11 +156,19 @@ void Block::moveright() {
             box4.x += 1;
         }
         if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+            the_board->grid[box1.y][box1.x] = item;
+            the_board->grid[box2.y][box2.x] = item;
+            the_board->grid[box3.y][box3.x] = item;
+            the_board->grid[box4.y][box4.x] = item;
                 drop();
                 return;
         }
         if (the_board->isheavy) {
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                the_board->grid[box1.y][box1.x] = item;
+            the_board->grid[box2.y][box2.x] = item;
+            the_board->grid[box3.y][box3.x] = item;
+            the_board->grid[box4.y][box4.x] = item;
                 drop();
                 return;
             } else {
@@ -124,11 +182,19 @@ void Block::moveright() {
                     box3.y += 1;
                     box4.y += 1;
                 } else {
+                    the_board->grid[box1.y][box1.x] = item;
+                    the_board->grid[box2.y][box2.x] = item;
+                    the_board->grid[box3.y][box3.x] = item;
+                    the_board->grid[box4.y][box4.x] = item;
                     drop();
                     return;
                 }
             }
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                the_board->grid[box1.y][box1.x] = item;
+                the_board->grid[box2.y][box2.x] = item;
+                the_board->grid[box3.y][box3.x] = item;
+                the_board->grid[box4.y][box4.x] = item;
                 drop();
                 return;
             } else {
@@ -142,6 +208,10 @@ void Block::moveright() {
                     box3.y += 1;
                     box4.y += 1;
                 } else {
+                    the_board->grid[box1.y][box1.x] = item;
+                    the_board->grid[box2.y][box2.x] = item;
+                    the_board->grid[box3.y][box3.x] = item;
+                    the_board->grid[box4.y][box4.x] = item;
                     drop();
                     return;
                 }
@@ -150,6 +220,11 @@ void Block::moveright() {
         }
         if (the_board->owners_level->level >= 3) {
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                the_board->grid[box1.y][box1.x] = item;
+                the_board->grid[box2.y][box2.x] = item;
+                the_board->grid[box3.y][box3.x] = item;
+                the_board->grid[box4.y][box4.x] = item;
+                drop();
                 return;
             } else {
                 char temp5 = the_board->charAt(box1.y + 1, box1.x);
@@ -162,15 +237,32 @@ void Block::moveright() {
                     box3.y += 1;
                     box4.y += 1;
                 } else {
+                    the_board->grid[box1.y][box1.x] = item;
+                    the_board->grid[box2.y][box2.x] = item;
+                    the_board->grid[box3.y][box3.x] = item;
+                    the_board->grid[box4.y][box4.x] = item;
+                    drop();
                     return;
                 }
             }
         }
     }
+    the_board->grid[box1.y][box1.x] = item;
+    the_board->grid[box2.y][box2.x] = item;
+    the_board->grid[box3.y][box3.x] = item;
+    the_board->grid[box4.y][box4.x] = item;
 }
 
 void Block::movedown() {
+    the_board->grid[box1.y][box1.x] = ' ';
+    the_board->grid[box2.y][box2.x] = ' ';
+    the_board->grid[box3.y][box3.x] = ' ';
+    the_board->grid[box4.y][box4.x] = ' ';
     if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+        the_board->grid[box1.y][box1.x] = item;
+        the_board->grid[box2.y][box2.x] = item;
+        the_board->grid[box3.y][box3.x] = item;
+        the_board->grid[box4.y][box4.x] = item;
         drop();
         return;
     } else {
@@ -184,12 +276,20 @@ void Block::movedown() {
             box3.y += 1;
             box4.y += 1;
         } else {
+            the_board->grid[box1.y][box1.x] = item;
+            the_board->grid[box2.y][box2.x] = item;
+            the_board->grid[box3.y][box3.x] = item;
+            the_board->grid[box4.y][box4.x] = item;
             drop();
             return;
         }
     }
     if (the_board->owners_level->level >= 3) {
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
+                the_board->grid[box1.y][box1.x] = item;
+                the_board->grid[box2.y][box2.x] = item;
+                the_board->grid[box3.y][box3.x] = item;
+                the_board->grid[box4.y][box4.x] = item;
                 drop();
                 return;
             } else {
@@ -203,16 +303,31 @@ void Block::movedown() {
                     box3.y += 1;
                     box4.y += 1;
                 } else {
+                    the_board->grid[box1.y][box1.x] = item;
+                    the_board->grid[box2.y][box2.x] = item;
+                    the_board->grid[box3.y][box3.x] = item;
+                    the_board->grid[box4.y][box4.x] = item;
                     drop();
                     return;
                 }
             }
         }
+    the_board->grid[box1.y][box1.x] = item;
+    the_board->grid[box2.y][box2.x] = item;
+    the_board->grid[box3.y][box3.x] = item;
+    the_board->grid[box4.y][box4.x] = item;
 }
 
 void Block::drop() {
+    the_board->grid[box1.y][box1.x] = ' ';
+    the_board->grid[box2.y][box2.x] = ' ';
+    the_board->grid[box3.y][box3.x] = ' ';
+    the_board->grid[box4.y][box4.x] = ' ';
 	if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17){
-        std::cout << "bottom" << std::endl;
+        the_board->grid[box1.y][box1.x] = item;
+        the_board->grid[box2.y][box2.x] = item;
+        the_board->grid[box3.y][box3.x] = item;
+        the_board->grid[box4.y][box4.x] = item;
 		return;
 	}
 	char temp1 = the_board->charAt(box1.y + 1, box1.x);
@@ -227,7 +342,10 @@ void Block::drop() {
         // std::cout << "value:" <<temp1 << temp2 << temp3 << temp4 << std::endl;
 		drop();
 	} else {
-        std::cout << "end" <<temp1 << temp2 << temp3 << temp4 << std::endl;
+        the_board->grid[box1.y][box1.x] = item;
+        the_board->grid[box2.y][box2.x] = item;
+        the_board->grid[box3.y][box3.x] = item;
+        the_board->grid[box4.y][box4.x] = item;
         return;
     }
 }
@@ -236,15 +354,19 @@ void Block::clean(int x, int y) {
     if (box1.x == x && box1.y == y) {
         box1.x = -1;
         box1.y = -1;
+        the_board->grid[box1.y][box1.x] = ' ';
     } else if (box2.x == x && box2.y == y) {
+        the_board->grid[box2.y][box2.x] = ' ';
         box2.x = -1;
         box2.y = -1;
     } else if (box3.x == x && box3.y == y) {
+        the_board->grid[box3.y][box3.x] = ' ';
         box3.x = -1;
         box3.y = -1;
     } else if (box4.x == x && box4.y == y) {
         box4.x = -1;
         box4.y = -1;
+        the_board->grid[box4.y][box4.x] = ' ';
     }
 }
 

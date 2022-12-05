@@ -439,10 +439,6 @@ void Board::drop(){
 	// switching player's turn will be implemented in player
 	//    for stylistic sense.
     currentBlock->drop();
-    grid[currentBlock->box1.x][currentBlock->box1.y] = currentBlock->item;
-    grid[currentBlock->box2.x][currentBlock->box2.y] = currentBlock->item;
-    grid[currentBlock->box3.x][currentBlock->box3.y] = currentBlock->item;
-    grid[currentBlock->box4.x][currentBlock->box4.y] = currentBlock->item;
 	attach(currentBlock);
     for (auto i : blocks) {
             i->debug();
