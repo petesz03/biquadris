@@ -128,10 +128,23 @@ int main(int argc, char** args){
             playerInPlay = player2;
             boardInPlay = player2->getBoard();
         }
+	// If either's turn is finished, it is other's term	
+	if (player1->getIsOver() && player1->getIsOver()){
+		break;
+	}
+	else if (player1->getIsOver()){
+		playerInPlay = player2;
+		boardInPlay = player2->getBoard();
+	}
+	else if (player2->getIsOver()){
+		playerInPlay = player1;
+		boardInPlay = player1->getBoard();
+	}
+
 	if (repetition == 0){
         	if (!readFromFile){
             		if (std::cin >> command){}
-            		else{ return 0;}
+            		else{ break; }
         	}
         	else{
             		if (commandfile >> command){}
@@ -188,7 +201,7 @@ int main(int argc, char** args){
 	    if (playerInPlay->getIsOver()){
 		    (player1->getBoard())->render();
 		    (player2->getBoard())->render();
-		    return 0;
+		    break;
 	    }
         }
         else if (command == "levelup"){
@@ -289,16 +302,29 @@ int main(int argc, char** args){
 	repetition--;
 		
     }
+                int player1HighScore = player1->getMaxScore();
+		int player2HighScore = player2->getMaxScore(); 
+ 		std::cout << "Player 1's High Score is: " << player1HighScore << std::endl;
+		std::cout << "Player 2's High Score is: " << player2HighScore << std::endl;
+                if (player1HighScore > player2HighScore){
+                        std::cout << "Player 1 win!" << std::endl;
+                }
+                else if (player2HighScore > player1HighScore){
+                        std::cout << "Player 2 win!" << std::endl;
+                }
+                else{
+                        std::cout << "Tie!" << std::endl;
+                }
 
     /***** Free Memory: *****/
     // Deleting players will delete its corresponding level and board, which
     //   will delete all the attached blocks:
-    delete player1;
-    delete player2;
+    //delete player1;
+    //delete player2;
 
     // Must delete graphic observers since they are not deleted:
-    delete textDisplay;
-    if (graphics){
-        delete graphicDisplay;
-    }
+    // delete textDisplay;
+    // if (graphics){
+       // delete graphicDisplay;
+    //}
 }
