@@ -25,6 +25,7 @@ public:
     bool isblind;
     bool isforce;
     bool isheavy;
+    int rowsCleared;
     
 
 public:
@@ -54,6 +55,10 @@ public:
     void drop();
     void clockwiseTurn();
     void counterClockwiseTurn();
+
+    void blind();
+    void setRowsCleared(int rows);
+    int getRowsCleared();
 };
 
 

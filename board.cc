@@ -10,7 +10,8 @@ Board::Board(std::shared_ptr<Player> owner1, std::shared_ptr<Level> owners_level
     owners_level{owners_level1},
     isblind{false},
     isforce{false},
-    isheavy{false} {
+    isheavy{false},
+    rowsCleared{0}{
     owner = owner1.get();
     currentBlock = std::shared_ptr<Block>(createBlock());
     nextBlock = std::shared_ptr<Block>(createBlock());
@@ -58,19 +59,29 @@ void Board::checkfullrow(){
             owner->updateScore(score);
        	} 
     }
-	if (rowscleared >= 2){
-	       if (owner->getPid() == 1){
-		       for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
-			       (*it)->setBlind(2, true);
-		       }
-	       }
-	       else{
-		       for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
-                               (*it)->setBlind(1, true);
-                       }
-	       }
-	       render();
+}
+
+void Board::blind(){
+	if (rowsCleared >= 2){
+ 		if (owner->getPid() == 1){
+ 			for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){             
+				(*it)->setBlind(2, true);
+			}
+ 		}
+ 		else{
+ 			for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
+ 				(*it)->setBlind(1, true);
+			}
+ 		}
 	}
+}
+
+void Board::setRowsCleared(int rows){
+	rowsCleared = rows;
+}
+
+int Board::getRowsCleared(){
+	return rowsCleared;
 }
 
 void Board::unsetBlind(int pid){
