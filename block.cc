@@ -11,6 +11,7 @@ Block::Block(char item, Posn box1, Posn box2, Posn box3, Posn box4, int heavines
 
 
 void Block::moveleft() {
+    std::cout << the_board->isheavy << std::endl;
     the_board->grid[box1.y][box1.x] = ' ';
     the_board->grid[box2.y][box2.x] = ' ';
     the_board->grid[box3.y][box3.x] = ' ';

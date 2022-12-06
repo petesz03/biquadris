@@ -241,7 +241,15 @@ int main(int argc, char** args) {
 		    }
 		    else if (specialAction == "blind" || specialAction == "Blind"){
 			    boardInPlay->blind();
-		    }
+		    } else if (specialAction == "heavy" || specialAction == "Heavy") {
+                if (playerInPlay->getPid() == 1){
+				    player2->getBoard()->isheavy = true;
+                    std::cout << "main:" <<player2->getBoard()->isheavy << std::endl;
+			    }
+			    else{
+				    player1->getBoard()->isheavy = true;
+			    }
+            }
 	    }
 	    boardInPlay->setRowsCleared(0);
         } else if (command == "levelup") {
