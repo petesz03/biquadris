@@ -223,10 +223,7 @@ int main(int argc, char** args) {
             readFromFile = true;
             commandfile.open(file, std::fstream::in);
         } else if (command == "restart") {
-            // Delete old displays in main to avoid
-            //   multiple deletes of the same displays
-            (player1->getBoard())->detach(graphicDisplay);
-            (player1->getBoard())->detach(textDisplay);
+            // Delete displays, detach done in destructors
             delete graphicDisplay;
             delete textDisplay;
 
@@ -234,20 +231,14 @@ int main(int argc, char** args) {
             player1->restart();
             player2->restart();
 
-            // Build new displays:
-            GraphicDisplay* newGraphics = new GraphicDisplay{ player1->getBoard(), player2->getBoard() };
-            TextDisplay* newText = new TextDisplay{ player1->getBoard(), player2->getBoard() };
-            // Reassign the textDisplay and graphicDisplay
-            textDisplay = newText;
-            graphicDisplay = newGraphics;
+            // Build new displays, attach done in constructors:
+            if (graphics) {
+                graphicDisplay = new GraphicDisplay{ player1->getBoard(), player2->getBoard() };
+            }
+            textDisplay = new TextDisplay{ player1->getBoard(), player2->getBoard() };
 
-            // Call the restart function to get new boards for player 1 and 2.
-
-            // Attach the new displays:
-            (player1->getBoard())->attach(newGraphics);
-            (player2->getBoard())->attach(newGraphics);
-            (player1->getBoard())->attach(newText);
-            (player2->getBoard())->attach(newText);
+            // Render
+            (player1->getBoard())->render();
         } else if (command == "newblock") {
             // Testing functions: (delete in end)
             Block* newblock = new Iblock{};

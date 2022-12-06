@@ -32,10 +32,10 @@ Block* Board::createBlock() {
 
 // CLEARING THE BOARD CLEARS ALLLLLL THE BLOCKS (NOT THE PLAYER AND LEVEL):
 Board::~Board(){
+    // current block in blcoks, also deleted
     for (auto it = blocks.begin(); it != blocks.end(); it++){
         delete *it;
     }
-    delete currentBlock;
     delete nextBlock;
     // Note that owner and owners_level should be deleted in player when it returns.
     // We cannot delete it twice.
