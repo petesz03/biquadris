@@ -265,8 +265,6 @@ int main(int argc, char** args) {
             }
             std::shared_ptr<Block> curBlock = boardInPlay->getCurrentBlock();
             boardInPlay->detach(curBlock);
-            // Delete the old "currentBlock" in Board:
-            boardInPlay->attach(curBlock);
             // Set currentBlock in Board
             boardInPlay->setCurrent(newblock);
         }
