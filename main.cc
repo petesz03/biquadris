@@ -334,19 +334,28 @@ int main(int argc, char** args) {
         }  
         // command: "restart"
         else if (command == listOfCommands[19]) {
+		/*
             // Delete displays, detach done in destructors
 
             // Get new boards for player1 and player2:
-            Level1 = std::shared_ptr<Level(new Lvel0{filePlayer1});
+            player1Level = std::shared_ptr<Level>(new Level0{filePlayer1});
+	    player2Level = std::shared_ptr<Level>(new Level0{filePlayer2});
+	    player1Board = std::shared_ptr<Board>(new Board{nullptr, nullptr});
+	    player2Board = std::shared_ptr<Board>(new Board{nullptr, nullptr});
 
-	    
-	    myBoard1 = std::shared_ptr<Board>(new Board(temp, myLevel));
-	    
+	    player1New = std::shared_ptr<Level>(new Player{1,player1Level,player1Board, nullptr, filePlayer1});
+	    player2New = std::shared_ptr<Level>(new Player{1,player2Level,player2Board, player1New, filePlayer2});
+	    player1New->setLevelOpponent(player1New); */
+
+		player1->restart();
+		player2->restart();
+
             // Build new displays, attach done in constructors:
             if (graphics) {
                 graphicDisplay = std::shared_ptr<GraphicDisplay>(new GraphicDisplay{ player1->getBoard(), player2->getBoard() });
             }
             textDisplay = std::shared_ptr<TextDisplay>(new TextDisplay{ player1->getBoard(), player2->getBoard() });
+
         } 
         // command: "rename"
         else if (command == "rename") {
