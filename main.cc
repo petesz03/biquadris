@@ -118,14 +118,12 @@ int main(int argc, char** args) {
         player2Level = std::shared_ptr<Level>(new Level4{});
     }
 
-    /*** Don't touch: ***/
     std::shared_ptr<Player> player1 = std::shared_ptr<Player>(new Player{ 1, player1Level, nullptr, nullptr, filePlayer1 });
     std::shared_ptr<Board> player1Board = std::shared_ptr<Board>(new Board{ player1, player1Level });
     player1->setBoard(player1Board);
     std::shared_ptr<Player> player2 = std::shared_ptr<Player>(new Player{ 2, player2Level, nullptr, player1, filePlayer2 });
     std::shared_ptr<Board> player2Board = std::shared_ptr<Board>(new Board{ player2, player2Level }); // Change depending on constructor of board
     player2->setBoard(player2Board);
-    /******/
 
     // Creating player1's text displays:
     std::shared_ptr<TextDisplay> textDisplay = std::shared_ptr<TextDisplay>(new TextDisplay{ player1Board, player2Board });
@@ -339,9 +337,11 @@ int main(int argc, char** args) {
             // Delete displays, detach done in destructors
 
             // Get new boards for player1 and player2:
-            player1->restart();
-            player2->restart();
+            Level1 = std::shared_ptr<Level(new Lvel0{filePlayer1});
 
+	    
+	    myBoard1 = std::shared_ptr<Board>(new Board(temp, myLevel));
+	    
             // Build new displays, attach done in constructors:
             if (graphics) {
                 graphicDisplay = std::shared_ptr<GraphicDisplay>(new GraphicDisplay{ player1->getBoard(), player2->getBoard() });

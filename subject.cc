@@ -10,7 +10,6 @@ Subject::Subject() {
     }
 }
 
-
 void Subject::attach(std::shared_ptr<DisplayObserver> ob){
     displayobservers.emplace_back(ob);
 }
