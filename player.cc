@@ -170,27 +170,22 @@ void Player::updateMaxScore() {
 // methods to perform moves to the current blocks
 void Player::makeMoveLeft() {
 	myBoard->moveLeft();
-	myBoard->render();
 }
 
 void Player::makeMoveRight() {
     myBoard->moveRight();
-    myBoard->render();
 }
 
 void Player::makeMoveDown() {
     myBoard->moveDown();
-    myBoard->render();
 }
 
 void Player::makeClockwiseTurn() {
     myBoard->clockwiseTurn();
-    myBoard->render();
 }
 
 void Player::makeCounterTurn() {
     myBoard->counterClockwiseTurn();
-    myBoard->render();
 }
 
 void Player::makeDrop() {
@@ -206,7 +201,6 @@ void Player::makeDrop() {
 	    std::cout << "player " << pid << "'s board is full" << std::endl;
 	    isOver = true;
     }
-    myBoard->render();
 }
 
 // Only used upon initiation: !!!

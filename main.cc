@@ -197,11 +197,6 @@ int main(int argc, char** args) {
             playerInPlay->makeCounterTurn();
         } else if (command == "drop") {
             playerInPlay->makeDrop();
-            if (playerInPlay->getIsOver()) {
-                (player1->getBoard())->render();
-                (player2->getBoard())->render();
-                break;
-            }
         } else if (command == "levelup") {
             playerInPlay->levelUp();
         } else if (command == "leveldown") {
@@ -235,16 +230,10 @@ int main(int argc, char** args) {
                 graphicDisplay = std::shared_ptr<GraphicDisplay>(new GraphicDisplay{ player1->getBoard(), player2->getBoard() });
             }
             textDisplay = std::shared_ptr<TextDisplay>(new TextDisplay{ player1->getBoard(), player2->getBoard() });
-
-            // Render
-            (player1->getBoard())->render();
         } else if (command == "newblock") {
             // Testing functions: (delete in end)
             std::shared_ptr<Block> newblock = std::shared_ptr<Block>(new Iblock{});
         } else if (command == "render") {
-            if (player1->getMyTurn()) { std::cout << "Player 1 moving" << std::endl; } else if (player2->getMyTurn()) { std::cout << "Player2 moving" << std::endl; } else { std::cout << "What is going on" << std::endl; }
-            (player1->getBoard())->render();
-            (player2->getBoard())->render();
         } else if (command.length() == 1) {
             // Create the specified block
             std::shared_ptr<Block> newblock = nullptr;
@@ -268,6 +257,9 @@ int main(int argc, char** args) {
             // Set currentBlock in Board
             boardInPlay->setCurrent(newblock);
         }
+        // Render
+        (player1->getBoard())->render();
+
         repetition--;
     }
     int player1HighScore = player1->getMaxScore();
