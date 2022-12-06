@@ -3,6 +3,7 @@
 #include "posn.h"
 #include "player.h"
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <vector>
 
@@ -26,16 +27,23 @@ void TextDisplay::setBlind(int player, bool blind){
 	}
 }
 void TextDisplay::notify(){
-    // Space have to change weith number of digits in score:
-    // level and score
-    std::cout << "Level:    " << b1->owner->getLevel() << "\t" << "Level:    " << b2->owner->getLevel() << std::endl;
-    std::cout << "Score:    " << b1->owner->getScore() << "\t" << "Score:    " << b2->owner->getScore() << std::endl;
+    // level
+    std::cout << "Level:" << std::setw(5) << std::setfill(' ') << b1->owner->getLevel() << "\t";
+    std::cout << "Level:" << std::setw(5) << std::setfill(' ') << b2->owner->getLevel() << std::endl;
+
+    // score
+    std::cout << "Score:" << std::setw(5) << std::setfill(' ') << b1->owner->getScore() << "\t";
+    std::cout << "Score:" << std::setw(5) << std::setfill(' ') << b2->owner->getScore() << std::endl;
+
+    // max score
+    std::cout << "Max Score:" << std::string(5, ' ') << "\t";
+    std::cout << "Max Score:" << std::string(5, ' ') << std::endl;
+    std::cout << std::setw(11) << std::setfill(' ') << b1->owner->getMaxScore() << "\t";
+    std::cout << std::setw(11) << std::setfill(' ') << b2->owner->getMaxScore() << std::endl;
 
     // first divider
-    for (int i = 0; i < 11; ++i) std::cout << '-';
-    std::cout << "\t";
-    for (int i = 0; i < 11; ++i) std::cout << '-';
-    std::cout << std::endl;
+    std::cout << std::string(11, '-') << "\t";
+    std::cout << std::string(11, '-') << std::endl;
 
     // print board
     for (int i = 0; i < 18; i++) {
@@ -59,10 +67,9 @@ void TextDisplay::notify(){
     }
 
     // second divider
-    for (int i = 0; i < 11; ++i) std::cout << '-';
-    std::cout << "\t";
-    for (int i = 0; i < 11; ++i) std::cout << '-';
-    std::cout << std::endl;
+    // first divider
+    std::cout << std::string(11, '-') << "\t";
+    std::cout << std::string(11, '-') << std::endl;
 
     // next block
     std::cout << "Next:      " << "\t" << "Next:      " << std::endl;
