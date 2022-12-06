@@ -8,10 +8,9 @@ class Board;
 
 class Level {
 protected:
-
+    int level;
 
 public:
-    int level;
     // ctor and virtual dtor for Level class
     Level(int level);
     virtual ~Level();
@@ -20,6 +19,9 @@ public:
     virtual Block* randomNextBlock(Board* subject) = 0;
     virtual Block* fileNextBlock(Board* subject) = 0;
     virtual void useFile(std::string file) = 0;
+
+    // field getter
+    int getLevel();
 
 };
 

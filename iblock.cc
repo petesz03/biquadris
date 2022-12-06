@@ -69,7 +69,7 @@ void Iblock::clockwiseturn() {
     the_board->grid[box3.y][box3.x] = item;
     the_board->grid[box4.y][box4.x] = item;
 
-    if (the_board->owners_level->level >= 3) {
+    if (the_board->owners_level->getLevel() >= 3) {
         the_board->grid[box1.y][box1.x] = ' ';
         the_board->grid[box2.y][box2.x] = ' ';
         the_board->grid[box3.y][box3.x] = ' ';
@@ -165,7 +165,7 @@ void Iblock::counterturn() {
     the_board->grid[box3.y][box3.x] = item;
     the_board->grid[box4.y][box4.x] = item;
 
-    if (the_board->owners_level->level >= 3) {
+    if (the_board->owners_level->getLevel() >= 3) {
         the_board->grid[box1.y][box1.x] = ' ';
         the_board->grid[box2.y][box2.x] = ' ';
         the_board->grid[box3.y][box3.x] = ' ';

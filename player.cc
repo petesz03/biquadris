@@ -23,7 +23,6 @@ Player::Player(
         maxScore{0},
         isOver{false},
         isMyTurn{false},
-        currLevel{0},
         myLevel{myLevel},
         myBoard{myBoard},
         opponent{opponent},
@@ -49,7 +48,7 @@ int Player::getScore() { return score; }
 
 int Player::getMaxScore() { return maxScore; }
 
-int Player::getLevel() { return currLevel; }
+int Player::getLevel() { return myLevel->getLevel(); }
 
 bool Player::getMyTurn() { return isMyTurn; }
 
@@ -59,6 +58,7 @@ std::string Player::getFileForLevel0(){ return fileForLevel0; };
 
 // methods to increase and decrease level
 void Player::levelUp() {
+    int currLevel = myLevel->getLevel();
     if (currLevel < 4) {
         delete myLevel;
         currLevel++;
@@ -84,6 +84,7 @@ void Player::levelUp() {
 }
 
 void Player::levelDown() {
+    int currLevel = myLevel->getLevel();
     if (currLevel > 0) {
         delete myLevel;
         currLevel--;
@@ -111,7 +112,6 @@ void Player::levelDown() {
 // method to restart the current game
 void Player::restart() {
     delete myLevel;
-    currLevel = 0;
     myLevel = new Level0{fileForLevel0};
     delete myBoard;
     myBoard = new Board(this, myLevel);

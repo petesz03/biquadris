@@ -97,7 +97,7 @@ void Block::moveleft() {
             }
             
         }
-        if (the_board->owners_level->level >= 3) {
+        if (the_board->owners_level->getLevel() >= 3) {
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
                 the_board->grid[box1.y][box1.x] = item;
                 the_board->grid[box2.y][box2.x] = item;
@@ -220,7 +220,7 @@ void Block::moveright() {
             }
             
         }
-        if (the_board->owners_level->level >= 3) {
+        if (the_board->owners_level->getLevel() >= 3) {
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
                 the_board->grid[box1.y][box1.x] = item;
                 the_board->grid[box2.y][box2.x] = item;
@@ -286,7 +286,7 @@ void Block::movedown() {
             return;
         }
     }
-    if (the_board->owners_level->level >= 3) {
+    if (the_board->owners_level->getLevel() >= 3) {
             if (box1.y == 17 || box2.y == 17 || box3.y == 17 || box4.y == 17) {
                 the_board->grid[box1.y][box1.x] = item;
                 the_board->grid[box2.y][box2.x] = item;

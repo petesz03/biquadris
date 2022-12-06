@@ -27,7 +27,6 @@ public:
     bool isMyTurn;
 
     // current level number, and a pointer to the Level object
-    int currLevel;
     Level* myLevel;
 
     // pointer to my board, Board object

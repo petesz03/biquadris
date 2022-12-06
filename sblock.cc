@@ -74,7 +74,7 @@ void Sblock::clockwiseturn() {
             setbox4(x_val + 2, y_val);
         }
     }
-    if (the_board->owners_level->level >= 3) {
+    if (the_board->owners_level->getLevel() >= 3) {
         the_board->grid[box1.y][box1.x] = ' ';
         the_board->grid[box2.y][box2.x] = ' ';
         the_board->grid[box3.y][box3.x] = ' ';
@@ -178,7 +178,7 @@ void Sblock::counterturn() {
             setbox4(x_val + 2, y_val);
         }
     }
-    if (the_board->owners_level->level >= 3) {
+    if (the_board->owners_level->getLevel() >= 3) {
         the_board->grid[box1.y][box1.x] = ' ';
         the_board->grid[box2.y][box2.x] = ' ';
         the_board->grid[box3.y][box3.x] = ' ';
