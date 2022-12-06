@@ -249,19 +249,19 @@ int main(int argc, char** args) {
             // Create the specified block
             std::shared_ptr<Block> newblock = nullptr;
             if (command == "I"){
-                newblock = std::shared_ptr<Block>(new Iblock{ boardInPlay });
+                newblock = std::shared_ptr<Block>(new Iblock{ boardInPlay.get() });
             } else if (command == "J"){
-                newblock = std::shared_ptr<Block>(new Jblock{ boardInPlay });
+                newblock = std::shared_ptr<Block>(new Jblock{ boardInPlay.get() });
             } else if (command == "L"){
-                newblock = std::shared_ptr<Block>(new Lblock{ boardInPlay });
+                newblock = std::shared_ptr<Block>(new Lblock{ boardInPlay.get() });
             } else if (command == "S"){
-                newblock = std::shared_ptr<Block>(new Sblock{ boardInPlay });
+                newblock = std::shared_ptr<Block>(new Sblock{ boardInPlay.get() });
             } else if (command == "Z"){
-                newblock = std::shared_ptr<Block>(new Zblock{ boardInPlay });
+                newblock = std::shared_ptr<Block>(new Zblock{ boardInPlay.get() });
             } else if (command == "T"){
-                newblock = std::shared_ptr<Block>(new Tblock{ boardInPlay });
+                newblock = std::shared_ptr<Block>(new Tblock{ boardInPlay.get() });
             } else if (command == "O"){
-                newblock = std::shared_ptr<Block>(new Oblock{ boardInPlay });
+                newblock = std::shared_ptr<Block>(new Oblock{ boardInPlay.get() });
             }
             std::shared_ptr<Block> curBlock = boardInPlay->getCurrentBlock();
             boardInPlay->detach(curBlock);

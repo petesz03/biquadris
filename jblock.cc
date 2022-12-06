@@ -1,7 +1,7 @@
 #include <vector>
 #include "jblock.h"
 
-Jblock::Jblock(std::shared_ptr<Board> the_board, int heaviness, bool candown, int dir):
+Jblock::Jblock(Board* the_board, int heaviness, bool candown, int dir):
     Block{'J', Posn{4,3}, Posn{5,3}, Posn{6,3}, Posn{4, 2}, heaviness, candown, the_board}, dir{dir} {}
 
 Jblock::~Jblock() {

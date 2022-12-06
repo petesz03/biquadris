@@ -9,7 +9,7 @@ class Oblock : public Block {
 public:
     int dir;
 public:
-    Oblock(std::shared_ptr<Board> the_board = nullptr, int heaviness = 0, bool candown = true, int dir = 1);
+    Oblock(Board* the_board = nullptr, int heaviness = 0, bool candown = true, int dir = 1);
     ~Oblock();
     void clockwiseturn();
     void counterturn();

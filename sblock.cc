@@ -1,6 +1,6 @@
 #include "sblock.h"
 
-Sblock::Sblock(std::shared_ptr<Board> the_board, int heaviness, bool candown, int dir):
+Sblock::Sblock(Board* the_board, int heaviness, bool candown, int dir):
     Block{'S', Posn{4,3}, Posn{5,3}, Posn{5,2}, Posn{6,2}, heaviness, candown, the_board}, dir{dir} {}
 
 

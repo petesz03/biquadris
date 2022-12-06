@@ -1,7 +1,7 @@
 #include <vector>
 #include "lblock.h"
 
-Lblock::Lblock(std::shared_ptr<Board> the_board, int heaviness, bool candown, int dir):
+Lblock::Lblock(Board* the_board, int heaviness, bool candown, int dir):
     Block{'L', Posn{4,3}, Posn{5,3}, Posn{6,3}, Posn{6,2}, heaviness, candown, the_board}, dir{dir} {}
 
 

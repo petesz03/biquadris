@@ -24,28 +24,28 @@ std::shared_ptr<Block> Level3::randomNextBlock(std::shared_ptr<Board> subject) {
     switch (random % 9 + 1)
     {
     case 1: case 2:
-        return std::shared_ptr<Block>(new Sblock(subject));
+        return std::shared_ptr<Block>(new Sblock(subject.get()));
         break;
     case 3: case 4:
-        return std::shared_ptr<Block>(new Zblock(subject));
+        return std::shared_ptr<Block>(new Zblock(subject.get()));
         break;
     case 5:
-        return std::shared_ptr<Block>(new Iblock(subject));
+        return std::shared_ptr<Block>(new Iblock(subject.get()));
         break;
     case 6:
-        return std::shared_ptr<Block>(new Jblock(subject));
+        return std::shared_ptr<Block>(new Jblock(subject.get()));
         break;
     case 7:
-        return std::shared_ptr<Block>(new Lblock(subject));
+        return std::shared_ptr<Block>(new Lblock(subject.get()));
         break;
     case 8:
-        return std::shared_ptr<Block>(new Oblock(subject));
+        return std::shared_ptr<Block>(new Oblock(subject.get()));
         break;
     case 9:
-        return std::shared_ptr<Block>(new Tblock(subject));
+        return std::shared_ptr<Block>(new Tblock(subject.get()));
         break;
     default:
-        return std::shared_ptr<Block>(new Iblock(subject));
+        return std::shared_ptr<Block>(new Iblock(subject.get()));
     }
 }
 
@@ -61,28 +61,28 @@ std::shared_ptr<Block> Level3::fileNextBlock(std::shared_ptr<Board> subject) {
 
     switch (next) {
         case 'I':
-            return std::shared_ptr<Block>(new Iblock(subject));
+            return std::shared_ptr<Block>(new Iblock(subject.get()));
             break;
         case 'J':
-            return std::shared_ptr<Block>(new Jblock(subject));
+            return std::shared_ptr<Block>(new Jblock(subject.get()));
             break;
         case 'L':
-            return std::shared_ptr<Block>(new Lblock(subject));
+            return std::shared_ptr<Block>(new Lblock(subject.get()));
             break;
         case 'O':
-            return std::shared_ptr<Block>(new Oblock(subject));
+            return std::shared_ptr<Block>(new Oblock(subject.get()));
             break;
         case 'S':
-            return std::shared_ptr<Block>(new Sblock(subject));
+            return std::shared_ptr<Block>(new Sblock(subject.get()));
             break;
         case 'Z':
-            return std::shared_ptr<Block>(new Zblock(subject));
+            return std::shared_ptr<Block>(new Zblock(subject.get()));
             break;
         case 'T':
-            return std::shared_ptr<Block>(new Tblock(subject));
+            return std::shared_ptr<Block>(new Tblock(subject.get()));
             break;
         default:
-            return std::shared_ptr<Block>(new Iblock(subject));
+            return std::shared_ptr<Block>(new Iblock(subject.get()));
     }
 
 }

@@ -15,7 +15,7 @@ public:
     Posn box4;
     int heaviness;
     bool candown;
-    std::shared_ptr<Board> the_board;
+    Board* the_board;
     int level_when_create;
 public:
     void moveleft();
@@ -26,7 +26,7 @@ public:
     virtual void clockwiseturn();
     virtual void counterturn();
     //ctor
-    Block(char, Posn, Posn, Posn, Posn, int, bool, std::shared_ptr<Board>);
+    Block(char, Posn, Posn, Posn, Posn, int, bool, Board*);
     //dtor
     virtual ~Block();
     void cantmove();

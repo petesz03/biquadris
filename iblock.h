@@ -8,7 +8,7 @@ class Iblock: public Block {
 public:
     int dir;
 public:
-    Iblock(std::shared_ptr<Board> the_board = nullptr, int heaviness = 0, bool candown = true, int dir = 1);
+    Iblock(Board* the_board = nullptr, int heaviness = 0, bool candown = true, int dir = 1);
     ~Iblock() override;
     void clockwiseturn();
     void counterturn();
