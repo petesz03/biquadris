@@ -215,57 +215,78 @@ int main(int argc, char** args) {
                 continue;
             }
         }
+        // command: "left"
         if (command == listOfCommands[0]) {
             playerInPlay->makeMoveLeft();
-        } else if (command == listOfCommands[1]) {
+        } 
+        // command: "right"
+        else if (command == listOfCommands[1]) {
             playerInPlay->makeMoveRight();
-        } else if (command == listOfCommands[2]) {
+        } 
+        // command: "down"
+        else if (command == listOfCommands[2]) {
             playerInPlay->makeMoveDown();
-        } else if (command == listOfCommands[3]) {
+        } 
+        // command: "clockwise"
+        else if (command == listOfCommands[3]) {
             playerInPlay->makeClockwiseTurn();
-        } else if (command == listOfCommands[4]) {
+        } 
+        // command: "counterclockwise"
+        else if (command == listOfCommands[4]) {
             playerInPlay->makeCounterTurn();
-        } else if (command == listOfCommands[5]) {
+        } 
+        // command: "drop"
+        else if (command == listOfCommands[5]) {
             playerInPlay->makeDrop();
-	    if (boardInPlay->getRowsCleared() >= 2){
-		    std::cout << "Congratulation! Player " << playerInPlay->getPid() << ", you have a special action! Please type in Blind, Heavy, or Force (followed by a blockType)" << std::endl;
-		    std::string specialAction = "";
-		    std::cin >> specialAction;
-		    if (specialAction == "Force" || specialAction == "force"){
-			    std::string blockToDrop;
-			    std::cin >> blockToDrop;
-			    if (playerInPlay->getPid() == 1){
-				    replaceBlock(player2, blockToDrop);
-			    }
-			    else{
-				    replaceBlock(player1, blockToDrop);
-			    }
-		    }
-		    else if (specialAction == "blind" || specialAction == "Blind"){
-			    boardInPlay->blind();
-		    } else if (specialAction == "heavy" || specialAction == "Heavy") {
-                if (playerInPlay->getPid() == 1){
-				    player2->getBoard()->isheavy = true;
-                    std::cout << "main:" <<player2->getBoard()->isheavy << std::endl;
-			    }
-			    else{
-				    player1->getBoard()->isheavy = true;
-			    }
+            if (boardInPlay->getRowsCleared() >= 2){
+                std::cout << "Congratulation! Player " << playerInPlay->getPid() << ", you have a special action! Please type in Blind, Heavy, or Force (followed by a blockType)" << std::endl;
+                std::string specialAction = "";
+                std::cin >> specialAction;
+                if (specialAction == "Force" || specialAction == "force"){
+                    std::string blockToDrop;
+                    std::cin >> blockToDrop;
+                    if (playerInPlay->getPid() == 1){
+                        replaceBlock(player2, blockToDrop);
+                    }
+                    else{
+                        replaceBlock(player1, blockToDrop);
+                    }
+                }
+                else if (specialAction == "blind" || specialAction == "Blind"){
+                    boardInPlay->blind();
+                } else if (specialAction == "heavy" || specialAction == "Heavy") {
+                    if (playerInPlay->getPid() == 1){
+                        player2->getBoard()->isheavy = true;
+                        std::cout << "main:" <<player2->getBoard()->isheavy << std::endl;
+                    }
+                    else{
+                        player1->getBoard()->isheavy = true;
+                    }
+                }
             }
-	    }
-	    boardInPlay->setRowsCleared(0);
-        } else if (command == listOfCommands[6]) {
+            boardInPlay->setRowsCleared(0);
+        } 
+        // command: "levelup"
+        else if (command == listOfCommands[6]) {
             playerInPlay->levelUp();
-        } else if (command == listOfCommands[7]) {
+        } 
+        // command: "leveldown"
+        else if (command == listOfCommands[7]) {
             playerInPlay->levelDown();
-        } else if (command == listOfCommands[8]) {
+        } 
+        // command: "norandom"
+        else if (command == listOfCommands[8]) {
             playerInPlay->setIsRandom(false);
             std::string file;
             std::cin >> file;
             (playerInPlay->myLevel)->useFile(file);
-        } else if (command == listOfCommands[9]) {
+        } 
+        // command: "random"
+        else if (command == listOfCommands[9]) {
             playerInPlay->setIsRandom(true);
-        } else if (command == listOfCommands[10]) {
+        } 
+        // command: "sequence"
+        else if (command == listOfCommands[10]) {
             std::string file;
             if (!readFromFile) { std::cin >> file; } else {
                 // If we are currently already reading from a file,
@@ -275,8 +296,9 @@ int main(int argc, char** args) {
             }
             readFromFile = true;
             commandfile.open(file, std::fstream::in);
-        }else if (command == listOfCommands[11]) {
-
+        } 
+        // command: "I", "J", "L", "S", "Z", "T", "O"
+        else if (command == listOfCommands[11]) {
 		    replaceBlock(playerInPlay, "I");
             // Create the specified block
             std::shared_ptr<Block> newblock = nullptr;
@@ -304,12 +326,16 @@ int main(int argc, char** args) {
 		    replaceBlock(playerInPlay, "O");
             // Create the specified block
             std::shared_ptr<Block> newblock = nullptr;
-        } else if (command == listOfCommands[18]) {
+        } 
+        // command: "list"
+        else if (command == listOfCommands[18]) {
             for (auto cmd: listOfCommands) {
                 std::cout << cmd << " ";
             }
             std::cout << "\n" << std::endl;
-        }  else if (command == listOfCommands[19]) {
+        }  
+        // command: "restart"
+        else if (command == listOfCommands[19]) {
             // Delete displays, detach done in destructors
 
             // Get new boards for player1 and player2:
@@ -321,7 +347,9 @@ int main(int argc, char** args) {
                 graphicDisplay = std::shared_ptr<GraphicDisplay>(new GraphicDisplay{ player1->getBoard(), player2->getBoard() });
             }
             textDisplay = std::shared_ptr<TextDisplay>(new TextDisplay{ player1->getBoard(), player2->getBoard() });
-        } else if (command == "rename") {
+        } 
+        // command: "rename"
+        else if (command == "rename") {
             std::string oldName, newName;
             std::cin >> oldName >> newName;
             auto it = std::find(listOfCommands.begin(), listOfCommands.end(), oldName);
