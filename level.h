@@ -1,6 +1,7 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 #include <string>
+#include <memory>
 
 class Player;
 class Block;
@@ -16,8 +17,8 @@ public:
     virtual ~Level();
 
     // method for generating the next block for the given player
-    virtual Block* randomNextBlock(Board* subject) = 0;
-    virtual Block* fileNextBlock(Board* subject) = 0;
+    virtual std::shared_ptr<Block> randomNextBlock(std::shared_ptr<Board> subject) = 0;
+    virtual std::shared_ptr<Block> fileNextBlock(std::shared_ptr<Board> subject) = 0;
     virtual void useFile(std::string file) = 0;
 
     // field getter

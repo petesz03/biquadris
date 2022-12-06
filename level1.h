@@ -16,8 +16,8 @@ public:
 	Level1();
     ~Level1();
 
-    Block* randomNextBlock(Board* subject);
-    Block* fileNextBlock(Board* subject);
+    std::shared_ptr<Block> randomNextBlock(std::shared_ptr<Board> subject);
+    std::shared_ptr<Block> fileNextBlock(std::shared_ptr<Board> subject);
     void useFile(std::string file);
 	
 };

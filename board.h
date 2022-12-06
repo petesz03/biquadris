@@ -17,7 +17,7 @@
 
 class Board: public Subject{
 public:
-    std::shared_ptr<Player> owner;
+    Player* owner;
     std::shared_ptr<Level> owners_level;
     std::shared_ptr<Block> currentBlock;
     std::shared_ptr<Block> nextBlock;

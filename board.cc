@@ -7,10 +7,11 @@
 #include "posn.h"
 
 Board::Board(std::shared_ptr<Player> owner1, std::shared_ptr<Level> owners_level1):
-    owner{owner1}, owners_level{owners_level1},
+    owners_level{owners_level1},
     isblind{false},
     isforce{false},
     isheavy{false} {
+    owner = owner1.get();
     currentBlock = std::shared_ptr<Block>(createBlock());
     nextBlock = std::shared_ptr<Block>(createBlock());
     attach(currentBlock);
@@ -19,13 +20,13 @@ Board::Board(std::shared_ptr<Player> owner1, std::shared_ptr<Level> owners_level
 
 std::shared_ptr<Block> Board::createBlock() {
     std::shared_ptr<Block> newBlock;
-
+    std::shared_ptr<Board> temp = std::shared_ptr<Board>(this);
     if (owner->israndom) {
-
-        newBlock = std::shared_ptr<Block>(owners_level->randomNextBlock(this));
+        
+        newBlock = std::shared_ptr<Block>(owners_level->randomNextBlock(temp));
     } else {
 
-        newBlock = std::shared_ptr<Block>(owners_level->fileNextBlock(this));
+        newBlock = std::shared_ptr<Block>(owners_level->fileNextBlock(temp));
     }
     return newBlock;
 }
@@ -186,7 +187,8 @@ void Board::clockwiseTurn(){ currentBlock->clockwiseturn();}
 void Board::counterClockwiseTurn(){ currentBlock->counterturn(); }
 
 void Board::setPlayer(std::shared_ptr<Player> newPlayer){
-	owner = newPlayer;
+    Player* temp = newPlayer.get();
+	owner = temp;
 }
 
 void Board::setLevel(std::shared_ptr<Level> newLevel){

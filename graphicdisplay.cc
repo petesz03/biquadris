@@ -9,7 +9,7 @@
 
 GraphicDisplay::GraphicDisplay(std::shared_ptr<Board> b1, std::shared_ptr<Board> b2):
     DisplayObserver{}, b1{b1}, b2{b2} {
-    Xwindow *win = new Xwindow{30*15,24*15};
+    std::shared_ptr<Xwindow> win = std::shared_ptr<Xwindow>(new Xwindow{30*15,24*15});
     w = std::shared_ptr<Xwindow>(win);
     std::shared_ptr<DisplayObserver> temp = std::shared_ptr<GraphicDisplay>(this);
 
@@ -69,8 +69,8 @@ void GraphicDisplay::placeTile(char pattern, int row, int col){
 }
 
 void GraphicDisplay::notify(){
-	std::shared_ptr<Player> player1 = b1->owner;
-	std::shared_ptr<Player> player2 = b2->owner;
+	Player* player1 = b1->owner;
+	Player* player2 = b2->owner;
 
 	// Define constants:
 	int p1Level = player1->getLevel();
@@ -109,7 +109,7 @@ void GraphicDisplay::notify(){
 	// Define constants:
 	int nextRowStart = 22;
 	int nextColStart = 0;
-	std::shared_ptr<Player> playerInPlay;
+	Player* playerInPlay;
 	std::shared_ptr<Board> boardInPlay;
 	char nextItem = ' ';
 
