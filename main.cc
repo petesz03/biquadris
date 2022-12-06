@@ -121,7 +121,6 @@ int main(int argc, char** args) {
             boardInPlay = player2->getBoard();
         }
         // If either's turn is finished, it is other's term	
-        std::cout << "[over]" << player1->getIsOver() << player2->getIsOver() << std::endl;
         if (player1->getIsOver() && player2->getIsOver()) {
             break;
         } else if (player1->getIsOver()) {
@@ -138,8 +137,6 @@ int main(int argc, char** args) {
             } else {
                 if (commandfile >> command) {} else { std::cin >> command; }
             }
-
-            std::cout << "[command] " << command << std::endl;
             // Read for input and call functions in playerInPlay,
                 //   WHILE checking for similar commands:
 
@@ -179,7 +176,6 @@ int main(int argc, char** args) {
             }
         }
 
-        std::cout << "[commandlength] " << command.length() << std::endl;
         if (command == "left") {
             playerInPlay->makeMoveLeft();
         } else if (command == "right") {
@@ -278,7 +274,6 @@ int main(int argc, char** args) {
             boardInPlay->setCurrent(newblock);
         }
         repetition--;
-        std::cout << "[repetition] " << repetition << std::endl;
     }
     int player1HighScore = player1->getMaxScore();
     int player2HighScore = player2->getMaxScore();
