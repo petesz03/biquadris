@@ -25,7 +25,8 @@
 #include "tblock.h"
 #include "textdisplay.h"
 #include "window.h"
-#include "zblock.h"   
+#include "zblock.h"  
+#include <memory> 
 
 class BlockObserver;
 
@@ -62,37 +63,37 @@ int main(int argc, char** args) {
     }
     /***** Setup *****/
     // Set up a level according to levelInitiated:
-    Level* player1Level;
-    Level* player2Level;
+    std::shared_ptr<Level> player1Level;
+    std::shared_ptr<Level> player2Level;
 
     if (levelInitiated == 0) {
-        player1Level = new Level0{ filePlayer1 };
-        player2Level = new Level0{ filePlayer2 };
+        player1Level = std::shared_ptr<Level>(new Level0{ filePlayer1 });
+        player2Level = std::shared_ptr<Level>(new Level0{ filePlayer2 });
     } else if (levelInitiated == 1) {
-        player1Level = new Level1{};
-        player2Level = new Level1{};
+        player1Level = std::shared_ptr<Level>(new Level1{});
+        player2Level = std::shared_ptr<Level>(new Level1{});
     } else if (levelInitiated == 2) {
-        player1Level = new Level2{};
-        player2Level = new Level2{};
+        player1Level = std::shared_ptr<Level>(new Level2{});
+        player2Level = std::shared_ptr<Level>(new Level2{});
     } else if (levelInitiated == 3) {
-        player1Level = new Level3{};
-        player2Level = new Level3{};
+        player1Level = std::shared_ptr<Level>(new Level3{});
+        player2Level = std::shared_ptr<Level>(new Level3{});
     } else {
-        player1Level = new Level4{};
-        player2Level = new Level4{};
+        player1Level = std::shared_ptr<Level>(new Level4{});
+        player2Level = std::shared_ptr<Level>(new Level4{});
     }
 
     /*** Don't touch: ***/
-    Player* player1 = new Player{ 1, player1Level, nullptr, nullptr, filePlayer1 };
-    Board* player1Board = new Board{ player1, player1Level };
+    std::shared_ptr<Player> player1 = std::shared_ptr<Player>(new Player{ 1, player1Level, nullptr, nullptr, filePlayer1 });
+    std::shared_ptr<Board> player1Board = std::shared_ptr<Board>(new Board{ player1, player1Level });
     player1->setBoard(player1Board);
-    Player* player2 = new Player{ 2, player2Level, nullptr, player1, filePlayer2 };
-    Board* player2Board = new Board{ player2, player2Level }; // Change depending on constructor of board
+    std::shared_ptr<Player> player2 = std::shared_ptr<Player>(new Player{ 2, player2Level, nullptr, player1, filePlayer2 });
+    std::shared_ptr<Board> player2Board = std::shared_ptr<Board>(new Board{ player2, player2Level }); // Change depending on constructor of board
     player2->setBoard(player2Board);
     /******/
 
     // Creating player1's text displays:
-    TextDisplay* textDisplay = new TextDisplay{ player1Board, player2Board };
+    std::shared_ptr<TextDisplay> textDisplay = std::shared_ptr<TextDisplay>(new TextDisplay{ player1Board, player2Board });
 
 
     // If the filePlayer fields are not empty, we have to replace level0's file:
@@ -100,9 +101,9 @@ int main(int argc, char** args) {
 
     // Creating player1 and player2's text displays:
 
-    GraphicDisplay* graphicDisplay = nullptr;
+    std::shared_ptr<GraphicDisplay> graphicDisplay = nullptr;
     if (graphics) {
-        graphicDisplay = new GraphicDisplay{ player1Board, player2Board };
+        graphicDisplay = std::shared_ptr<GraphicDisplay>(new GraphicDisplay{ player1Board, player2Board });
     }
 
     // Since player1's opponent's pointer is nullptr, change the pointer:
@@ -119,8 +120,8 @@ int main(int argc, char** args) {
     int repetition = 0;
     while (true) {
         // Set who is moving for future commands:
-        Player* playerInPlay;
-        Board* boardInPlay;
+        std::shared_ptr<Player> playerInPlay;
+        std::shared_ptr<Board> boardInPlay;
         if (player1->getMyTurn()) {
             playerInPlay = player1;
             boardInPlay = player1->getBoard();
@@ -224,8 +225,6 @@ int main(int argc, char** args) {
             commandfile.open(file, std::fstream::in);
         } else if (command == "restart") {
             // Delete displays, detach done in destructors
-            delete graphicDisplay;
-            delete textDisplay;
 
             // Get new boards for player1 and player2:
             player1->restart();
@@ -233,41 +232,40 @@ int main(int argc, char** args) {
 
             // Build new displays, attach done in constructors:
             if (graphics) {
-                graphicDisplay = new GraphicDisplay{ player1->getBoard(), player2->getBoard() };
+                graphicDisplay = std::shared_ptr<GraphicDisplay>(new GraphicDisplay{ player1->getBoard(), player2->getBoard() });
             }
-            textDisplay = new TextDisplay{ player1->getBoard(), player2->getBoard() };
+            textDisplay = std::shared_ptr<TextDisplay>(new TextDisplay{ player1->getBoard(), player2->getBoard() });
 
             // Render
             (player1->getBoard())->render();
         } else if (command == "newblock") {
             // Testing functions: (delete in end)
-            Block* newblock = new Iblock{};
+            std::shared_ptr<Block> newblock = std::shared_ptr<Block>(new Iblock{});
         } else if (command == "render") {
             if (player1->getMyTurn()) { std::cout << "Player 1 moving" << std::endl; } else if (player2->getMyTurn()) { std::cout << "Player2 moving" << std::endl; } else { std::cout << "What is going on" << std::endl; }
             (player1->getBoard())->render();
             (player2->getBoard())->render();
         } else if (command.length() == 1) {
             // Create the specified block
-            Block* newblock = nullptr;
+            std::shared_ptr<Block> newblock = nullptr;
             if (command == "I"){
-                newblock = new Iblock{ boardInPlay };
+                newblock = std::shared_ptr<Block>(new Iblock{ boardInPlay });
             } else if (command == "J"){
-                newblock = new Jblock{ boardInPlay };
+                newblock = std::shared_ptr<Block>(new Jblock{ boardInPlay });
             } else if (command == "L"){
-                newblock = new Lblock{ boardInPlay };
+                newblock = std::shared_ptr<Block>(new Lblock{ boardInPlay });
             } else if (command == "S"){
-                newblock = new Sblock{ boardInPlay };
+                newblock = std::shared_ptr<Block>(new Sblock{ boardInPlay });
             } else if (command == "Z"){
-                newblock = new Zblock{ boardInPlay };
+                newblock = std::shared_ptr<Block>(new Zblock{ boardInPlay });
             } else if (command == "T"){
-                newblock = new Tblock{ boardInPlay };
+                newblock = std::shared_ptr<Block>(new Tblock{ boardInPlay });
             } else if (command == "O"){
-                newblock = new Oblock{ boardInPlay };
+                newblock = std::shared_ptr<Block>(new Oblock{ boardInPlay });
             }
-            Block* curBlock = boardInPlay->getCurrentBlock();
+            std::shared_ptr<Block> curBlock = boardInPlay->getCurrentBlock();
             boardInPlay->detach(curBlock);
             // Delete the old "currentBlock" in Board:
-            delete curBlock;
             boardInPlay->attach(curBlock);
             // Set currentBlock in Board
             boardInPlay->setCurrent(newblock);

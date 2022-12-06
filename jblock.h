@@ -9,7 +9,7 @@ class Jblock : public Block {
 public:
     int dir;
 public:
-    Jblock(Board* the_board = nullptr, int heaviness = 0, bool candown = true, int dir = 1);
+    Jblock(std::shared_ptr<Board> the_board = nullptr, int heaviness = 0, bool candown = true, int dir = 1);
     ~Jblock();
     void clockwiseturn();
     void counterturn();

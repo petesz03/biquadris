@@ -9,7 +9,7 @@ class Zblock : public Block {
 public:
     int dir;
 public:
-    Zblock(Board* the_board = nullptr, int heaviness = 0, bool candown = true, int dir = 1);
+    Zblock(std::shared_ptr<Board> the_board = nullptr, int heaviness = 0, bool candown = true, int dir = 1);
     ~Zblock();
     void clockwiseturn();
     void counterturn();

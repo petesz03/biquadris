@@ -9,12 +9,13 @@
 #include "level3.h"
 #include "level4.h"
 #include <iostream>
+#include <memory>
 
 Player::Player(
     int pid,
-    Level* myLevel,
-    Board* myBoard,
-    Player* opponent,
+    std::shared_ptr<Level> myLevel,
+    std::shared_ptr<Board> myBoard,
+    std::shared_ptr<Player> opponent,
     std::string fileForLevel0): 
         israndom{true},
         pid{pid},
@@ -29,11 +30,11 @@ Player::Player(
         fileForLevel0{fileForLevel0} {}
 
 Player::~Player() {
-    delete myLevel;
-    delete myBoard;
 }
 
-void Player::setOpponent(Player* opponent){ this->opponent = opponent; }
+void Player::setOpponent(std::shared_ptr<Player> opponent){ 
+    this->opponent = opponent;
+}
 
 void Player::setTurn(bool turn){ isMyTurn = turn; }
 
@@ -60,61 +61,58 @@ std::string Player::getFileForLevel0(){ return fileForLevel0; };
 void Player::levelUp() {
     int currLevel = myLevel->getLevel();
     if (currLevel < 4) {
-        delete myLevel;
         currLevel++;
         switch (currLevel)
         {
         case 1:
-            myLevel = new Level1{};
+            myLevel = std::shared_ptr<Level>(new Level1{});
             break;
         case 2:
-            myLevel = new Level2{};
+            myLevel = std::shared_ptr<Level>(new Level2{});
             break;
         case 3:
-            myLevel = new Level3{};
+            myLevel = std::shared_ptr<Level>(new Level3{});
             break;
         case 4:
-            myLevel = new Level4{};
+            myLevel = std::shared_ptr<Level>(new Level4{});
             break;
         default:
             break;
         }
     }
-    myBoard->owners_level = myLevel;
+    myBoard->owners_level = std::shared_ptr<Level>(myLevel);
 }
 
 void Player::levelDown() {
     int currLevel = myLevel->getLevel();
     if (currLevel > 0) {
-        delete myLevel;
         currLevel--;
         switch (currLevel)
         {
         case 0:
-            myLevel = new Level0(fileForLevel0);
+            myLevel = std::shared_ptr<Level>(new Level0(fileForLevel0));
             break;
         case 1:
-            myLevel = new Level1();
+            myLevel = std::shared_ptr<Level>(new Level1());
             break;
         case 2:
-            myLevel = new Level2();
+            myLevel = std::shared_ptr<Level>(new Level2());
             break;
         case 3:
-            myLevel = new Level3();
+            myLevel = std::shared_ptr<Level>(new Level3());
             break;
         default:
             break;
         }
     }
-    myBoard->owners_level = myLevel;
+    myBoard->owners_level = std::shared_ptr<Level>(myLevel);
 }
 
 // method to restart the current game
 void Player::restart() {
-    delete myLevel;
-    myLevel = new Level0{fileForLevel0};
-    delete myBoard;
-    myBoard = new Board(this, myLevel);
+    myLevel = std::shared_ptr<Level>(new Level0{fileForLevel0});
+    std::shared_ptr<Player> temp = std::shared_ptr<Player>(this);
+    myBoard = std::shared_ptr<Board>(new Board(temp, myLevel));
     count = 0;
     score = 0;
 }
@@ -145,38 +143,6 @@ void Player::setHeavy() {
     myBoard->isheavy = true;
 }
 
-/*
-void Player::setCurrBlockchar(char blockType) {
-    isForce = true;
-    delete currBlcok;
-    
-    switch (blockType) {
-        case "I":
-            currBlock = new IBlock();
-            break;
-        case "J":
-            currBlock = new JBlock();
-            break;
-        case "L":
-            currBlock = new LBlock();
-            break;
-        case "O":
-            currBlock = new OBlock();
-            break;
-        case "S":
-            currBlock = new SBlock();
-            break;
-        case "Z":
-            currBlock = new ZBlock();
-            break;
-        case "T":
-            currBlock = new TBlock();
-            break;
-        default:
-            currBlock = new IBlock();
-    }
-}
-*/
 
 void Player::unsetBlind() {
     myBoard->unsetBlind(pid);
@@ -244,11 +210,11 @@ void Player::makeDrop() {
 }
 
 // Only used upon initiation: !!!
-void Player::setBoard(Board* newBoard){
+void Player::setBoard(std::shared_ptr<Board> newBoard){
 	myBoard = newBoard;
 }
 
-Board* Player::getBoard(){
+std::shared_ptr<Board> Player::getBoard(){
 	return myBoard;
 }
 

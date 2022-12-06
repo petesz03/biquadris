@@ -1,6 +1,7 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 #include <string>
+#include <memory>
 
 class Level;
 class Board;
@@ -27,13 +28,13 @@ public:
     bool isMyTurn;
 
     // current level number, and a pointer to the Level object
-    Level* myLevel;
+    std::shared_ptr<Level> myLevel;
 
     // pointer to my board, Board object
-    Board* myBoard;
+    std::shared_ptr<Board> myBoard;
 
     // pointer to the opponent player, player Opponent
-    Player* opponent;
+    std::shared_ptr<Player> opponent;
 
     // whether special action is triggered
 
@@ -45,17 +46,17 @@ public:
     // ctor and dtor
     Player(
         int pid,
-        Level* myLevel,
-        Board* myBoard,
-        Player* opponent,
+        std::shared_ptr<Level> myLevel,
+        std::shared_ptr<Board> myBoard,
+        std::shared_ptr<Player> opponent,
 	std::string fileForLevel0);
     ~Player();
 
     // function to change the status:
-    void setOpponent(Player* opponent);
+    void setOpponent(std::shared_ptr<Player> opponent);
     void setTurn(bool turn);
     void setFileForLevel0(std::string file);
-    void setBoard(Board* setBoard); // Only used during initiation
+    void setBoard(std::shared_ptr<Board> setBoard); // Only used during initiation
     void setIsOver(bool over);
     // retrieve player information
     int getPid();
@@ -65,7 +66,7 @@ public:
     bool getMyTurn();
     bool getIsOver();
     std::string getFileForLevel0();
-    Board* getBoard();
+    std::shared_ptr<Board> getBoard();
 
 
     // generate punish block if in level 4

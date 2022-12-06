@@ -13,70 +13,39 @@
 #include <vector>
 #include "level.h"
 #include "subject.h"
+#include <memory>
 
 class Board: public Subject{
 public:
-    Player* owner;
-    Level* owners_level;
-    Block* currentBlock;
-    Block* nextBlock;
+    std::shared_ptr<Player> owner;
+    std::shared_ptr<Level> owners_level;
+    std::shared_ptr<Block> currentBlock;
+    std::shared_ptr<Block> nextBlock;
     //special action
     bool isblind;
     bool isforce;
     bool isheavy;
-    /*
-
-    //all blocks
-    std::vector<Block*> v_all;
     
-    //vector of each row
-    std::vector<Block*> row0;
-    std::vector<Block*> row1;
-    std::vector<Block*> row2;
-    std::vector<Block*> row3;
-    std::vector<Block*> row4;
-    std::vector<Block*> row5;
-    std::vector<Block*> row6;
-    std::vector<Block*> row7;
-    std::vector<Block*> row8;
-    std::vector<Block*> row9;
-    std::vector<Block*> row10;
-    std::vector<Block*> row11;
-    std::vector<Block*> row12;
-    std::vector<Block*> row13;
-    std::vector<Block*> row14;
-    std::vector<Block*> row15;
-    std::vector<Block*> row16;
-    std::vector<Block*> row17;
-    */
-    
-    /*
-    //max height
-    int max_height;
-    std::vector<int> to_free;
-    int num_of_full;
-    bool start_action;
-    */
 
 public:
-    Board(Player* owner, Level* owners_level);
+    Board(std::shared_ptr<Player> owner, std::shared_ptr<Level> owners_level);
     ~Board();
     void checkfullrow();
     void clearRow(int row);
-    Block* createBlock();
-    Block* getCurrentBlock();
+    std::shared_ptr<Block> createBlock();
+    std::shared_ptr<Block> getCurrentBlock();
     char charAt(int row, int col);
-    Block* getNextBlock();
-    void setCurrent(Block* newBlock);
-    void setNext(Block* newBlock);
+    std::shared_ptr<Block> getNextBlock();
+    void setCurrent(std::shared_ptr<Block> newBlock);
+    void setNext(std::shared_ptr<Block> newBlock);
     void render();
-    void setPlayer(Player* newPlayer);
-    void setLevel(Level* newLevel);
+    void setPlayer(std::shared_ptr<Player> newPlayer);
+    void setLevel(std::shared_ptr<Level> newLevel);
     bool checkLose();
-    void attach(Block* newBlock) override;
-    void detach(Block* newBlock) override;
-    void attach(DisplayObserver* ob) override;
-    void detach(DisplayObserver* ob) override;
+    void attach(std::shared_ptr<Block> newBlock) override;
+    void detach(std::shared_ptr<Block> newBlock) override;
+    void attach(std::shared_ptr<DisplayObserver> ob) override;
+    void detach(std::shared_ptr<DisplayObserver> ob) override;
     void unsetBlind(int pid);
     // Move block functions:
     void moveLeft();

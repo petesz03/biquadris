@@ -1,6 +1,7 @@
 #ifndef _DISPLAYOBSERVER_H_
 #define _DISPLAYOBSERVER_H_
 
+#include <memory>
 class Subject;
 
 class DisplayObserver{

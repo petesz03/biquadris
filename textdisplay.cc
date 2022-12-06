@@ -7,15 +7,17 @@
 #include <string>
 #include <vector>
 
-TextDisplay::TextDisplay(Board* b1, Board* b2):
+TextDisplay::TextDisplay(std::shared_ptr<Board> b1, std::shared_ptr<Board> b2):
     DisplayObserver{}, b1{b1}, b2{b2}{
-    b1->attach(this);
-    b2->attach(this);
+    std::shared_ptr<DisplayObserver> temp = std::shared_ptr<TextDisplay>(this);
+    b1->attach(temp);
+    b2->attach(temp);
     }
 
 TextDisplay::~TextDisplay(){
-    b1->detach( this );
-    b2->detach( this );
+    std::shared_ptr<DisplayObserver> temp = std::shared_ptr<TextDisplay>(this);
+    b1->detach( temp );
+    b2->detach( temp );
 }
 
 void TextDisplay::setBlind(int player, bool blind){

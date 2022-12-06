@@ -2,17 +2,18 @@
 #define _GRAPHICDISPLAY_H_
 #include "displayobserver.h"
 #include "window.h"
+#include <memory>
 
 class Board;
 class Player;
 
 class GraphicDisplay: public DisplayObserver{
-	Board* b1;
-	Board* b2;
-	Xwindow* w;
+	std::shared_ptr<Board> b1;
+	std::shared_ptr<Board> b2;
+	std::shared_ptr<Xwindow> w;
 
 	public:
-	GraphicDisplay(Board* b1, Board* b2);
+	GraphicDisplay(std::shared_ptr<Board> b1, std::shared_ptr<Board> b2);
 	void notify() override;
 	~GraphicDisplay();
 	void setBlind(int player, bool blind);

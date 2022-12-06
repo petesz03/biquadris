@@ -11,11 +11,11 @@ Subject::Subject() {
 }
 
 
-void Subject::attach(DisplayObserver* ob){
+void Subject::attach(std::shared_ptr<DisplayObserver> ob){
     displayobservers.emplace_back(ob);
 }
 
-void Subject::detach(DisplayObserver* ob){
+void Subject::detach(std::shared_ptr<DisplayObserver> ob){
     for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
         if (*it == ob){
             displayobservers.erase(it);

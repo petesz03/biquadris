@@ -6,26 +6,26 @@
 #include <iostream>
 #include "posn.h"
 
-Board::Board(Player* owner, Level* owners_level):
-    owner{owner}, owners_level{owners_level},
+Board::Board(std::shared_ptr<Player> owner1, std::shared_ptr<Level> owners_level1):
+    owner{owner1}, owners_level{owners_level1},
     isblind{false},
     isforce{false},
     isheavy{false} {
-    currentBlock = createBlock();
-    nextBlock = createBlock();
+    currentBlock = std::shared_ptr<Block>(createBlock());
+    nextBlock = std::shared_ptr<Block>(createBlock());
     attach(currentBlock);
     render();
 }
 
-Block* Board::createBlock() {
-    Block* newBlock;
+std::shared_ptr<Block> Board::createBlock() {
+    std::shared_ptr<Block> newBlock;
 
     if (owner->israndom) {
 
-        newBlock = owners_level->randomNextBlock(this);
+        newBlock = std::shared_ptr<Block>(owners_level->randomNextBlock(this));
     } else {
 
-        newBlock = owners_level->fileNextBlock(this);
+        newBlock = std::shared_ptr<Block>(owners_level->fileNextBlock(this));
     }
     return newBlock;
 }
@@ -33,10 +33,6 @@ Block* Board::createBlock() {
 // CLEARING THE BOARD CLEARS ALLLLLL THE BLOCKS (NOT THE PLAYER AND LEVEL):
 Board::~Board(){
     // current block in blcoks, also deleted
-    for (auto it = blocks.begin(); it != blocks.end(); it++){
-        delete *it;
-    }
-    delete nextBlock;
     // Note that owner and owners_level should be deleted in player when it returns.
     // We cannot delete it twice.
 }
@@ -83,9 +79,7 @@ void Board::unsetBlind(int pid){
 
 // Add score additions in here somehow!!
 void Board::clearRow(int row){
-    
-    std::vector<Block*> temp;
-    std::vector<Block*> to_delete;
+    std::vector<std::shared_ptr<Block>> temp;
     for (auto a : blocks) {
         if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
 
@@ -96,7 +90,6 @@ void Board::clearRow(int row){
                 if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
                     int score = (a->level_when_create + 1) * (a->level_when_create + 1);
                     a->the_board->owner->updateScore(score);
-                    to_delete.emplace_back(a);
                 } else {
                     temp.emplace_back(a);
                 }
@@ -107,7 +100,6 @@ void Board::clearRow(int row){
                 if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
                     int score = (a->level_when_create + 1) * (a->level_when_create + 1);
                     a->the_board->owner->updateScore(score);
-                    to_delete.emplace_back(a);
                 } else {
                     temp.emplace_back(a);
                 }
@@ -118,7 +110,6 @@ void Board::clearRow(int row){
                 if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
                     int score = (a->level_when_create + 1) * (a->level_when_create + 1);
                     a->the_board->owner->updateScore(score);
-                    to_delete.emplace_back(a);
                 } else {
                     temp.emplace_back(a);
                 }
@@ -129,7 +120,6 @@ void Board::clearRow(int row){
                 if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
                     int score = (a->level_when_create + 1) * (a->level_when_create + 1);
                     a->the_board->owner->updateScore(score);
-                    to_delete.emplace_back(a);
                 } else {
                     temp.emplace_back(a);
                 }
@@ -138,9 +128,6 @@ void Board::clearRow(int row){
         }
     }
     blocks = temp;
-    for (auto a : to_delete) {
-        delete a;
-    }
 	
     for (int i = 0; i < 11; i++) {
         grid[row][i] = ' ';
@@ -155,27 +142,17 @@ void Board::clearRow(int row){
 }
 
 char Board::charAt(int row, int col){
-    /*
-    for (auto it = blocks.begin(); it != blocks.end(); it++){
-        std::vector<Posn> vec{(*it)->box1, (*it)->box2, (*it)->box3, (*it)->box4};
-        // iterate through all 4 Posns:
-        for (auto vecIt = vec.begin(); vecIt != vec.end(); vecIt++){
-            if ((vecIt)->x == col && (vecIt)->y == row){ return (*it)->getItem(); }
-        }
-    }
-    return ' ';
-    */
    return grid[row][col];
 }
 
-Block* Board::getCurrentBlock() {
+std::shared_ptr<Block> Board::getCurrentBlock() {
     return currentBlock;
 }
-Block* Board::getNextBlock(){
+std::shared_ptr<Block> Board::getNextBlock(){
     return nextBlock;
 }
 
-void Board::setCurrent(Block* newBlock){
+void Board::setCurrent(std::shared_ptr<Block> newBlock){
     currentBlock = newBlock;
     return;
 }
@@ -201,22 +178,22 @@ void Board::drop(){
 	// Create new blocks:
 	currentBlock = nextBlock;
 	nextBlock = createBlock();
-    	attach(currentBlock);
+    attach(currentBlock);
 }
 
 void Board::clockwiseTurn(){ currentBlock->clockwiseturn();}
 
 void Board::counterClockwiseTurn(){ currentBlock->counterturn(); }
 
-void Board::setPlayer(Player* newPlayer){
+void Board::setPlayer(std::shared_ptr<Player> newPlayer){
 	owner = newPlayer;
 }
 
-void Board::setLevel(Level* newLevel){
+void Board::setLevel(std::shared_ptr<Level> newLevel){
 	owners_level = newLevel;
 }
 
-void Board::setNext(Block* newBlock){
+void Board::setNext(std::shared_ptr<Block> newBlock){
 	nextBlock = newBlock;
 }
 
@@ -227,7 +204,7 @@ bool Board::checkLose(){
 	return false;
 }
 
-void Board::attach(Block* newBlock){
+void Board::attach(std::shared_ptr<Block> newBlock){
 	Posn boxA = newBlock->box1;
 	Posn boxB = newBlock->box2;
 	Posn boxC = newBlock->box3;
@@ -247,7 +224,7 @@ void Board::attach(Block* newBlock){
 	blocks.emplace_back(newBlock);
 }
 
-void Board::detach(Block* oldBlock){
+void Board::detach(std::shared_ptr<Block> oldBlock){
 	Posn boxA = oldBlock->box1;
 	Posn boxB = oldBlock->box2;
 	Posn boxC = oldBlock->box3;
@@ -259,11 +236,11 @@ void Board::detach(Block* oldBlock){
 	}
 }
 
-void Board::attach(DisplayObserver* ob){
+void Board::attach(std::shared_ptr<DisplayObserver> ob){
     displayobservers.emplace_back(ob);
 }
 
-void Board::detach(DisplayObserver* ob){
+void Board::detach(std::shared_ptr<DisplayObserver> ob){
     for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
         if (*it == ob){
             displayobservers.erase(it);
