@@ -128,6 +128,15 @@ void GraphicDisplay::notify(){
 	if (boardInPlay->getNextBlock() != nullptr){
 		nextItem = (boardInPlay->getNextBlock())->getItem();
 	}
+	placeTile(' ', nextRowStart, nextColStart);
+	placeTile(' ', nextRowStart, nextColStart+1);
+	placeTile(' ', nextRowStart, nextColStart+2);
+	placeTile(' ', nextRowStart, nextColStart+3);
+	placeTile(' ', nextRowStart+1, nextColStart);
+	placeTile(' ', nextRowStart+1, nextColStart+1);
+	placeTile(' ', nextRowStart+1, nextColStart+2);
+	placeTile(' ', nextRowStart+1, nextColStart+3);
+
 	
 	// Place tiles accordingly:
 	switch(nextItem){
