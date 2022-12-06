@@ -91,11 +91,11 @@ Block* Level3::fileNextBlock(Board* subject) {
 // method to take its blocks in sequence from the files sequence1.txt 
 // (for player 1) and sequence2.txt (for player 2), or other file with 
 // name specified
-void Level3::useFile(string file) {
+void Level3::useFile(string filename) {
     blockIndex = 0;
     file.clear();
 
-    ifstream seq{file};
+    ifstream seq{filename};
     char curr;
 
     while (seq >> curr) {

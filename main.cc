@@ -166,7 +166,7 @@ int main(int argc, char** args) {
             }
             std::vector<std::string> listOfCommands = {
                 "left", "right", "down", "clockwise","counterclockwise", "drop", "levelup", "leveldown", 
-                "norandom", "random","sequence", "I", "J", "L", "S", "Z", "T", "O", "restart"
+                "norandom", "random","sequence", "I", "J", "L", "S", "Z", "T", "O", "restart", "render"
                 };
             // Check how many different types of command that "command" matches to:
             for (auto it = listOfCommands.begin(); it != listOfCommands.end(); it++) {

@@ -27,7 +27,7 @@ public:
 	// method to take its blocks in sequence from the files sequence1.txt 
     // (for player 1) and sequence2.txt (for player 2), or other file with 
     // name specified
-	void useFile(std::string file);
+	void useFile(std::string filename);
 	
 };
 
