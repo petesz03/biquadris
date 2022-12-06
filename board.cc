@@ -13,21 +13,20 @@ Board::Board(std::shared_ptr<Player> owner1, std::shared_ptr<Level> owners_level
     isheavy{false},
     rowsCleared{0}{
     owner = owner1.get();
-    currentBlock = std::shared_ptr<Block>(createBlock());
-    nextBlock = std::shared_ptr<Block>(createBlock());
+    currentBlock = createBlock();
+    nextBlock = createBlock();
     attach(currentBlock);
     render();
 }
 
 std::shared_ptr<Block> Board::createBlock() {
     std::shared_ptr<Block> newBlock;
-    std::shared_ptr<Board> temp = std::shared_ptr<Board>(this);
     if (owner->israndom) {
         
-        newBlock = std::shared_ptr<Block>(owners_level->randomNextBlock(temp));
+        newBlock = owners_level->randomNextBlock(this);
     } else {
 
-        newBlock = std::shared_ptr<Block>(owners_level->fileNextBlock(temp));
+        newBlock = owners_level->fileNextBlock(this);
     }
     return newBlock;
 }

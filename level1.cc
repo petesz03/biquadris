@@ -13,7 +13,7 @@ Level1::Level1(): Level(1) {}
 
 Level1::~Level1() {}
 
-std::shared_ptr<Block> Level1::randomNextBlock(std::shared_ptr<Board> subject) {
+std::shared_ptr<Block> Level1::randomNextBlock(Board* board) {
 	// generate a random number
 	int random = rand();
 
@@ -21,32 +21,32 @@ std::shared_ptr<Block> Level1::randomNextBlock(std::shared_ptr<Board> subject) {
     switch (random % 12 + 1)
     {
     case 1:
-        return std::shared_ptr<Block>(new Sblock(subject.get()));
+        return std::shared_ptr<Block>(new Sblock(board));
         break;
     case 2:
-        return std::shared_ptr<Block>(new Zblock(subject.get()));
+        return std::shared_ptr<Block>(new Zblock(board));
         break;
     case 3: case 4:
-        return std::shared_ptr<Block>(new Iblock(subject.get()));
+        return std::shared_ptr<Block>(new Iblock(board));
         break;
     case 5: case 6:
-        return std::shared_ptr<Block>(new Jblock(subject.get()));
+        return std::shared_ptr<Block>(new Jblock(board));
         break;
     case 7: case 8:
-        return std::shared_ptr<Block>(new Lblock(subject.get()));
+        return std::shared_ptr<Block>(new Lblock(board));
         break;
     case 9: case 10:
-        return std::shared_ptr<Block>(new Oblock(subject.get()));
+        return std::shared_ptr<Block>(new Oblock(board));
         break;
     case 11: case 12:
-        return std::shared_ptr<Block>(new Tblock(subject.get()));
+        return std::shared_ptr<Block>(new Tblock(board));
         break;
     default:
-        return std::shared_ptr<Block>(new Iblock(subject.get()));
+        return std::shared_ptr<Block>(new Iblock(board));
     }
 }
 
-std::shared_ptr<Block> Level1::fileNextBlock(std::shared_ptr<Board> subject) {
+std::shared_ptr<Block> Level1::fileNextBlock(Board* board) {
 	// generate a random number
 	int random = rand();
 
@@ -54,28 +54,28 @@ std::shared_ptr<Block> Level1::fileNextBlock(std::shared_ptr<Board> subject) {
     switch (random % 12 + 1)
     {
     case 1:
-        return std::shared_ptr<Block>(new Sblock(subject.get()));
+        return std::shared_ptr<Block>(new Sblock(board));
         break;
     case 2:
-        return std::shared_ptr<Block>(new Zblock(subject.get()));
+        return std::shared_ptr<Block>(new Zblock(board));
         break;
     case 3: case 4:
-        return std::shared_ptr<Block>(new Iblock(subject.get()));
+        return std::shared_ptr<Block>(new Iblock(board));
         break;
     case 5: case 6:
-        return std::shared_ptr<Block>(new Jblock(subject.get()));
+        return std::shared_ptr<Block>(new Jblock(board));
         break;
     case 7: case 8:
-        return std::shared_ptr<Block>(new Lblock(subject.get()));
+        return std::shared_ptr<Block>(new Lblock(board));
         break;
     case 9: case 10:
-        return std::shared_ptr<Block>(new Oblock(subject.get()));
+        return std::shared_ptr<Block>(new Oblock(board));
         break;
     case 11: case 12:
-        return std::shared_ptr<Block>(new Tblock(subject.get()));
+        return std::shared_ptr<Block>(new Tblock(board));
         break;
     default:
-        return std::shared_ptr<Block>(new Iblock(subject.get()));
+        return std::shared_ptr<Block>(new Iblock(board));
     }
 }
 

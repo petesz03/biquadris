@@ -22,8 +22,8 @@ public:
     Level0(std::string file);
     ~Level0();
 
-    std::shared_ptr<Block> fileNextBlock(std::shared_ptr<Board> subject);
-    std::shared_ptr<Block> randomNextBlock(std::shared_ptr<Board> subject);
+    std::shared_ptr<Block> fileNextBlock(Board* board);
+    std::shared_ptr<Block> randomNextBlock(Board* board);
 
     // method to take its blocks in sequence from the files sequence1.txt 
     // (for player 1) and sequence2.txt (for player 2), or other file with 
