@@ -17,7 +17,7 @@ public:
     void notifyObservers();
     virtual void attach(std::shared_ptr<DisplayObserver> ob);
     virtual void attach(std::shared_ptr<Block> newBlock) = 0;
-    virtual void detach(std::shared_ptr<DisplayObserver> ob);
+    virtual void detach(DisplayObserver* ob);
     virtual void detach(std::shared_ptr<Block> newBlock) = 0;
     virtual ~Subject() = default;
 

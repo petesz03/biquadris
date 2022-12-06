@@ -15,9 +15,8 @@ TextDisplay::TextDisplay(std::shared_ptr<Board> b1, std::shared_ptr<Board> b2):
     }
 
 TextDisplay::~TextDisplay(){
-    std::shared_ptr<DisplayObserver> temp = std::shared_ptr<TextDisplay>(this);
-    b1->detach( temp );
-    b2->detach( temp );
+    b1->detach( this );
+    b2->detach( this );
 }
 
 void TextDisplay::setBlind(int player, bool blind){
