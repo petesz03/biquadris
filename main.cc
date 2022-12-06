@@ -30,6 +30,34 @@
 
 class BlockObserver;
 
+
+void replaceBlock(std::shared_ptr<Player> player, std::string command){
+	// Create the specified block            
+	std::shared_ptr<Block> newblock = nullptr;
+	Board*  boardInPlay = player->getBoard().get();
+
+	if (command == "I"){                
+		newblock = std::shared_ptr<Block>(new Iblock{ boardInPlay });            
+	} else if (command == "J"){                
+		newblock = std::shared_ptr<Block>(new Jblock{ boardInPlay });
+	} else if (command == "L"){
+		newblock = std::shared_ptr<Block>(new Lblock{ boardInPlay });
+	} else if (command == "S"){
+		newblock = std::shared_ptr<Block>(new Sblock{ boardInPlay });
+	} else if (command == "Z"){
+                newblock = std::shared_ptr<Block>(new Zblock{ boardInPlay });
+	} else if (command == "T"){
+                newblock = std::shared_ptr<Block>(new Tblock{ boardInPlay });            
+	} else if (command == "O"){
+                newblock = std::shared_ptr<Block>(new Oblock{ boardInPlay });
+	}            
+	std::shared_ptr<Block> curBlock = boardInPlay->getCurrentBlock();            
+	boardInPlay->detach(curBlock);            
+	// Set currentBlock in Board            
+	boardInPlay->setCurrent(newblock);
+	boardInPlay->attach(newblock);
+}
+
 // We currently do not support seed
 int main(int argc, char** args) {
     // set the given seed value
@@ -197,6 +225,25 @@ int main(int argc, char** args) {
             playerInPlay->makeCounterTurn();
         } else if (command == "drop") {
             playerInPlay->makeDrop();
+	    if (boardInPlay->getRowsCleared() >= 2){
+		    std::cout << "Congratulation! Player " << playerInPlay->getPid() << ", you have a special action! Please type in Blind, Heavy, or Force (followed by a blockType)" << std::endl;
+		    std::string specialAction = "";
+		    std::cin >> specialAction;
+		    if (specialAction == "Force" || specialAction == "force"){
+			    std::string blockToDrop;
+			    std::cin >> blockToDrop;
+			    if (playerInPlay->getPid() == 1){
+				    replaceBlock(player2, blockToDrop);
+			    }
+			    else{
+				    replaceBlock(player1, blockToDrop);
+			    }
+		    }
+		    else if (specialAction == "blind" || specialAction == "Blind"){
+			    boardInPlay->blind();
+		    }
+	    }
+	    boardInPlay->setRowsCleared(0);
         } else if (command == "levelup") {
             playerInPlay->levelUp();
         } else if (command == "leveldown") {
@@ -235,27 +282,9 @@ int main(int argc, char** args) {
             std::shared_ptr<Block> newblock = std::shared_ptr<Block>(new Iblock{});
         } else if (command == "render") {
         } else if (command.length() == 1) {
+		replaceBlock(playerInPlay, command);
             // Create the specified block
             std::shared_ptr<Block> newblock = nullptr;
-            if (command == "I"){
-                newblock = std::shared_ptr<Block>(new Iblock{ boardInPlay.get() });
-            } else if (command == "J"){
-                newblock = std::shared_ptr<Block>(new Jblock{ boardInPlay.get() });
-            } else if (command == "L"){
-                newblock = std::shared_ptr<Block>(new Lblock{ boardInPlay.get() });
-            } else if (command == "S"){
-                newblock = std::shared_ptr<Block>(new Sblock{ boardInPlay.get() });
-            } else if (command == "Z"){
-                newblock = std::shared_ptr<Block>(new Zblock{ boardInPlay.get() });
-            } else if (command == "T"){
-                newblock = std::shared_ptr<Block>(new Tblock{ boardInPlay.get() });
-            } else if (command == "O"){
-                newblock = std::shared_ptr<Block>(new Oblock{ boardInPlay.get() });
-            }
-            std::shared_ptr<Block> curBlock = boardInPlay->getCurrentBlock();
-            boardInPlay->detach(curBlock);
-            // Set currentBlock in Board
-            boardInPlay->setCurrent(newblock);
         }
         // Render
         (player1->getBoard())->render();
