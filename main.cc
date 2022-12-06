@@ -26,7 +26,8 @@
 #include "textdisplay.h"
 #include "window.h"
 #include "zblock.h"  
-#include <memory> 
+#include <memory>
+#include <algorithm>
 
 class BlockObserver;
 
@@ -60,6 +61,12 @@ void replaceBlock(std::shared_ptr<Player> player, std::string command){
 
 // We currently do not support seed
 int main(int argc, char** args) {
+    // vector of commands
+    std::vector<std::string> listOfCommands = {
+        "left", "right", "down", "clockwise","counterclockwise", "drop", "levelup", "leveldown", 
+        "norandom", "random","sequence", "I", "J", "L", "S", "Z", "T", "O", "restart", "list", "rename"
+    };
+
     // set the given seed value
 	srand((unsigned) time(NULL));
     // Default is that we have a graphical display
@@ -193,10 +200,6 @@ int main(int argc, char** args) {
                 repetition = stoi(command.substr(0, commandDigit));
                 command = command.substr(commandDigit, command.size() - 1);
             }
-            std::vector<std::string> listOfCommands = {
-                "left", "right", "down", "clockwise","counterclockwise", "drop", "levelup", "leveldown", 
-                "norandom", "random","sequence", "I", "J", "L", "S", "Z", "T", "O", "restart", "render"
-                };
             // Check how many different types of command that "command" matches to:
             for (auto it = listOfCommands.begin(); it != listOfCommands.end(); it++) {
                 if ((*it).rfind(command, 0) != std::string::npos) {
@@ -212,18 +215,17 @@ int main(int argc, char** args) {
                 continue;
             }
         }
-
-        if (command == "left") {
+        if (command == listOfCommands[0]) {
             playerInPlay->makeMoveLeft();
-        } else if (command == "right") {
+        } else if (command == listOfCommands[1]) {
             playerInPlay->makeMoveRight();
-        } else if (command == "down") {
+        } else if (command == listOfCommands[2]) {
             playerInPlay->makeMoveDown();
-        } else if (command == "clockwise") {
+        } else if (command == listOfCommands[3]) {
             playerInPlay->makeClockwiseTurn();
-        } else if (command == "counterclockwise") {
+        } else if (command == listOfCommands[4]) {
             playerInPlay->makeCounterTurn();
-        } else if (command == "drop") {
+        } else if (command == listOfCommands[5]) {
             playerInPlay->makeDrop();
 	    if (boardInPlay->getRowsCleared() >= 2){
 		    std::cout << "Congratulation! Player " << playerInPlay->getPid() << ", you have a special action! Please type in Blind, Heavy, or Force (followed by a blockType)" << std::endl;
@@ -252,18 +254,18 @@ int main(int argc, char** args) {
             }
 	    }
 	    boardInPlay->setRowsCleared(0);
-        } else if (command == "levelup") {
+        } else if (command == listOfCommands[6]) {
             playerInPlay->levelUp();
-        } else if (command == "leveldown") {
+        } else if (command == listOfCommands[7]) {
             playerInPlay->levelDown();
-        } else if (command == "norandom") {
+        } else if (command == listOfCommands[8]) {
             playerInPlay->setIsRandom(false);
             std::string file;
             std::cin >> file;
             (playerInPlay->myLevel)->useFile(file);
-        } else if (command == "random") {
+        } else if (command == listOfCommands[9]) {
             playerInPlay->setIsRandom(true);
-        } else if (command == "sequence") {
+        } else if (command == listOfCommands[10]) {
             std::string file;
             if (!readFromFile) { std::cin >> file; } else {
                 // If we are currently already reading from a file,
@@ -273,7 +275,7 @@ int main(int argc, char** args) {
             }
             readFromFile = true;
             commandfile.open(file, std::fstream::in);
-        } else if (command == "restart") {
+        } else if (command == listOfCommands[11]) {
             // Delete displays, detach done in destructors
 
             // Get new boards for player1 and player2:
@@ -285,14 +287,51 @@ int main(int argc, char** args) {
                 graphicDisplay = std::shared_ptr<GraphicDisplay>(new GraphicDisplay{ player1->getBoard(), player2->getBoard() });
             }
             textDisplay = std::shared_ptr<TextDisplay>(new TextDisplay{ player1->getBoard(), player2->getBoard() });
-        } else if (command == "newblock") {
-            // Testing functions: (delete in end)
-            std::shared_ptr<Block> newblock = std::shared_ptr<Block>(new Iblock{});
-        } else if (command == "render") {
-        } else if (command.length() == 1) {
-		replaceBlock(playerInPlay, command);
+        } else if (command == listOfCommands[12]) {
+		    replaceBlock(playerInPlay, "I");
             // Create the specified block
             std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[13]) {
+		    replaceBlock(playerInPlay, "J");
+            // Create the specified block
+            std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[14]) {
+		    replaceBlock(playerInPlay, "L");
+            // Create the specified block
+            std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[15]) {
+		    replaceBlock(playerInPlay, "S");
+            // Create the specified block
+            std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[16]) {
+		    replaceBlock(playerInPlay, "Z");
+            // Create the specified block
+            std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[17]) {
+		    replaceBlock(playerInPlay, "T");
+            // Create the specified block
+            std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[18]) {
+		    replaceBlock(playerInPlay, "O");
+            // Create the specified block
+            std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[19]) {
+            for (auto cmd: listOfCommands) {
+                std::cout << cmd << " ";
+            }
+            std::cout << "\n" << std::endl;
+        } else if (command == "rename") {
+            std::string oldName, newName;
+            std::cin >> oldName >> newName;
+            auto it = std::find(listOfCommands.begin(), listOfCommands.end(), oldName);
+            if (oldName != "rename" && it != listOfCommands.end() && std::find(listOfCommands.begin(), listOfCommands.end(), newName) == listOfCommands.end()){
+                int index = it - listOfCommands.begin();
+                listOfCommands[index] = newName;
+            } else {
+                std::cout << "Invalid Command" << std::endl;
+                repetition = 0;
+                continue;
+            }
         }
         // Render
         (player1->getBoard())->render();
