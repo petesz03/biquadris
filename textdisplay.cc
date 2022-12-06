@@ -50,7 +50,7 @@ void TextDisplay::notify(){
     // print board
     for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 11; j++) {
-		if (p1Blind && i <= 12 && i >= 3 && j <= 9 && j >= 3){
+		if (p1Blind && i <= 14 && i >= 5 && j <= 8 && j >= 2){
 			std::cout << '?';
 		}
 		else{
@@ -59,7 +59,7 @@ void TextDisplay::notify(){
         }
         std::cout << "\t";
         for (int j = 0; j < 11; j++) {
-		if (p2Blind && i <= 12 && i >= 3 && j <= 9 && j >= 3){
+		if (p2Blind && i <= 14 && i >= 5 && j <= 8 && j >= 2){
 			std::cout << '?';
 		}
 		else{
