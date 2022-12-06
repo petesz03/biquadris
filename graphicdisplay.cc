@@ -2,7 +2,9 @@
 #include "board.h"
 #include "player.h"
 #include "window.h"
+#include <sstream>
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <vector>
 #include <memory>
@@ -63,6 +65,9 @@ void GraphicDisplay::placeTile(char pattern, int row, int col){
     else if (pattern == 'T'){
         w->fillRectangle(x, y, multiplier, multiplier, Xwindow::Magenta);
     }
+    else if (pattern == '*'){
+        w->fillRectangle(x, y, multiplier, multiplier, Xwindow::Brown);
+    }
     else{
 	    w->fillRectangle(x,y,multiplier, multiplier, Xwindow::White);
     }
@@ -72,23 +77,31 @@ void GraphicDisplay::notify(){
 	Player* player1 = b1->owner;
 	Player* player2 = b2->owner;
 
-	// Define constants:
-	int p1Level = player1->getLevel();
-	int p2Level = player2->getLevel();
-	int p1Score = player1->getScore();
-	int p2Score = player2->getScore();
-
-	int p2ColStart = 19; // player2's board is column 19 to 29.
-	// Row 0 is player's name, 1 is Level, 2 is Score.
+    // Row 0 is player's name, 1 is Level, 2 is Score. Player2's board is column 19 to 29.
 	int rowStart = 3; 
+	int p2ColStart = 19;
 	
 	// Initiating Board:
-	w->drawString(0,12,"    Player 1");
-	w->drawString(0,28,"    Level:     "+p1Level);
-	w->drawString(0,43,"    Score:     "+p1Score);
-	w->drawString(p2ColStart*15,12,"     Player 2");
-	w->drawString(p2ColStart*15,28,"     Level:     "+p2Level);
-	w->drawString(p2ColStart*15,43,"     Score:     "+p2Score);
+	w->drawString(0,12,"Player 1");
+	w->drawString(p2ColStart*15,12,"Player 2");
+
+    // clear level and score
+    w->fillRectangle(0,15,15*6, 15*4, Xwindow::White);
+    w->fillRectangle(p2ColStart*15,15,15*6, 15*4, Xwindow::White);
+
+    // draw new level and score
+    std::stringstream ss;
+    ss << "Level:" << std::setw(5) << std::setfill(' ') << player1->getLevel();
+	w->drawString(0,28,ss.str());
+    ss.str(std::string());
+    ss << "Score:" << std::setw(5) << std::setfill(' ') << player1->getScore();
+	w->drawString(0,43,ss.str());
+    ss.str(std::string());
+    ss << "Level:" << std::setw(5) << std::setfill(' ') << player2->getLevel();
+	w->drawString(p2ColStart*15,28,ss.str());
+    ss.str(std::string());
+    ss << "Score:" << std::setw(5) << std::setfill(' ') << player2->getScore();
+	w->drawString(p2ColStart*15,43,ss.str());
 
 	// Prints board:
 	for (int row = 0; row < 18; row++){
@@ -103,8 +116,8 @@ void GraphicDisplay::notify(){
 	}
 
 	// Prints nextblock (if any):
-	w->drawString(0,22*15 - 1,"     Next:");	
-	w->drawString(p2ColStart*15,22*15 - 1, "     Next:");
+	w->drawString(0,22*15 - 1,"Next:");	
+	w->drawString(p2ColStart*15,22*15 - 1, "Next:");
 
 	// Define constants:
 	int nextRowStart = 22;
@@ -138,6 +151,10 @@ void GraphicDisplay::notify(){
 	placeTile(' ', nextRowStart+1, nextColStart+3);
 
 	
+    // clear level and score
+    w->fillRectangle(0,nextRowStart*15,15*4, 15*2, Xwindow::White);
+    w->fillRectangle(p2ColStart*15,nextRowStart*15,15*4, 15*2, Xwindow::White);
+
 	// Place tiles accordingly:
 	switch(nextItem){
 		case 'I':
@@ -148,39 +165,39 @@ void GraphicDisplay::notify(){
 			break;
 		case 'J':
 			placeTile(nextItem, nextRowStart, nextColStart);
-                        placeTile(nextItem, nextRowStart+1, nextColStart);
-                        placeTile(nextItem, nextRowStart+1, nextColStart+1);
-                        placeTile(nextItem, nextRowStart+1, nextColStart+2);
+            placeTile(nextItem, nextRowStart+1, nextColStart);
+            placeTile(nextItem, nextRowStart+1, nextColStart+1);
+            placeTile(nextItem, nextRowStart+1, nextColStart+2);
 			break;
 		case 'L':
 			placeTile(nextItem, nextRowStart, nextColStart+2);
-                        placeTile(nextItem, nextRowStart+1, nextColStart);
-                        placeTile(nextItem, nextRowStart+1, nextColStart+1);
-                        placeTile(nextItem, nextRowStart+1, nextColStart+2);
+            placeTile(nextItem, nextRowStart+1, nextColStart);
+            placeTile(nextItem, nextRowStart+1, nextColStart+1);
+            placeTile(nextItem, nextRowStart+1, nextColStart+2);
 			break;
 		case 'O':
 			placeTile(nextItem, nextRowStart, nextColStart);
-                        placeTile(nextItem, nextRowStart, nextColStart+1);
-                        placeTile(nextItem, nextRowStart+1, nextColStart);
-                        placeTile(nextItem, nextRowStart+1, nextColStart+1);
+            placeTile(nextItem, nextRowStart, nextColStart+1);
+            placeTile(nextItem, nextRowStart+1, nextColStart);
+            placeTile(nextItem, nextRowStart+1, nextColStart+1);
 			break;
 		case 'S':
 			placeTile(nextItem, nextRowStart, nextColStart+1);
-                        placeTile(nextItem, nextRowStart, nextColStart+2);
-                        placeTile(nextItem, nextRowStart+1, nextColStart);
-                        placeTile(nextItem, nextRowStart+1, nextColStart+1);
+            placeTile(nextItem, nextRowStart, nextColStart+2);
+            placeTile(nextItem, nextRowStart+1, nextColStart);
+            placeTile(nextItem, nextRowStart+1, nextColStart+1);
 			break;
 		case 'Z':
 			placeTile(nextItem, nextRowStart, nextColStart);
-                        placeTile(nextItem, nextRowStart, nextColStart+1);
-                        placeTile(nextItem, nextRowStart+1, nextColStart+1);
-                        placeTile(nextItem, nextRowStart+1, nextColStart+2);
+            placeTile(nextItem, nextRowStart, nextColStart+1);
+            placeTile(nextItem, nextRowStart+1, nextColStart+1);
+            placeTile(nextItem, nextRowStart+1, nextColStart+2);
 			break;
 		case 'T':
 			placeTile(nextItem, nextRowStart, nextColStart);
-                        placeTile(nextItem, nextRowStart, nextColStart+1);
-                        placeTile(nextItem, nextRowStart, nextColStart+2);
-                        placeTile(nextItem, nextRowStart+1, nextColStart+1);
+            placeTile(nextItem, nextRowStart, nextColStart+1);
+            placeTile(nextItem, nextRowStart, nextColStart+2);
+            placeTile(nextItem, nextRowStart+1, nextColStart+1);
 			break;
 		case ' ':
 			break;
