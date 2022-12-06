@@ -26,7 +26,7 @@ public:
     bool isforce;
     bool isheavy;
     int rowsCleared;
-    
+    int dropCounter;
 
 public:
     Board(std::shared_ptr<Player> owner, std::shared_ptr<Level> owners_level);
@@ -59,6 +59,7 @@ public:
     void blind();
     void setRowsCleared(int rows);
     int getRowsCleared();
+    void punish();
 };
 
 

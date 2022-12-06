@@ -11,7 +11,8 @@ Board::Board(std::shared_ptr<Player> owner1, std::shared_ptr<Level> owners_level
     isblind{false},
     isforce{false},
     isheavy{false},
-    rowsCleared{0}{
+    rowsCleared{0},
+    dropCounter{0}{
     owner = owner1.get();
     currentBlock = createBlock();
     nextBlock = createBlock();
@@ -92,6 +93,7 @@ void Board::unsetBlind(int pid){
 
 // Add score additions in here somehow!!
 void Board::clearRow(int row){
+	dropCounter = 0;
     for (auto a : blocks) {
         if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
 
@@ -133,7 +135,11 @@ void Board::clearRow(int row){
     }
 
     for (int i = 0; i < 11; i++) {
-        grid[row][i] = ' ';
+	    // Add score for punish blocks:
+	    if (grid[row][i] == '*'){
+		    owner->updateScore(25);
+	    }
+	    grid[row][i] = ' ';
     }
     for (int i = row; i > 0; i--) {
         for (int a = 0; a < 11; a++) {
@@ -177,11 +183,28 @@ void Board::drop(){
     	currentBlock->drop();
 	// After dropped, check if any row is full and clear it.
 	checkfullrow();
-
+	dropCounter++;
 	// Create new blocks:
 	currentBlock = nextBlock;
 	nextBlock = createBlock();
     attach(currentBlock);
+    if (dropCounter >= 5){
+	    punish();
+	    dropCounter = 0;
+    }
+}
+
+void Board::punish(){
+	int level = owner->getLevel();
+	if (level == 4){
+		int centralCol = 5;
+		for (int row = 4; row < 18; row++){
+			if (grid[row][centralCol] != ' '){
+				grid[row-1][centralCol] = '*';
+				return;
+			}
+		}
+	}
 }
 
 void Board::clockwiseTurn(){ currentBlock->clockwiseturn();}
