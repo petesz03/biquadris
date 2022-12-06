@@ -20,8 +20,6 @@ Level4::~Level4() {}
 // PLEASE IMPLEMENT THE HEAVINESS OF BLOCK IF BLOCK CLASS IS DONE
 /////////////////////////////////////////////////////////////////
 Block* Level4::randomNextBlock(Board* subject) {
-    // set the given seed value
-    srand((unsigned) time(NULL));
     // generate a random number
     int random = rand();
 

@@ -31,6 +31,8 @@ class BlockObserver;
 
 // We currently do not support seed
 int main(int argc, char** args) {
+    // set the given seed value
+	srand((unsigned) time(NULL));
     // Default is that we have a graphical display
     bool graphics = true;
     // The following two files are to replace level0's file:
@@ -40,7 +42,13 @@ int main(int argc, char** args) {
     int levelInitiated = 0;
     for (int i = 1; i < argc; i++) {
         std::string argument = args[i];
-        if (argument == "-text") { graphics = false; } else if (argument == "-scriptfile1") {
+        if (argument == "-text") { 
+            graphics = false; 
+        } else if (argument == "-seed") {
+            i++;
+            srand(atoi(args[i]));
+        }
+        else if (argument == "-scriptfile1") {
             i++;
             filePlayer1 = args[i];
         } else if (argument == "-scriptfile2") {

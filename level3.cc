@@ -17,8 +17,6 @@ Level3::Level3(): Level{3}, blockIndex{0} {}
 Level3::~Level3() {}
 
 Block* Level3::randomNextBlock(Board* subject) {
-    // set the given seed value
-    srand((unsigned) time(NULL));
     // generate a random number
     int random = rand();
 

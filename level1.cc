@@ -14,8 +14,6 @@ Level1::Level1(): Level(1) {}
 Level1::~Level1() {}
 
 Block* Level1::randomNextBlock(Board* subject) {
-    // set the given seed value
-	srand((unsigned) time(NULL));
 	// generate a random number
 	int random = rand();
 
@@ -49,8 +47,6 @@ Block* Level1::randomNextBlock(Board* subject) {
 }
 
 Block* Level1::fileNextBlock(Board* subject) {
-    // set the given seed value
-	srand((unsigned) time(NULL));
 	// generate a random number
 	int random = rand();
 
