@@ -81,7 +81,6 @@ void Board::unsetBlind(int pid){
 
 // Add score additions in here somehow!!
 void Board::clearRow(int row){
-    std::vector<std::shared_ptr<Block>> temp;
     for (auto a : blocks) {
         if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
 
@@ -92,8 +91,6 @@ void Board::clearRow(int row){
                 if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
                     int score = (a->level_when_create + 1) * (a->level_when_create + 1);
                     a->the_board->owner->updateScore(score);
-                } else {
-                    temp.emplace_back(a);
                 }
             }
             if (a->box2.y == row) {
@@ -102,8 +99,6 @@ void Board::clearRow(int row){
                 if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
                     int score = (a->level_when_create + 1) * (a->level_when_create + 1);
                     a->the_board->owner->updateScore(score);
-                } else {
-                    temp.emplace_back(a);
                 }
             }
             if (a->box3.y == row) {
@@ -112,8 +107,6 @@ void Board::clearRow(int row){
                 if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
                     int score = (a->level_when_create + 1) * (a->level_when_create + 1);
                     a->the_board->owner->updateScore(score);
-                } else {
-                    temp.emplace_back(a);
                 }
             }
             if (a->box4.y == row) {
@@ -122,15 +115,12 @@ void Board::clearRow(int row){
                 if (a->box1.x == -1 && a->box2.x == -1 && a->box3.x == -1 && a->box4.x == -1) {
                     int score = (a->level_when_create + 1) * (a->level_when_create + 1);
                     a->the_board->owner->updateScore(score);
-                } else {
-                    temp.emplace_back(a);
                 }
             }
             
         }
     }
-    blocks = temp;
-	
+
     for (int i = 0; i < 11; i++) {
         grid[row][i] = ' ';
     }
