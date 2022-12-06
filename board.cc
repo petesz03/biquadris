@@ -68,6 +68,7 @@ void Board::checkfullrow(){
                                (*it)->setBlind(1, true);
                        }
 	       }
+	       render();
 	}
     }
 }
