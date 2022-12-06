@@ -162,7 +162,7 @@ int main(int argc, char** args) {
                 };
             // Check how many different types of command that "command" matches to:
             for (auto it = listOfCommands.begin(); it != listOfCommands.end(); it++) {
-                if ((*it).find(command, 0) != std::string::npos) {
+                if ((*it).rfind(command, 0) != std::string::npos) {
                     commandsMatched++;
                     commandToExecute = (*it);
                 }
