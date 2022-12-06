@@ -33,12 +33,16 @@ class BlockObserver;
 
 
 void replaceBlock(std::shared_ptr<Player> player, std::string command){
-	// Create the specified block            
+	// Create the specified block
+	std::cout << "[DEBUG]" << 0 << std::endl;            
 	std::shared_ptr<Block> newblock = nullptr;
+	std::cout << "[DEBUG]" << "00" << std::endl;  
 	Board*  boardInPlay = player->getBoard().get();
+	std::cout << "[DEBUG]" << "000" << std::endl;  
 
 	if (command == "I"){                
-		newblock = std::shared_ptr<Block>(new Iblock{ boardInPlay });            
+		std::cout << "[DEBUG]" << 1 << std::endl;
+        newblock = std::shared_ptr<Block>(new Iblock{ boardInPlay });            
 	} else if (command == "J"){                
 		newblock = std::shared_ptr<Block>(new Jblock{ boardInPlay });
 	} else if (command == "L"){
@@ -46,17 +50,22 @@ void replaceBlock(std::shared_ptr<Player> player, std::string command){
 	} else if (command == "S"){
 		newblock = std::shared_ptr<Block>(new Sblock{ boardInPlay });
 	} else if (command == "Z"){
-                newblock = std::shared_ptr<Block>(new Zblock{ boardInPlay });
+        newblock = std::shared_ptr<Block>(new Zblock{ boardInPlay });
 	} else if (command == "T"){
-                newblock = std::shared_ptr<Block>(new Tblock{ boardInPlay });            
+        newblock = std::shared_ptr<Block>(new Tblock{ boardInPlay });            
 	} else if (command == "O"){
-                newblock = std::shared_ptr<Block>(new Oblock{ boardInPlay });
-	}            
-	std::shared_ptr<Block> curBlock = boardInPlay->getCurrentBlock();            
-	boardInPlay->detach(curBlock);            
+        newblock = std::shared_ptr<Block>(new Oblock{ boardInPlay });
+	}
+	std::cout << "[DEBUG]" << 2 << std::endl;
+	std::shared_ptr<Block> curBlock = boardInPlay->getCurrentBlock();
+	std::cout << "[DEBUG]" << 3 << std::endl;
+	boardInPlay->detach(curBlock);
+	std::cout << "[DEBUG]" << 4 << std::endl;            
 	// Set currentBlock in Board            
 	boardInPlay->setCurrent(newblock);
+	std::cout << "[DEBUG]" << 5 << std::endl;
 	boardInPlay->attach(newblock);
+	std::cout << "[DEBUG]" << 6 << std::endl;
 }
 
 // We currently do not support seed
@@ -64,7 +73,7 @@ int main(int argc, char** args) {
     // vector of commands
     std::vector<std::string> listOfCommands = {
         "left", "right", "down", "clockwise","counterclockwise", "drop", "levelup", "leveldown", 
-        "norandom", "random","sequence", "I", "J", "L", "S", "Z", "T", "O", "restart", "list", "rename"
+        "norandom", "random","sequence", "I", "J", "L", "S", "Z", "T", "O", "list", "restart", "rename"
     };
 
     // set the given seed value
@@ -275,7 +284,42 @@ int main(int argc, char** args) {
             }
             readFromFile = true;
             commandfile.open(file, std::fstream::in);
-        } else if (command == listOfCommands[11]) {
+        }else if (command == listOfCommands[11]) {
+
+	        std::cout << "[DEBUG]" << 10 << std::endl;  
+		    replaceBlock(playerInPlay, "I");
+            // Create the specified block
+            std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[12]) {
+		    replaceBlock(playerInPlay, "J");
+            // Create the specified block
+            std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[13]) {
+		    replaceBlock(playerInPlay, "L");
+            // Create the specified block
+            std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[14]) {
+		    replaceBlock(playerInPlay, "S");
+            // Create the specified block
+            std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[15]) {
+		    replaceBlock(playerInPlay, "Z");
+            // Create the specified block
+            std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[16]) {
+		    replaceBlock(playerInPlay, "T");
+            // Create the specified block
+            std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[17]) {
+		    replaceBlock(playerInPlay, "O");
+            // Create the specified block
+            std::shared_ptr<Block> newblock = nullptr;
+        } else if (command == listOfCommands[18]) {
+            for (auto cmd: listOfCommands) {
+                std::cout << cmd << " ";
+            }
+            std::cout << "\n" << std::endl;
+        }  else if (command == listOfCommands[19]) {
             // Delete displays, detach done in destructors
 
             // Get new boards for player1 and player2:
@@ -287,39 +331,6 @@ int main(int argc, char** args) {
                 graphicDisplay = std::shared_ptr<GraphicDisplay>(new GraphicDisplay{ player1->getBoard(), player2->getBoard() });
             }
             textDisplay = std::shared_ptr<TextDisplay>(new TextDisplay{ player1->getBoard(), player2->getBoard() });
-        } else if (command == listOfCommands[12]) {
-		    replaceBlock(playerInPlay, "I");
-            // Create the specified block
-            std::shared_ptr<Block> newblock = nullptr;
-        } else if (command == listOfCommands[13]) {
-		    replaceBlock(playerInPlay, "J");
-            // Create the specified block
-            std::shared_ptr<Block> newblock = nullptr;
-        } else if (command == listOfCommands[14]) {
-		    replaceBlock(playerInPlay, "L");
-            // Create the specified block
-            std::shared_ptr<Block> newblock = nullptr;
-        } else if (command == listOfCommands[15]) {
-		    replaceBlock(playerInPlay, "S");
-            // Create the specified block
-            std::shared_ptr<Block> newblock = nullptr;
-        } else if (command == listOfCommands[16]) {
-		    replaceBlock(playerInPlay, "Z");
-            // Create the specified block
-            std::shared_ptr<Block> newblock = nullptr;
-        } else if (command == listOfCommands[17]) {
-		    replaceBlock(playerInPlay, "T");
-            // Create the specified block
-            std::shared_ptr<Block> newblock = nullptr;
-        } else if (command == listOfCommands[18]) {
-		    replaceBlock(playerInPlay, "O");
-            // Create the specified block
-            std::shared_ptr<Block> newblock = nullptr;
-        } else if (command == listOfCommands[19]) {
-            for (auto cmd: listOfCommands) {
-                std::cout << cmd << " ";
-            }
-            std::cout << "\n" << std::endl;
         } else if (command == "rename") {
             std::string oldName, newName;
             std::cin >> oldName >> newName;
