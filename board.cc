@@ -263,13 +263,13 @@ void Board::detach(std::shared_ptr<Block> oldBlock){
 	}
 }
 
-void Board::attach(std::shared_ptr<DisplayObserver> ob){
+void Board::attach(std::shared_ptr<DisplayObserver>  ob){
     displayobservers.emplace_back(ob);
 }
 
-void Board::detach(std::shared_ptr<DisplayObserver> ob){
+void Board::detach(DisplayObserver* ob){
     for (auto it = displayobservers.begin(); it != displayobservers.end(); it++){
-        if (*it == ob){
+        if ((*it).get() == ob){
             displayobservers.erase(it);
             break;
         }

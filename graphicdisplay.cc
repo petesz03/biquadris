@@ -20,9 +20,7 @@ GraphicDisplay::GraphicDisplay(std::shared_ptr<Board> b1, std::shared_ptr<Board>
     }
 
 GraphicDisplay::~GraphicDisplay(){ 
-    std::shared_ptr<DisplayObserver> temp = std::shared_ptr<GraphicDisplay>(this);
-	b1->detach(temp);
-	b2->detach(temp);
+	b1->detach(this);
 }
 
 void GraphicDisplay::setBlind(int player, bool blind){}

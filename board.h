@@ -45,8 +45,8 @@ public:
     bool checkLose();
     void attach(std::shared_ptr<Block> newBlock) override;
     void detach(std::shared_ptr<Block> newBlock) override;
-    void attach(std::shared_ptr<DisplayObserver> ob) override;
-    void detach(std::shared_ptr<DisplayObserver> ob) override;
+    void attach(std::shared_ptr<DisplayObserver>  ob) override;
+    void detach(DisplayObserver*  ob) override;
     void unsetBlind(int pid);
     // Move block functions:
     void moveLeft();

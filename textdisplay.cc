@@ -16,7 +16,6 @@ TextDisplay::TextDisplay(std::shared_ptr<Board> b1, std::shared_ptr<Board> b2):
 
 TextDisplay::~TextDisplay(){
     b1->detach( this );
-    b2->detach( this );
 }
 
 void TextDisplay::setBlind(int player, bool blind){
