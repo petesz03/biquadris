@@ -34,14 +34,10 @@ class BlockObserver;
 
 void replaceBlock(std::shared_ptr<Player> player, std::string command){
 	// Create the specified block
-	std::cout << "[DEBUG]" << 0 << std::endl;            
 	std::shared_ptr<Block> newblock = nullptr;
-	std::cout << "[DEBUG]" << "00" << std::endl;  
 	Board*  boardInPlay = player->getBoard().get();
-	std::cout << "[DEBUG]" << "000" << std::endl;  
 
 	if (command == "I"){                
-		std::cout << "[DEBUG]" << 1 << std::endl;
         newblock = std::shared_ptr<Block>(new Iblock{ boardInPlay });            
 	} else if (command == "J"){                
 		newblock = std::shared_ptr<Block>(new Jblock{ boardInPlay });
@@ -56,16 +52,11 @@ void replaceBlock(std::shared_ptr<Player> player, std::string command){
 	} else if (command == "O"){
         newblock = std::shared_ptr<Block>(new Oblock{ boardInPlay });
 	}
-	std::cout << "[DEBUG]" << 2 << std::endl;
 	std::shared_ptr<Block> curBlock = boardInPlay->getCurrentBlock();
-	std::cout << "[DEBUG]" << 3 << std::endl;
 	boardInPlay->detach(curBlock);
-	std::cout << "[DEBUG]" << 4 << std::endl;            
 	// Set currentBlock in Board            
 	boardInPlay->setCurrent(newblock);
-	std::cout << "[DEBUG]" << 5 << std::endl;
 	boardInPlay->attach(newblock);
-	std::cout << "[DEBUG]" << 6 << std::endl;
 }
 
 // We currently do not support seed
@@ -286,7 +277,6 @@ int main(int argc, char** args) {
             commandfile.open(file, std::fstream::in);
         }else if (command == listOfCommands[11]) {
 
-	        std::cout << "[DEBUG]" << 10 << std::endl;  
 		    replaceBlock(playerInPlay, "I");
             // Create the specified block
             std::shared_ptr<Block> newblock = nullptr;
