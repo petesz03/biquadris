@@ -12,7 +12,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "blockobserver.h"
 #include "displayobserver.h"
 #include "graphicdisplay.h"
 #include "iblock.h"
