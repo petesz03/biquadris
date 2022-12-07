@@ -145,6 +145,7 @@ int main(int argc, char** args) {
     player1->setTurn(true);
     player2->setTurn(false);
     player1Board->render();
+
     /***** Input *****/
     std::string command;
     std::string file;
@@ -173,6 +174,8 @@ int main(int argc, char** args) {
             boardInPlay = player1->getBoard();
         }
 
+	// If repetition is not zero, we do not read from input, we just execute
+	//    the same command:
         if (repetition == 0) {
             if (!readFromFile) {
                 if (std::cin >> command) {} else { break; }
@@ -186,6 +189,7 @@ int main(int argc, char** args) {
             int commandsMatched = 0;
             std::string commandToExecute = "";
 
+	    // Determine the number of digits before the ACTUAL command:
             int commandDigit = 0;
             for (size_t i = 0; i <= command.size(); i++) {
                 if (isdigit(command[i])) {
@@ -240,6 +244,8 @@ int main(int argc, char** args) {
                 std::cout << "Congratulation! Player " << playerInPlay->getPid() << ", you have a special action! Please type in Blind, Heavy, or Force (followed by a blockType)" << std::endl;
                 std::string specialAction = "";
                 std::cin >> specialAction;
+		
+		// Read in from standard input to determine which special action:
                 if (specialAction == "Force" || specialAction == "force"){
                     std::string blockToDrop;
                     std::cin >> blockToDrop;
@@ -277,7 +283,7 @@ int main(int argc, char** args) {
             playerInPlay->setIsRandom(false);
             std::string file;
             std::cin >> file;
-            (playerInPlay->myLevel)->useFile(file);
+            (playerInPlay->getMyLevel())->useFile(file);
         } 
         // command: "random"
         else if (command == listOfCommands[9]) {
@@ -334,29 +340,36 @@ int main(int argc, char** args) {
         }  
         // command: "restart"
         else if (command == listOfCommands[19]) {
-		/*
-            // Delete displays, detach done in destructors
+		// Initiate new levels for each:
+		player1Level = std::shared_ptr<Level>(new Level0{ filePlayer1 });
+		player2Level = std::shared_ptr<Level>(new Level0{ filePlayer2 });
 
-            // Get new boards for player1 and player2:
-            player1Level = std::shared_ptr<Level>(new Level0{filePlayer1});
-	    player2Level = std::shared_ptr<Level>(new Level0{filePlayer2});
-	    player1Board = std::shared_ptr<Board>(new Board{nullptr, nullptr});
-	    player2Board = std::shared_ptr<Board>(new Board{nullptr, nullptr});
+		// Make new players and boards. Attach them:
+		player1 = std::shared_ptr<Player>(new Player{ 1, player1Level, nullptr, nullptr, filePlayer1 });    
+		player1Board = std::shared_ptr<Board>(new Board{ player1, player1Level });
+	    	player1->setBoard(player1Board);
+	    	player2 = std::shared_ptr<Player>(new Player{ 2, player2Level, nullptr, player1, filePlayer2 });    
+		player2Board = std::shared_ptr<Board>(new Board{ player2, player2Level });
+		player2->setBoard(player2Board);
 
-	    player1New = std::shared_ptr<Level>(new Player{1,player1Level,player1Board, nullptr, filePlayer1});
-	    player2New = std::shared_ptr<Level>(new Player{1,player2Level,player2Board, player1New, filePlayer2});
-	    player1New->setLevelOpponent(player1New); */
+		// Make new textdisplay:
+    		textDisplay = std::shared_ptr<TextDisplay>(new TextDisplay{ player1Board, player2Board });
+		std::shared_ptr<GraphicDisplay> graphicDisplay = nullptr;   
+		
+		// Make new graphicdisplay, if graphic is turned on:
+		if (graphics) {
+			graphicDisplay = std::shared_ptr<GraphicDisplay>(new GraphicDisplay{ player1Board, player2Board });
+		}
 
-		player1->restart();
-		player2->restart();
+		// Since player1's opponent's pointer is nullptr, change the pointer:
+		player1->setOpponent(player2);
 
-            // Build new displays, attach done in constructors:
-            if (graphics) {
-                graphicDisplay = std::shared_ptr<GraphicDisplay>(new GraphicDisplay{ player1->getBoard(), player2->getBoard() });
-            }
-            textDisplay = std::shared_ptr<TextDisplay>(new TextDisplay{ player1->getBoard(), player2->getBoard() });
+		// Set the turns to default!
+		player1->setTurn(true);
+		player2->setTurn(false);
+	}
 
-        } 
+      
         // command: "rename"
         else if (command == "rename") {
             std::string oldName, newName;
@@ -371,11 +384,20 @@ int main(int argc, char** args) {
                 continue;
             }
         }
+	if (player1->getIsOver()){
+		player1->setTurn(false);
+		player2->setTurn(true);
+	}
+	else if (player2->getIsOver()){
+		player2->setTurn(false);
+		player1->setTurn(true);
+	}
         // Render
         (player1->getBoard())->render();
 
         repetition--;
     }
+    // Prints highscore for both players and compare:
     int player1HighScore = player1->getMaxScore();
     int player2HighScore = player2->getMaxScore();
     std::cout << "Player 1's High Score is: " << player1HighScore << std::endl;
@@ -388,15 +410,5 @@ int main(int argc, char** args) {
         std::cout << "Tie!" << std::endl;
     }
 
-    /***** Free Memory: *****/
-    // Deleting players will delete its corresponding level and board, which
-    //   will delete all the attached blocks:
-    //delete player1;
-    //delete player2;
 
-    // Must delete graphic observers since they are not deleted:
-    // delete textDisplay;
-    // if (graphics){
-       // delete graphicDisplay;
-    //}
 }

@@ -55,7 +55,13 @@ bool Player::getMyTurn() { return isMyTurn; }
 
 bool Player::getIsOver() { return isOver; }
 
+bool Player::getIsRandom(){ return israndom;}
+
 std::string Player::getFileForLevel0(){ return fileForLevel0; };
+
+Level* Player::getMyLevel(){
+	return myLevel.get();
+}
 
 // methods to increase and decrease level
 void Player::levelUp() {

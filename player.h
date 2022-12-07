@@ -9,7 +9,7 @@ class SpecialAction;
 class Block;
 
 class Player {
-public:
+
     // the player's id, 1 or 2
     bool israndom;
     int pid;
@@ -63,8 +63,10 @@ public:
     int getScore();
     int getMaxScore();
     int getLevel();
+    Level* getMyLevel();
     bool getMyTurn();
     bool getIsOver();
+    bool getIsRandom();
     std::string getFileForLevel0();
     std::shared_ptr<Board> getBoard();
 

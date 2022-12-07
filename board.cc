@@ -7,12 +7,15 @@
 #include "posn.h"
 
 Board::Board(std::shared_ptr<Player> owner1, std::shared_ptr<Level> owners_level1):
-    owners_level{owners_level1},
-    isblind{false},
-    isforce{false},
-    isheavy{false},
+    currentBlock{nullptr},
+    nextBlock{nullptr},
     rowsCleared{0},
-    dropCounter{0}{
+    dropCounter{0},
+    owner{nullptr},
+    owners_level{owners_level1}, 
+    isheavy{false},
+    isblind{false},
+    isforce{false}{
     owner = owner1.get();
     currentBlock = createBlock();
     nextBlock = createBlock();
@@ -22,7 +25,7 @@ Board::Board(std::shared_ptr<Player> owner1, std::shared_ptr<Level> owners_level
 
 std::shared_ptr<Block> Board::createBlock() {
     std::shared_ptr<Block> newBlock;
-    if (owner->israndom) {
+    if (owner->getIsRandom()) {
         
         newBlock = owners_level->randomNextBlock(this);
     } else {

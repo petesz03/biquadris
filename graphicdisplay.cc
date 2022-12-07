@@ -120,20 +120,18 @@ void GraphicDisplay::notify(){
 	// Define constants:
 	int nextRowStart = 22;
 	int nextColStart = 0;
-	Player* playerInPlay;
 	std::shared_ptr<Board> boardInPlay;
 	char nextItem = ' ';
 
 	// set boardInPlay and boardInPlay:
 	if (player1->getMyTurn()){
-		playerInPlay = player1;
 		boardInPlay = b1;
 	}
 	else{
-		playerInPlay = player2;
 		boardInPlay = b2;
 		nextColStart = p2ColStart;
 	}
+
 
 	// Set nextItem, keep ' ' if nextBlock is nullptr:
 	if (boardInPlay->getNextBlock() != nullptr){
