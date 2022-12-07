@@ -7,3 +7,4 @@ Level::~Level(){}
 int Level::getLevel() {
     return level;
 }
+
