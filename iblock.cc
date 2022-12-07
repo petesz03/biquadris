@@ -10,8 +10,6 @@ Iblock::~Iblock() {
 
 }
 
-
-
 void Iblock::clockwiseturn() {
     int x_val = box1.x;
     int y_val = box1.y;

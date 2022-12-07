@@ -8,7 +8,6 @@ Jblock::~Jblock() {
 
 }
 
-
 void Jblock::clockwiseturn() {
     the_board->grid[box1.y][box1.x] = ' ';
     the_board->grid[box2.y][box2.x] = ' ';
@@ -208,13 +207,5 @@ void Jblock::counterturn() {
     the_board->grid[box3.y][box3.x] = item;
     the_board->grid[box4.y][box4.x] = item;
 }
-
-
-
-
-
-
-
-
 
 

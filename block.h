@@ -39,8 +39,5 @@ public:
     bool inrange(Posn box1, Posn box2, Posn box3, Posn box4);
 };
 
-
-
-
 #endif
 

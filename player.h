@@ -58,6 +58,8 @@ public:
     void setFileForLevel0(std::string file);
     void setBoard(std::shared_ptr<Board> setBoard); // Only used during initiation
     void setIsOver(bool over);
+    void setMaxScore(int n);
+    
     // retrieve player information
     int getPid();
     int getScore();

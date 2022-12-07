@@ -62,8 +62,11 @@ void replaceBlock(std::shared_ptr<Player> player, std::string command){
 int main(int argc, char** args) {
     // vector of commands
     std::vector<std::string> listOfCommands = {
-        "left", "right", "down", "clockwise","counterclockwise", "drop", "levelup", "leveldown", 
-        "norandom", "random","sequence", "I", "J", "L", "S", "Z", "T", "O", "list", "restart", "rename"
+        "left", "right", "down", "clockwise","counterclockwise", 
+        "drop", "levelup", "leveldown", "norandom", "random",
+        "sequence", "I", "J", "L", "S", 
+        "Z", "T", "O", "list", "restart", 
+        "rename"
     };
 
     // set the given seed value
@@ -75,6 +78,7 @@ int main(int argc, char** args) {
     std::string filePlayer1 = "sequence1.txt";
     std::string filePlayer2 = "sequence2.txt";
     int levelInitiated = 0;
+    
     for (int i = 1; i < argc; i++) {
         std::string argument = args[i];
         if (argument == "-text") { 
@@ -95,6 +99,7 @@ int main(int argc, char** args) {
             levelInitiated = stoi(argument);
         }
     }
+
     /***** Setup *****/
     // Set up a level according to levelInitiated:
     std::shared_ptr<Level> player1Level;
@@ -120,16 +125,13 @@ int main(int argc, char** args) {
     std::shared_ptr<Player> player1 = std::shared_ptr<Player>(new Player{ 1, player1Level, nullptr, nullptr, filePlayer1 });
     std::shared_ptr<Board> player1Board = std::shared_ptr<Board>(new Board{ player1, player1Level });
     player1->setBoard(player1Board);
+    
     std::shared_ptr<Player> player2 = std::shared_ptr<Player>(new Player{ 2, player2Level, nullptr, player1, filePlayer2 });
     std::shared_ptr<Board> player2Board = std::shared_ptr<Board>(new Board{ player2, player2Level }); // Change depending on constructor of board
     player2->setBoard(player2Board);
 
     // Creating player1's text displays:
     std::shared_ptr<TextDisplay> textDisplay = std::shared_ptr<TextDisplay>(new TextDisplay{ player1Board, player2Board });
-
-
-    // If the filePlayer fields are not empty, we have to replace level0's file:
-
 
     // Creating player1 and player2's text displays:
 
@@ -151,10 +153,12 @@ int main(int argc, char** args) {
     bool readFromFile = false;
     std::fstream commandfile;
     int repetition = 0;
+    
     while (true) {
         // Set who is moving for future commands:
         std::shared_ptr<Player> playerInPlay;
         std::shared_ptr<Board> boardInPlay;
+        
         if (player1->getMyTurn()) {
             playerInPlay = player1;
             boardInPlay = player1->getBoard();
@@ -173,22 +177,22 @@ int main(int argc, char** args) {
             boardInPlay = player1->getBoard();
         }
 
-	// If repetition is not zero, we do not read from input, we just execute
-	//    the same command:
+	    // If repetition is not zero, we do not read from input, we just execute
+	    // the same command:
         if (repetition == 0) {
             if (!readFromFile) {
                 if (std::cin >> command) {} else { break; }
             } else {
                 if (commandfile >> command) {} else { std::cin >> command; }
             }
+            
             // Read for input and call functions in playerInPlay,
-                //   WHILE checking for similar commands:
-
-                // We check for similar commands that "command" matches to:
+            // WHILE checking for similar commands:
+            // We check for similar commands that "command" matches to:
             int commandsMatched = 0;
             std::string commandToExecute = "";
 
-	    // Determine the number of digits before the ACTUAL command:
+	        // Determine the number of digits before the ACTUAL command:
             int commandDigit = 0;
             for (size_t i = 0; i <= command.size(); i++) {
                 if (isdigit(command[i])) {
@@ -244,7 +248,7 @@ int main(int argc, char** args) {
                 std::string specialAction = "";
                 std::cin >> specialAction;
 		
-		// Read in from standard input to determine which special action:
+		        // Read in from standard input to determine which special action:
                 if (specialAction == "Force" || specialAction == "force"){
                     std::string blockToDrop;
                     std::cin >> blockToDrop;
@@ -339,41 +343,49 @@ int main(int argc, char** args) {
         }  
         // command: "restart"
         else if (command == listOfCommands[19]) {
-		// Initiate new levels for each:
-		player1Level = std::shared_ptr<Level>(new Level0{ filePlayer1 });
-		player2Level = std::shared_ptr<Level>(new Level0{ filePlayer2 });
+            int max1 = player1->getMaxScore();
+            int max2 = player2->getMaxScore();
 
-		// Make new players and boards. Attach them:
-		player1 = std::shared_ptr<Player>(new Player{ 1, player1Level, nullptr, nullptr, filePlayer1 });    
-		player1Board = std::shared_ptr<Board>(new Board{ player1, player1Level });
-	    	player1->setBoard(player1Board);
-	    	player2 = std::shared_ptr<Player>(new Player{ 2, player2Level, nullptr, player1, filePlayer2 });    
-		player2Board = std::shared_ptr<Board>(new Board{ player2, player2Level });
-		player2->setBoard(player2Board);
+            // Initiate new levels for each:
+            player1Level = std::shared_ptr<Level>(new Level0{ filePlayer1 });
+            player2Level = std::shared_ptr<Level>(new Level0{ filePlayer2 });
 
-		// Make new textdisplay:
-    		textDisplay = std::shared_ptr<TextDisplay>(new TextDisplay{ player1Board, player2Board });
-		std::shared_ptr<GraphicDisplay> graphicDisplay = nullptr;   
-		
-		// Make new graphicdisplay, if graphic is turned on:
-		if (graphics) {
-			graphicDisplay = std::shared_ptr<GraphicDisplay>(new GraphicDisplay{ player1Board, player2Board });
-		}
+            // Make new players and boards. Attach them:
+            player1 = std::shared_ptr<Player>(new Player{ 1, player1Level, nullptr, nullptr, filePlayer1 });    
+            player1Board = std::shared_ptr<Board>(new Board{ player1, player1Level });
+            player1->setBoard(player1Board);
+            player2 = std::shared_ptr<Player>(new Player{ 2, player2Level, nullptr, player1, filePlayer2 });    
+            player2Board = std::shared_ptr<Board>(new Board{ player2, player2Level });
+            player2->setBoard(player2Board);
 
-		// Since player1's opponent's pointer is nullptr, change the pointer:
-		player1->setOpponent(player2);
+            // Make new textdisplay:
+            textDisplay = std::shared_ptr<TextDisplay>(new TextDisplay{ player1Board, player2Board });
+            std::shared_ptr<GraphicDisplay> graphicDisplay = nullptr;   
+            
+            // Make new graphicdisplay, if graphic is turned on:
+            if (graphics) {
+                graphicDisplay = std::shared_ptr<GraphicDisplay>(new GraphicDisplay{ player1Board, player2Board });
+            }
 
-		// Set the turns to default!
-		player1->setTurn(true);
-		player2->setTurn(false);
-	}
+            // Since player1's opponent's pointer is nullptr, change the pointer:
+            player1->setOpponent(player2);
 
-      
+            // Set the turns to default!
+            player1->setTurn(true);
+            player2->setTurn(false);
+
+            // Restore the max score for both players
+            player1->setMaxScore(max1);
+            player2->setMaxScore(max2);
+        }
+
         // command: "rename"
         else if (command == "rename") {
             std::string oldName, newName;
             std::cin >> oldName >> newName;
+            
             auto it = std::find(listOfCommands.begin(), listOfCommands.end(), oldName);
+            
             if (oldName != "rename" && it != listOfCommands.end() && std::find(listOfCommands.begin(), listOfCommands.end(), newName) == listOfCommands.end()){
                 int index = it - listOfCommands.begin();
                 listOfCommands[index] = newName;
@@ -383,17 +395,17 @@ int main(int argc, char** args) {
                 continue;
             }
         }
-	if (player1->getIsOver()){
-		player1->setTurn(false);
-		player2->setTurn(true);
-	}
-	else if (player2->getIsOver()){
-		player2->setTurn(false);
-		player1->setTurn(true);
-	}
+
+        if (player1->getIsOver()){
+            player1->setTurn(false);
+            player2->setTurn(true);
+        }
+        else if (player2->getIsOver()){
+            player2->setTurn(false);
+            player1->setTurn(true);
+        }
         // Render
         (player1->getBoard())->render();
-
         repetition--;
     }
     // Prints highscore for both players and compare:

@@ -15,8 +15,6 @@ public:
     void counterturn();
 };
 
-
-
 #endif
 
 

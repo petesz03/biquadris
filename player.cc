@@ -42,6 +42,10 @@ void Player::setFileForLevel0(std::string file){
     fileForLevel0 = file;
 }
 
+void Player::setMaxScore(int n) {
+    this->maxScore = n;
+}
+
 // retrieve player information
 int Player::getPid() { return pid; }
 
