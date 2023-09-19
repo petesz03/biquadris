@@ -5,7 +5,7 @@
 #include "level.h"
 #include <iostream>
 #include "posn.h"
-
+ 
 Board::Board(std::shared_ptr<Player> owner1, std::shared_ptr<Level> owners_level1):
     currentBlock{nullptr},
     nextBlock{nullptr},
